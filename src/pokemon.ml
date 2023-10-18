@@ -1,19 +1,27 @@
-(* Class Pokemon takes in a type of a pokemon and provides functions  *)
+type ptype =     
+| Fire
+| Water
+| Grass
+| Electric
 
-module Pokemon = struct
-  type t = {
-    name : string;
-    ptype : string;
-    hp : int;
-    moves : string list;
-  }
+type move = {
+  name: string;
+  damage: int;
+  ptype: ptype;
+}
 
-  let create name ptype hp moves = {
-    name = name;
-    ptype = ptype;
-    hp = hp;
-    moves = moves;
-  }
+type t = {
+  name : string;
+  ptype : string;
+  hp : int;
+  moves : string list;
+}
 
-  
-end
+let create name ptype hp moves = {
+  name = name;
+  ptype = ptype;
+  hp = hp;
+  moves = moves;
+}
+
+let attack move pokemon = { pokemon with hp = pokemon.hp - move.damage }
