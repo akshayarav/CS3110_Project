@@ -14,4 +14,6 @@ module Pokemon = struct
     hp = hp;
     moves = moves;
   }
+
+  
 end
