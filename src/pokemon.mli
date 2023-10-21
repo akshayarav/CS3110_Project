@@ -1,20 +1,24 @@
-(** Type representing the various Pokemon types. *)
-type ptype
+type ptype =
+  | Fire
+  | Water
+  | Grass
+  | Electric
+  | Flying
+  | Normal
 
-(** Type representing a move a Pokemon can perform. *)
-type move 
+type move = {
+  name: string;
+  damage: int;
+  ptype: ptype;
+}
 
-(** A pokemon representation. *)
 type t = {
   name : string;
-  ptype : string;
+  ptype : ptype;
   hp : int;
-  moves : move list;
+  moves : string list;
+  level : int;
 }
-(** Stats of the Pokemon *)
 
-val create : string -> string -> int -> move list -> t
-(** Create a pokemon *)
-
+val create : string -> ptype -> int -> string list -> int -> t
 val attack : move -> t -> t
-(** A move is applied onto a Pokemon and the Pokemon's hp is updated*)
