@@ -5,31 +5,30 @@ open Player
 
 (* open Ai *)
 
-(* Menu options *)
-let menu =
-  [
-    "Choose your starter pokemon";
-    "Battle wild pokemon";
-    "View player stats";
-    "Exit";
-  ]
-
 (* Stores the player *)
 let player = ref Player.new_player
 
+(* Menu options *)
+let base_menu = [ "View player stats"; "Exit" ]
+
 (* Display main menu *)
 let rec display_menu () =
+  let menu =
+    if List.length !player.team = 0 then
+      "Choose your starter pokemon" :: base_menu
+    else "Battle wild pokemon" :: base_menu
+  in
   printf "\nMain Menu:\n";
   List.iteri (fun idx option -> printf "%d. %s\n" (idx + 1) option) menu;
   printf "> ";
 
   match read_line () with
-  | "1" -> choose_starter ()
-  | "2" -> wild_battle ()
-  | "3" ->
+  | "1" ->
+      if List.length !player.team = 0 then choose_starter () else wild_battle ()
+  | "2" ->
       printf "%s\n" (Player.player_to_string !player);
       display_menu ()
-  | "4" -> exit 0
+  | "3" -> exit 0
   | _ ->
       printf "Invalid choice. Please try again.\n";
       display_menu ()
