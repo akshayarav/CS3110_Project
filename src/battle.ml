@@ -36,7 +36,7 @@ let rec battle_loop player_pokemon opponent =
           let chosen_move = List.nth player_pokemon.moves (choice - 1) in
           printf "You chose %s!\n" chosen_move.name;
           let updated_opponent = Pokemon.attack chosen_move opponent in
-          if updated_opponent.hp <= 0 then (
+          if updated_opponent.faint then (
             printf "You defeated the wild %s! You won the battle!\n"
               (Pokemon.name opponent);
             true (* Player won *))
