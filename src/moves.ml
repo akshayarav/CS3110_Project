@@ -1,4 +1,4 @@
-open Pokemon
+include Pokemon
 
 let tackle = { name = "Tackle"; damage = 10; ptype = Normal }
 let growl = { name = "Growl"; damage = 0; ptype = Normal }
@@ -12,3 +12,6 @@ let bubble = { name = "Bubble"; damage = 10; ptype = Water }
 let quick_attack = { name = "Quick Attack"; damage = 10; ptype = Normal }
 let gust = { name = "Gust"; damage = 10; ptype = Flying }
 let peck = { name = "Peck"; damage = 10; ptype = Flying }
+
+let all_moves = [tackle; growl; scratch; tail_whip; ember; leech_seed;
+vine_whip; water_gun; bubble; quick_attack; gust; peck]

@@ -3,6 +3,7 @@ open Printf
 open Pokemon
 open Pokedex
 open Player
+(* open Battle *)
 
 (* Menu options *)
 let menu = [ "Choose your starter pokemon"; "Battle wild pokemon"; "Exit" ]
@@ -18,12 +19,7 @@ let rec display_menu player =
 
   match read_line () with
   | "1" -> choose_starter ()
-  | "2" -> (
-      match player.first_pokemon with
-      | Some pokemon -> battle_wild_pokemon pokemon
-      | None ->
-          printf "You need to choose a starter Pokémon first!\n";
-          display_menu player)
+  | "2" -> wild_battle player
   | "3" -> exit 0
   | _ ->
       printf "Invalid choice. Please try again.\n";
@@ -50,17 +46,34 @@ and choose_starter () =
       choose_starter ()
 
 (* Simulate a battle with a wild pokemon *)
-and battle_wild_pokemon player_pokemon =
-  let wild_pokemon =
-    List.nth Pokedex.wild_pokemon
-      (Random.int (List.length Pokedex.wild_pokemon))
-  in
-  printf "\nA wild %s appeared!\n" wild_pokemon.name;
-  printf "You send out %s!\n" player_pokemon.name;
-
-  (* Here you would implement the battle logic *)
-  printf "You battled %s!\n" wild_pokemon.name;
-
-  display_menu player
-
+(* Simulate a battle with a wild pokemon *)
+and wild_battle player =
+  match player.current_pokemon with
+  | Some pokemon ->
+      let moves = pokemon.moves in
+      printf "Choose a move for %s:\n" (Pokemon.name pokemon);
+      List.iteri
+        (fun i (move : move) ->
+          printf "%d. %s (Type: %s, Damage: %d)\n" (i + 1) move.name
+            (ptype_to_string move.ptype)
+            move.damage)
+        moves;
+      let rec get_move_choice () =
+        try
+          let choice = read_int () in
+          if choice >= 1 && choice <= List.length moves then
+            let chosen_move = List.nth moves (choice - 1) in
+            printf "You chose %s!\n" chosen_move.name
+          else (
+            printf "Invalid move choice. Please enter a valid number: ";
+            get_move_choice ())
+        with Failure _ ->
+          printf "Invalid input. Please enter a valid number: ";
+          get_move_choice ()
+      in
+      get_move_choice ();
+      display_menu player
+  | None ->
+      printf "No current Pokémon to choose a move for\n";
+      display_menu player
 let () = display_menu player

@@ -1,4 +1,3 @@
-open Pokemon
 open Moves
 
 let bulbasaur =

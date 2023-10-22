@@ -15,11 +15,12 @@ type pokemon = {
   hp : int;
   moves : move list;
   level : int;
+  faint: bool;
 }
 (** Type for a pokemon has several stats *)
 
 (** Creates a new pokemon *)
-let create name ptype hp moves level = { name; ptype; hp; moves; level }
+let create name ptype hp moves level = { name; ptype; hp; moves; level; faint = false }
 
 (** Pokemon's hp is updated when attacked *)
 let attack move pokemon = { pokemon with hp = pokemon.hp - move.damage }
