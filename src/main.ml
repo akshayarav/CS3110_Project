@@ -6,7 +6,13 @@ open Player
 (* open Ai *)
 
 (* Menu options *)
-let menu = [ "Choose your starter pokemon"; "Battle wild pokemon"; "Exit" ]
+let menu =
+  [
+    "Choose your starter pokemon";
+    "Battle wild pokemon";
+    "View player stats";
+    "Exit";
+  ]
 
 (* Mutable reference to store the player's Pokémon *)
 let player = Player.new_player
@@ -20,7 +26,10 @@ let rec display_menu player =
   match read_line () with
   | "1" -> choose_starter ()
   | "2" -> wild_battle player
-  | "3" -> exit 0
+  | "3" ->
+      printf "%s\n" (Player.player_to_string player);
+      display_menu player
+  | "4" -> exit 0
   | _ ->
       printf "Invalid choice. Please try again.\n";
       display_menu player
