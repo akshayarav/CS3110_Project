@@ -15,12 +15,13 @@ type pokemon = {
   hp : int;
   moves : move list;
   level : int;
+  xp: (int*int);
   faint: bool;
 }
 (** Type for a pokemon has several stats *)
 
 (** Creates a new pokemon *)
-let create name ptype hp moves level = { name; ptype; hp; moves; level; faint = false }
+let create name ptype hp moves level = { name; ptype; hp; moves; level; xp = (0, 10); faint = false }
 
 (** Pokemon's hp is updated when attacked *)
 let attack move pokemon = { pokemon with hp = pokemon.hp - move.damage }
@@ -30,3 +31,9 @@ let to_string pokemon = pokemon.name ^ ": " ^ ptype_to_string pokemon.ptype
 
 (** Prints out the pokemon's name *)
 let name pokemon = pokemon.name
+
+(*Checks if enough xp to level up and updates accordingly*)
+let level_up pokemon =
+  let diff = fst pokemon.xp - snd pokemon.xp in
+    if diff >= 0 then { pokemon with xp = (diff, snd pokemon.xp + 20)}
+    else pokemon
