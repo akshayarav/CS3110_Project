@@ -80,4 +80,6 @@ and wild_battle () =
           (Pokemon.name opponent));
   display_menu ()
 
-let () = display_menu ()
+let () =
+  Random.self_init ();
+  display_menu ()
