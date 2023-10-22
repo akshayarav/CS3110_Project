@@ -3,5 +3,14 @@
 (** @canonical Dune__exe.Main *)
 module Main = Dune__exe__Main
 
+(** @canonical Dune__exe.Moves *)
+module Moves = Dune__exe__Moves
+
+(** @canonical Dune__exe.Player *)
+module Player = Dune__exe__Player
+
+(** @canonical Dune__exe.Pokedex *)
+module Pokedex = Dune__exe__Pokedex
+
 (** @canonical Dune__exe.Pokemon *)
 module Pokemon = Dune__exe__Pokemon
