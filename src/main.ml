@@ -66,7 +66,19 @@ and wild_battle () =
   in
   printf "A wild %s appears!\n" (Pokemon.name opponent);
 
-  Battle.battle_loop player_pokemon opponent;
+  let won = Battle.battle_loop player_pokemon opponent in
+  if won then (
+    printf "Do you want to add the wild %s to your team? (yes/no): "
+      (Pokemon.name opponent);
+    match String.lowercase_ascii (read_line ()) with
+    | "yes" ->
+        player := Player.add_team opponent !player;
+        printf "Added %s to your team.\n" (Pokemon.name opponent)
+    | "no" ->
+        printf "You chose not to add %s to your team.\n" (Pokemon.name opponent)
+    | _ ->
+        printf "Invalid choice. Not adding %s to your team.\n"
+          (Pokemon.name opponent));
   display_menu ()
 
 let () = display_menu ()
