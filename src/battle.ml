@@ -9,7 +9,7 @@ type battle_state = { player : player; ai : player; winner : player option }
     If player_pokemon wins battle_loop returns true else false *)
 let rec battle_loop player_pokemon opponent =
   if player_pokemon.hp <= 0 then (
-    printf "Your %s feinted. You lost the battle!\n" player_pokemon.name;
+    printf "Your %s feinted. You lost the battle!\n" player_pokemon.base.name;
     player_pokemon.feint <- true;
     false (* Player lost *))
   else if opponent.hp <= 0 then (
@@ -17,23 +17,23 @@ let rec battle_loop player_pokemon opponent =
       (Pokemon.name opponent);
     true (* Player won *))
   else (
-    printf "\nYour %s's HP: %d\n" player_pokemon.name player_pokemon.hp;
+    printf "\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp;
     printf "Wild %s's HP: %d\n" (Pokemon.name opponent) opponent.hp;
 
     (* Player's turn *)
-    printf "Choose a move for %s:\n" player_pokemon.name;
+    printf "Choose a move for %s:\n" player_pokemon.base.name;
     List.iteri
       (fun i (move : move) ->
         printf "%d. %s (Type: %s, Damage: %d)\n" (i + 1) move.name
           (ptype_to_string move.m_ptype)
           move.damage)
-      player_pokemon.moves;
+      player_pokemon.base.moves;
 
     let rec get_move_choice () =
       try
         let choice = read_int () in
-        if choice >= 1 && choice <= List.length player_pokemon.moves then (
-          let chosen_move = List.nth player_pokemon.moves (choice - 1) in
+        if choice >= 1 && choice <= List.length player_pokemon.base.moves then (
+          let chosen_move = List.nth player_pokemon.base.moves (choice - 1) in
           printf "You chose %s!\n" chosen_move.name;
           Pokemon.attack chosen_move opponent;
 
@@ -48,7 +48,7 @@ let rec battle_loop player_pokemon opponent =
 
             if player_pokemon.hp <= 0 then (
               printf "Your %s feinted. You lost the battle!\n"
-                player_pokemon.name;
+                player_pokemon.base.name;
               player_pokemon.feint <- true;
               false (* Player lost *))
             else battle_loop player_pokemon opponent)
