@@ -1,7 +1,7 @@
 open Moves
 
 let create_random_hp_pokemon name ptype moves =
-  create name ptype (10 + Random.int 51) moves 1
+  create name ptype (10 + Random.int 31) moves 1
 
 let bulbasaur =
   create "Bulbasaur" Grass 45 [ tackle; growl; leech_seed; vine_whip ] 5

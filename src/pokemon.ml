@@ -12,6 +12,7 @@ let ptype_to_string = function
 type pokemon = {
   name : string;
   ptype : ptype;
+  mutable max_hp : int;
   mutable hp : int;
   moves : move list;
   level : int;
@@ -22,7 +23,11 @@ type pokemon = {
 
 (** Creates a new pokemon *)
 let create name ptype hp moves level =
-  { name; ptype; hp; moves; level; xp = (0, 10); feint = false }
+  { name; ptype; max_hp = hp; hp; moves; level; xp = (0, 10); feint = false }
+
+(** Creates a deep copy of a pokemon *)
+let copy_pokemon (p : pokemon) : pokemon =
+  { p with hp = p.hp; feint = p.feint; xp = (0, 10) }
 
 (** Pokemon's hp is updated when attacked *)
 let attack move pokemon =
