@@ -1,7 +1,6 @@
 open Player
 open Printf
 open Pokemon
-open Ai
 
 type battle_state = { player : player; ai : player; winner : player option }
 
@@ -10,7 +9,8 @@ type battle_state = { player : player; ai : player; winner : player option }
     If player_pokemon wins battle_loop returns true else false *)
 let rec battle_loop player_pokemon opponent =
   if player_pokemon.hp <= 0 then (
-    printf "Your %s fainted. You lost the battle!\n" player_pokemon.name;
+    printf "Your %s feinted. You lost the battle!\n" player_pokemon.name;
+    player_pokemon.feint <- true;
     false (* Player lost *))
   else if opponent.hp <= 0 then (
     printf "You defeated the wild %s! You won the battle!\n"
@@ -25,7 +25,7 @@ let rec battle_loop player_pokemon opponent =
     List.iteri
       (fun i (move : move) ->
         printf "%d. %s (Type: %s, Damage: %d)\n" (i + 1) move.name
-          (ptype_to_string move.ptype)
+          (ptype_to_string move.m_ptype)
           move.damage)
       player_pokemon.moves;
 
@@ -35,22 +35,23 @@ let rec battle_loop player_pokemon opponent =
         if choice >= 1 && choice <= List.length player_pokemon.moves then (
           let chosen_move = List.nth player_pokemon.moves (choice - 1) in
           printf "You chose %s!\n" chosen_move.name;
-          let updated_opponent = Pokemon.attack chosen_move opponent in
-          if updated_opponent.faint then (
+          Pokemon.attack chosen_move opponent;
+
+          if opponent.feint then (
             printf "You defeated the wild %s! You won the battle!\n"
               (Pokemon.name opponent);
             true (* Player won *))
           else
-            let ai_move = choose_move opponent in
+            let ai_move = Ai.choose_move opponent in
             printf "Wild %s chose %s!\n" (Pokemon.name opponent) ai_move.name;
-            let updated_player_pokemon =
-              Pokemon.attack ai_move player_pokemon
-            in
-            if updated_player_pokemon.hp <= 0 then (
-              printf "Your %s fainted. You lost the battle!\n"
+            Pokemon.attack ai_move player_pokemon;
+
+            if player_pokemon.hp <= 0 then (
+              printf "Your %s feinted. You lost the battle!\n"
                 player_pokemon.name;
+              player_pokemon.feint <- true;
               false (* Player lost *))
-            else battle_loop updated_player_pokemon updated_opponent)
+            else battle_loop player_pokemon opponent)
         else (
           printf "Invalid move choice. Please enter a valid number: ";
           get_move_choice ())
