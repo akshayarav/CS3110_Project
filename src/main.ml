@@ -71,7 +71,9 @@ and wild_battle () =
       (Pokemon.name opponent);
     match String.lowercase_ascii (read_line ()) with
     | "yes" ->
-        player := Player.add_team opponent !player;
+        player := Player.add_team (Pokemon.copy_pokemon opponent) !player;
+        opponent.hp <- opponent.max_hp;
+        opponent.feint <- false;
         printf "Added %s to your team.\n" (Pokemon.name opponent)
     | "no" ->
         printf "You chose not to add %s to your team.\n" (Pokemon.name opponent)
