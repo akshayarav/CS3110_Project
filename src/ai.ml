@@ -1,15 +1,14 @@
 open Pokemon
 
-let random_choice list =
-  List.nth list (Random.int (List.length list))
+let random_choice list = List.nth list (Random.int (List.length list))
 
 let choose_move pokemon =
-  let available_moves = pokemon.moves in
+  let available_moves = pokemon.base.moves in
   match available_moves with
   | [] -> failwith "No available moves for this Pokemon."
   | _ ->
-    let move = random_choice available_moves in
-    move
+      let move = random_choice available_moves in
+      move
 
 let take_turn ai_pokemon player_pokemon =
   let move = choose_move ai_pokemon in

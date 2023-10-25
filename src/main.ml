@@ -37,49 +37,48 @@ let rec display_menu () =
 and choose_starter () =
   printf "\nChoose your starter pokemon:\n";
   List.iteri
-    (fun index pokemon ->
-      print_endline
-        (string_of_int (index + 1) ^ ". " ^ Pokemon.to_string pokemon))
-    starters;
+    (fun index (base_pokemon : Pokemon.base_pokemon) ->
+      printf "%d. %s\n" (index + 1) base_pokemon.name)
+    starters_base;
   printf "> ";
 
   match read_line () with
   | ("1" | "2" | "3") as choice ->
-      let starter_pokemon = List.nth starters (int_of_string choice - 1) in
+      let base_pokemon = List.nth starters_base (int_of_string choice - 1) in
+      let starter_pokemon = Pokemon.create base_pokemon 5 in
       player := Player.add_team starter_pokemon !player;
-      (* Update the mutable reference *)
-      print_endline ("You chose " ^ Pokemon.name starter_pokemon);
-      display_menu () (* Pass the updated player *)
+      printf "You chose %s!\n" starter_pokemon.base.name;
+      display_menu ()
   | _ ->
       printf "Invalid choice. Please try again.\n";
       choose_starter ()
 
 (* Simulate a battle with a wild pokemon *)
+(* Simulate a battle with a wild pokemon *)
 and wild_battle () =
-  let opponent_index = Random.int (List.length wild_pokemon) in
-  let opponent = List.nth wild_pokemon opponent_index in
+  let opponent_index = Random.int (List.length wild_pokemon_base) in
+  let base_opponent = List.nth wild_pokemon_base opponent_index in
+  let opponent = Pokemon.create_random base_opponent 5 in
   let player_pokemon =
     match !player.current_pokemon with
     | Some p -> p
     | None -> failwith "No current Pokémon to battle with"
   in
-  printf "A wild %s appears!\n" (Pokemon.name opponent);
+  printf "A wild %s appears!\n" opponent.base.name;
 
   let won = Battle.battle_loop player_pokemon opponent in
   if won then (
     printf "Do you want to add the wild %s to your team? (yes/no): "
-      (Pokemon.name opponent);
+      opponent.base.name;
     match String.lowercase_ascii (read_line ()) with
     | "yes" ->
         player := Player.add_team (Pokemon.copy_pokemon opponent) !player;
-        opponent.hp <- opponent.max_hp;
-        opponent.feint <- false;
-        printf "Added %s to your team.\n" (Pokemon.name opponent)
+        printf "Added %s to your team.\n" opponent.base.name
     | "no" ->
-        printf "You chose not to add %s to your team.\n" (Pokemon.name opponent)
+        printf "You chose not to add %s to your team.\n" opponent.base.name
     | _ ->
         printf "Invalid choice. Not adding %s to your team.\n"
-          (Pokemon.name opponent));
+          opponent.base.name);
   display_menu ()
 
 let () =
