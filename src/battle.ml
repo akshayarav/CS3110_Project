@@ -13,7 +13,7 @@ let rec battle_loop player_pokemon opponent =
     player_pokemon.feint <- true;
     false (* Player lost *))
   else if opponent.hp <= 0 then (
-    printf "You defeated the wild %s! You won the battle!\n"
+    printf "You defeated the wild %s! You won the battle! \n"
       (Pokemon.name opponent);
     true (* Player won *))
   else (
