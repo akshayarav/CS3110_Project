@@ -1,5 +1,5 @@
 type ptype = Fire | Water | Grass | Electric | Flying | Normal
-type move = { name : string; damage : int; ptype : ptype }
+type move = { name : string; damage : int; m_ptype : ptype }
 
 let ptype_to_string = function
   | Normal -> "Normal Type"
@@ -12,26 +12,30 @@ let ptype_to_string = function
 type pokemon = {
   name : string;
   ptype : ptype;
-  hp : int;
+  mutable hp : int;
   moves : move list;
   level : int;
   xp : int * int;
-  faint : bool;
+  mutable feint : bool;
 }
 (** Type for a pokemon has several stats *)
 
 (** Creates a new pokemon *)
 let create name ptype hp moves level =
-  { name; ptype; hp; moves; level; xp = (0, 10); faint = false }
+  { name; ptype; hp; moves; level; xp = (0, 10); feint = false }
 
 (** Pokemon's hp is updated when attacked *)
 let attack move pokemon =
   let new_hp = pokemon.hp - move.damage in
-  if new_hp <= 0 then { pokemon with hp = 0; faint = true }
-  else { pokemon with hp = new_hp }
+  if new_hp <= 0 then (
+    pokemon.hp <- 0;
+    pokemon.feint <- true)
+  else pokemon.hp <- new_hp
 
 (** Prints out pokemon and its stats *)
-let to_string pokemon = pokemon.name ^ ": " ^ ptype_to_string pokemon.ptype
+let to_string pokemon =
+  let feint_status = if pokemon.feint then " - FEINTED" else "" in
+  pokemon.name ^ ": " ^ ptype_to_string pokemon.ptype ^ feint_status
 
 (** Prints out the pokemon's name *)
 let name pokemon = pokemon.name
