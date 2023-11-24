@@ -198,5 +198,78 @@ let base_spearow =
     (* Evolves into Fearow at level 20 *)
   }
 
+(* Pikachu *)
+let base_raichu =
+  {
+    name = "Raichu";
+    ptype = Electric;
+    max_hp = 60;
+    moves = [ thunder_shock; thunder_wave; quick_attack ];
+    learnable_moves = [ (50, thunder) ];
+    evolution = None;
+  }
+
+let base_pikachu =
+  {
+    name = "Pikachu";
+    ptype = Electric;
+    max_hp = 35;
+    moves = [ thunder_shock; growl ];
+    learnable_moves = [ (15, thunder_wave); (22, electro_ball) ];
+    evolution = Some (30, base_raichu);
+  }
+
+(* Jigglypuff *)
+let base_wigglytuff =
+  {
+    name = "Wigglytuff";
+    ptype = Normal;
+    max_hp = 70;
+    moves = [ sing; double_slap; disable ];
+    learnable_moves = [ (45, hyper_voice) ];
+    evolution = None;
+  }
+
+let base_jigglypuff =
+  {
+    name = "Jigglypuff";
+    ptype = Normal;
+    max_hp = 45;
+    moves = [ sing; pound ];
+    learnable_moves = [ (18, double_slap); (24, rest) ];
+    evolution = Some (36, base_wigglytuff);
+  }
+
+(* Psyduck *)
+let base_golduck =
+  {
+    name = "Golduck";
+    ptype = Water;
+    max_hp = 80;
+    moves = [ water_gun; confusion; disable ];
+    learnable_moves = [ (52, hydro_pump) ];
+    evolution = None;
+  }
+
+let base_psyduck =
+  {
+    name = "Psyduck";
+    ptype = Water;
+    max_hp = 50;
+    moves = [ water_gun; tail_whip ];
+    learnable_moves = [ (16, confusion); (23, fury_swipes) ];
+    evolution = Some (33, base_golduck);
+  }
+
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle ]
-let wild_pokemon_base = [ base_pidgey; base_rattata; base_spearow ]
+
+let wild_pokemon_base =
+  [
+    base_golduck;
+    base_jigglypuff;
+    base_psyduck;
+    base_pikachu;
+    base_pidgey;
+    base_rattata;
+    base_spearow;
+  ]

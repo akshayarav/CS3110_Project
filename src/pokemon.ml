@@ -1,4 +1,4 @@
-type ptype = Fire | Water | Grass | Electric | Flying | Normal
+type ptype = Fire | Water | Grass | Electric | Flying | Normal | Psychic
 type move = { name : string; damage : int; m_ptype : ptype }
 
 type base_pokemon = {
@@ -26,6 +26,7 @@ let ptype_to_string = function
   | Electric -> "Electric Type"
   | Grass -> "Grass Type"
   | Flying -> "Flying Type"
+  | Psychic -> "Psychic Type"
 
 (** Creates a new pokemon *)
 let create base level =
@@ -117,7 +118,7 @@ let add_xp pokemon xp_earned =
   level_up updated_pokemon
 
 (* Calculate experience gained from defeating an opponent *)
-let calculate_xp_gained opponent_level = 1000 * opponent_level
+let calculate_xp_gained opponent_level = 10 * opponent_level
 
 (*Checks for new moves for the pokemon*)
 let check_new_moves pokemon =
