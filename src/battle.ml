@@ -35,7 +35,7 @@ let rec battle_loop player_pokemon opponent =
         if choice >= 1 && choice <= List.length player_pokemon.base.moves then (
           let chosen_move = List.nth player_pokemon.base.moves (choice - 1) in
           printf "You chose %s!\n" chosen_move.name;
-          Pokemon.attack chosen_move opponent;
+          Pokemon.attack chosen_move opponent player_pokemon;
 
           if opponent.feint then (
             printf "You defeated the wild %s! You won the battle!\n"
@@ -44,7 +44,7 @@ let rec battle_loop player_pokemon opponent =
           else
             let ai_move = Ai.choose_move opponent in
             printf "Wild %s chose %s!\n" (Pokemon.name opponent) ai_move.name;
-            Pokemon.attack ai_move player_pokemon;
+            Pokemon.attack ai_move player_pokemon opponent;
 
             if player_pokemon.hp <= 0 then (
               printf "Your %s feinted. You lost the battle!\n"

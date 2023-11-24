@@ -68,10 +68,17 @@ and wild_battle () =
 
   let won = Battle.battle_loop player_pokemon opponent in
   if won then (
+    let xp_gained = Pokemon.calculate_xp_gained opponent.level in
+    let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
+    player := Player.update_pokemon updated_pokemon !player;
+    printf "Your %s gained %d XP and is now Level %d.\n"
+      updated_pokemon.base.name xp_gained updated_pokemon.level;
     let reward =
       let min_reward = 1 in
       let max_reward = 5 in
-      let earned_coins = min_reward + Random.int (max_reward - min_reward + 1) in
+      let earned_coins =
+        min_reward + Random.int (max_reward - min_reward + 1)
+      in
       earned_coins
     in
     player := Player.adjust_coins reward !player;
@@ -91,47 +98,48 @@ and wild_battle () =
 
 (* Go to Pokemon Center *)
 and pokemon_center () =
-  if List.length !player.team = 0 then
-    (printf "\nObtain a Pokemon first!\n"; display_menu ())
-  else (
-    let options = ["Heal Pokemon"; "Exit"] in
-    printf "%s\n" (Player.player_to_string !player);
-    printf "\nWelcome! What would you like to do?\n";
-    List.iteri
-      (fun index option ->
-        printf "%d. %s\n" (index + 1) option)
-      options;
-    printf "> ";
-    match read_line () with
-    | "1" ->
-      printf "\nWhich Pokemon would you like to heal (cost: 2 coins)?\n";
-      List.iteri (fun i x -> printf "%d. %s\n" (i + 1) (Pokemon.to_string x)) !player.team;
-      printf "%d. Exit\n" ((List.length !player.team) + 1);
-      printf "> ";
-      (match read_int_opt () with
-      | Some number when number > 0 && number <= List.length !player.team ->
-        let selected = List.nth !player.team (number - 1) in
-        if selected.hp = selected.base.max_hp then
-          (printf "Pokemon is already at max hp! Select again.\n"; pokemon_center ());
-        if selected.feint then (
-          selected.feint <- false;
-          selected.hp <- selected.base.max_hp
-        ) else (
-          selected.hp <- selected.base.max_hp
-        );
-        player := Player.adjust_coins (-2) !player;
-        printf "%s has been healed.\n" (Pokemon.name selected);
-        pokemon_center()
-      | Some number when number = (List.length !player.team) + 1 -> pokemon_center ()
-      | _ ->
-        printf "Invalid choice. Please try again.\n";
-        pokemon_center ())
-    | "2" -> display_menu ()
-    | _ ->
-        printf "Invalid choice. Please try again.\n";
-        pokemon_center ();
-    );
-    display_menu ()
+  (if List.length !player.team = 0 then (
+     printf "\nObtain a Pokemon first!\n";
+     display_menu ())
+   else
+     let options = [ "Heal Pokemon"; "Exit" ] in
+     printf "%s\n" (Player.player_to_string !player);
+     printf "\nWelcome! What would you like to do?\n";
+     List.iteri
+       (fun index option -> printf "%d. %s\n" (index + 1) option)
+       options;
+     printf "> ";
+     match read_line () with
+     | "1" -> (
+         printf "\nWhich Pokemon would you like to heal (cost: 2 coins)?\n";
+         List.iteri
+           (fun i x -> printf "%d. %s\n" (i + 1) (Pokemon.to_string x))
+           !player.team;
+         printf "%d. Exit\n" (List.length !player.team + 1);
+         printf "> ";
+         match read_int_opt () with
+         | Some number when number > 0 && number <= List.length !player.team ->
+             let selected = List.nth !player.team (number - 1) in
+             if selected.hp = selected.base.max_hp then (
+               printf "Pokemon is already at max hp! Select again.\n";
+               pokemon_center ());
+             if selected.feint then (
+               selected.feint <- false;
+               selected.hp <- selected.base.max_hp)
+             else selected.hp <- selected.base.max_hp;
+             player := Player.adjust_coins (-2) !player;
+             printf "%s has been healed.\n" (Pokemon.name selected);
+             pokemon_center ()
+         | Some number when number = List.length !player.team + 1 ->
+             pokemon_center ()
+         | _ ->
+             printf "Invalid choice. Please try again.\n";
+             pokemon_center ())
+     | "2" -> display_menu ()
+     | _ ->
+         printf "Invalid choice. Please try again.\n";
+         pokemon_center ());
+  display_menu ()
 
 let () =
   Random.self_init ();

@@ -1,15 +1,24 @@
 open Pokemon
 
-type player = { team : pokemon list; current_pokemon : pokemon option ; coins : int}
+type player = {
+  team : pokemon list;
+  current_pokemon : pokemon option;
+  coins : int;
+}
 (** A player has a team, a first pokemon to send out, and the current pokemon in battle *)
 
 (** Creates a new player with an empty team*)
-let new_player = { team = []; current_pokemon = None ; coins = 10}
+let new_player = { team = []; current_pokemon = None; coins = 10 }
 
 (** Add a new pokemon to the player's team *)
 let add_team pokemon player =
   match player.team with
-  | [] -> { team = [pokemon]; current_pokemon = Some pokemon; coins = player.coins }
+  | [] ->
+      {
+        team = [ pokemon ];
+        current_pokemon = Some pokemon;
+        coins = player.coins;
+      }
   | _ -> { player with team = pokemon :: player.team }
 
 (** Adjusts the player's coins *)
@@ -24,7 +33,7 @@ let player_to_string player =
   let rec pokemon_list_to_string pokemons =
     match pokemons with
     | [] -> ""
-    | [pokemon] -> Pokemon.to_string pokemon
+    | [ pokemon ] -> Pokemon.to_string pokemon
     | pokemon :: rest ->
         Pokemon.to_string pokemon ^ ", " ^ pokemon_list_to_string rest
   in
@@ -36,4 +45,14 @@ let player_to_string player =
   | Some current_pokemon ->
       "\nCurrent pokemon to be used in battle:\n"
       ^ Pokemon.to_string current_pokemon
-  ^ "\nCoins: " ^ string_of_int player.coins
+      ^ "\nCoins: " ^ string_of_int player.coins
+
+let update_pokemon updated_pokemon player =
+  let updated_team =
+    List.map
+      (fun pokemon ->
+        if pokemon.base.name = updated_pokemon.base.name then updated_pokemon
+        else pokemon)
+      player.team
+  in
+  { player with team = updated_team; current_pokemon = Some updated_pokemon }
