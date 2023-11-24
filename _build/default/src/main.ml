@@ -2,8 +2,35 @@
 open Printf
 open Pokedex
 open Player
+open Pokemon
 
 (* open Ai *)
+
+let handle_new_moves pokemon =
+  let new_moves = Pokemon.check_new_moves pokemon in
+  List.fold_left
+    (fun acc_pokemon (_, new_move) ->
+      (* Extract just the move from each tuple *)
+      if List.length acc_pokemon.base.moves < 4 then
+        (* If less than 4 moves, learn directly without replacing *)
+        Pokemon.learn_move acc_pokemon new_move (-1)
+      else
+        (* Randomly select a move to be replaced *)
+        let move_to_replace = Random.int (List.length acc_pokemon.base.moves) in
+        Printf.printf "%s learns the move %s, replacing %s.\n"
+          acc_pokemon.base.name new_move.name
+          (List.nth acc_pokemon.base.moves move_to_replace).name;
+        Pokemon.learn_move acc_pokemon new_move move_to_replace)
+    pokemon new_moves
+
+(* Prints if pokemon can evolve *)
+let handle_evolution pokemon =
+  match Pokemon.check_evolution pokemon with
+  | Some evolved_form ->
+      printf "%s is evolving into %s!\n" pokemon.base.name evolved_form.name;
+      (* Add any user interaction if needed *)
+      Pokemon.evolve_pokemon pokemon evolved_form
+  | None -> pokemon
 
 (* Stores the player *)
 let player = ref Player.new_player
@@ -70,9 +97,29 @@ and wild_battle () =
   if won then (
     let xp_gained = Pokemon.calculate_xp_gained opponent.level in
     let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
-    player := Player.update_pokemon updated_pokemon !player;
-    printf "Your %s gained %d XP and is now Level %d.\n"
-      updated_pokemon.base.name xp_gained updated_pokemon.level;
+    printf "Your %s gained %d XP.\n" updated_pokemon.base.name xp_gained;
+
+    (* Check if the Pokémon leveled up *)
+    if updated_pokemon.level > player_pokemon.level then (
+      printf "Your %s grew to Level %d!\n" updated_pokemon.base.name
+        updated_pokemon.level;
+
+      (* Handle new moves *)
+      let pokemon_after_moves = handle_new_moves updated_pokemon in
+
+      (* Handle evolution *)
+      let evolved_pokemon = handle_evolution pokemon_after_moves in
+
+      (* Update player's pokemon *)
+      player := Player.update_pokemon evolved_pokemon !player;
+
+      if evolved_pokemon.base.name <> player_pokemon.base.name then
+        printf "What? %s is evolved into %s!\n" player_pokemon.base.name
+          evolved_pokemon.base.name)
+    else
+      (* If no level up, just update the Pokémon *)
+      player := Player.update_pokemon updated_pokemon !player;
+
     let reward =
       let min_reward = 1 in
       let max_reward = 5 in
