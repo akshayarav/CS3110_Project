@@ -1,9 +1,9 @@
 # dune exec ./main.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: /Users/akshay/Documents/3110/CS3110_Project
-# Auto-detected concurrency: 8
-$ /Users/akshay/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/yn/jj8k5q5d1cz3b13hrt5vmk840000gp/T/dune_adb6ae_output
+# Workspace root: /home/abhivetukuri/3110/CS3110_Project
+# Auto-detected concurrency: 12
+$ /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /tmp/dune_eca752_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -12,78 +12,81 @@ $ /Users/akshay/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/yn/jj8
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = In_build_dir "default"
-#  ; ocaml_bin = External "/Users/akshay/.opam/cs3110-2023fa/bin"
-#  ; ocaml = Ok External "/Users/akshay/.opam/cs3110-2023fa/bin/ocaml"
-#  ; ocamlc = External "/Users/akshay/.opam/cs3110-2023fa/bin/ocamlc.opt"
+#  ; ocaml_bin = External "/home/abhivetukuri/.opam/cs3110-2023fa/bin"
+#  ; ocaml = Ok External "/home/abhivetukuri/.opam/cs3110-2023fa/bin/ocaml"
+#  ; ocamlc = External "/home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/Users/akshay/.opam/cs3110-2023fa/bin/ocamlopt.opt"
+#      Ok External "/home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/Users/akshay/.opam/cs3110-2023fa/bin/ocamldep.opt"
+#      Ok External "/home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/Users/akshay/.opam/cs3110-2023fa/bin/ocamlmklib.opt"
+#      Ok External "/home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
 #        { "DUNE_OCAML_HARDCODED" :
-#            "/Users/akshay/.opam/cs3110-2023fa/lib/ocaml:/Users/akshay/.opam/cs3110-2023fa/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/Users/akshay/.opam/cs3110-2023fa/lib/ocaml"
-#        ; "DUNE_SOURCEROOT" : "/Users/akshay/Documents/3110/CS3110_Project"
+#            "/home/abhivetukuri/.opam/cs3110-2023fa/lib/ocaml:/home/abhivetukuri/.opam/cs3110-2023fa/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/home/abhivetukuri/.opam/cs3110-2023fa/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" : "/home/abhivetukuri/3110/CS3110_Project"
 #        ; "INSIDE_DUNE" :
-#            "/Users/akshay/Documents/3110/CS3110_Project/_build/default"
+#            "/home/abhivetukuri/3110/CS3110_Project/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/Users/akshay/Documents/3110/CS3110_Project/_build/install/default/lib"
+#            "/home/abhivetukuri/3110/CS3110_Project/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/Users/akshay/Documents/3110/CS3110_Project/_build/install/default/lib"
+#            "/home/abhivetukuri/3110/CS3110_Project/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/Users/akshay/Documents/3110/CS3110_Project/_build/install/default/lib/toplevel"
+#            "/home/abhivetukuri/3110/CS3110_Project/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
 #  ; findlib_paths =
-#      [ External "/Users/akshay/.opam/cs3110-2023fa/lib/ocaml"
-#      ; External "/Users/akshay/.opam/cs3110-2023fa/lib"
+#      [ External "/home/abhivetukuri/.opam/cs3110-2023fa/lib/ocaml"
+#      ; External "/home/abhivetukuri/.opam/cs3110-2023fa/lib"
 #      ]
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "5.0.0"
 #      ; standard_library_default =
-#          "/Users/akshay/.opam/cs3110-2023fa/lib/ocaml"
-#      ; standard_library = "/Users/akshay/.opam/cs3110-2023fa/lib/ocaml"
+#          "/home/abhivetukuri/.opam/cs3110-2023fa/lib/ocaml"
+#      ; standard_library = "/home/abhivetukuri/.opam/cs3110-2023fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
-#      ; c_compiler = "cc"
+#      ; c_compiler = "gcc"
 #      ; ocamlc_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread" ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
 #      ; ocamlc_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
 #      ; ocamlopt_cflags =
-#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread" ]
+#          [ "-O2"; "-fno-strict-aliasing"; "-fwrapv"; "-pthread"; "-fPIC" ]
 #      ; ocamlopt_cppflags = [ "-D_FILE_OFFSET_BITS=64" ]
 #      ; bytecomp_c_compiler =
-#          [ "cc"
+#          [ "gcc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
+#          ; "-fPIC"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ]
 #      ; bytecomp_c_libraries = [ "-lm"; "-lpthread" ]
 #      ; native_c_compiler =
-#          [ "cc"
+#          [ "gcc"
 #          ; "-O2"
 #          ; "-fno-strict-aliasing"
 #          ; "-fwrapv"
 #          ; "-pthread"
+#          ; "-fPIC"
 #          ; "-D_FILE_OFFSET_BITS=64"
 #          ]
 #      ; native_c_libraries = [ "-lm"; "-lpthread" ]
 #      ; native_pack_linker = [ "ld"; "-r"; "-o" ]
 #      ; cc_profile = []
-#      ; architecture = "arm64"
+#      ; architecture = "amd64"
 #      ; model = "default"
 #      ; int_size = 63
 #      ; word_size = 64
-#      ; system = "macosx"
-#      ; asm = [ "cc"; "-c"; "-Wno-trigraphs" ]
+#      ; system = "linux"
+#      ; asm = [ "as" ]
 #      ; asm_cfi_supported = true
 #      ; with_frame_pointers = false
 #      ; ext_exe = ""
@@ -94,8 +97,8 @@ $ /Users/akshay/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/yn/jj8
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "aarch64-apple-darwin21.6.0"
-#      ; target = "aarch64-apple-darwin21.6.0"
+#      ; host = "x86_64-pc-linux-gnu"
+#      ; target = "x86_64-pc-linux-gnu"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -115,3 +118,19 @@ $ /Users/akshay/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/yn/jj8
 #      ; windows_unicode = false
 #      }
 #  }
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamldep.opt -modules -impl src/pokemon.ml) > _build/default/src/.main.eobjs/dune__exe__Pokemon.impl.d
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Pokemon.cmo -c -impl src/pokemon.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Ai.cmo -c -impl src/ai.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Player.cmo -c -impl src/player.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Moves.cmo -c -impl src/moves.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Ai.cmx -c -impl src/ai.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Pokemon.cmx -c -impl src/pokemon.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Pokedex.cmo -c -impl src/pokedex.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Moves.cmx -c -impl src/moves.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Player.cmx -c -impl src/player.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Battle.cmo -c -impl src/battle.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Pokedex.cmx -c -impl src/pokedex.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Battle.cmx -c -impl src/battle.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Main.cmo -c -impl src/main.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Main.cmx -c -impl src/main.ml)
+$ (cd _build/default && /home/abhivetukuri/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o src/main.exe src/.main.eobjs/native/dune__exe.cmx src/.main.eobjs/native/dune__exe__Pokemon.cmx src/.main.eobjs/native/dune__exe__Ai.cmx src/.main.eobjs/native/dune__exe__Player.cmx src/.main.eobjs/native/dune__exe__Battle.cmx src/.main.eobjs/native/dune__exe__Moves.cmx src/.main.eobjs/native/dune__exe__Pokedex.cmx src/.main.eobjs/native/dune__exe__Main.cmx)
