@@ -6,6 +6,8 @@ type base_pokemon = {
   ptype : ptype;
   max_hp : int;
   moves : move list;
+  learnable_moves : (int * move) list;
+  evolution : (int * base_pokemon) option;
 }
 
 type pokemon = {
@@ -116,3 +118,25 @@ let add_xp pokemon xp_earned =
 
 (* Calculate experience gained from defeating an opponent *)
 let calculate_xp_gained opponent_level = 1000 * opponent_level
+
+(*Checks for new moves for the pokemon*)
+let check_new_moves pokemon =
+  List.filter (fun (lvl, _) -> lvl = pokemon.level) pokemon.base.learnable_moves
+
+(*Checks if the pokemon can evolve*)
+let check_evolution pokemon =
+  match pokemon.base.evolution with
+  | Some (lvl, evolved_form) when pokemon.level >= lvl -> Some evolved_form
+  | _ -> None
+
+let evolve_pokemon pokemon evolved_form =
+  { pokemon with base = evolved_form; hp = evolved_form.max_hp }
+
+(* Function to add or replace a move *)
+let learn_move pokemon new_move move_to_replace =
+  let new_moves =
+    List.mapi
+      (fun i move -> if i = move_to_replace then new_move else move)
+      pokemon.base.moves
+  in
+  { pokemon with base = { pokemon.base with moves = new_moves } }
