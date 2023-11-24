@@ -22,6 +22,18 @@ let wing_attack = { name = "Wing Attack"; damage = 15; m_ptype = Flying }
 let hurricane = { name = "Hurricane"; damage = 20; m_ptype = Flying }
 let hyper_fang = { name = "Hyper Fang"; damage = 15; m_ptype = Normal }
 let drill_peck = { name = "Drill Peck"; damage = 20; m_ptype = Flying }
+let thunder_shock = { name = "Thunder Shock"; damage = 10; m_ptype = Electric }
+let thunder_wave = { name = "Thunder Wave"; damage = 0; m_ptype = Electric }
+let electro_ball = { name = "Electro Ball"; damage = 15; m_ptype = Electric }
+let thunder = { name = "Thunder"; damage = 20; m_ptype = Electric }
+let sing = { name = "Sing"; damage = 0; m_ptype = Normal }
+let pound = { name = "Pound"; damage = 10; m_ptype = Normal }
+let double_slap = { name = "Double Slap"; damage = 15; m_ptype = Normal }
+let rest = { name = "Rest"; damage = 0; m_ptype = Normal }
+let hyper_voice = { name = "Hyper Voice"; damage = 20; m_ptype = Normal }
+let confusion = { name = "Confusion"; damage = 10; m_ptype = Psychic }
+let fury_swipes = { name = "Fury Swipes"; damage = 15; m_ptype = Normal }
+let disable = { name = "Disable"; damage = 10; m_ptype = Normal }
 
 let all_moves =
   [
@@ -47,4 +59,15 @@ let all_moves =
     hurricane;
     hyper_fang;
     drill_peck;
+    thunder_shock;
+    thunder_wave;
+    electro_ball;
+    thunder;
+    sing;
+    pound;
+    double_slap;
+    rest;
+    hyper_voice;
+    confusion;
+    fury_swipes;
   ]
