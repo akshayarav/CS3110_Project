@@ -79,13 +79,13 @@ let rec battle_loop player_pokemon opponent player =
         if choice >= 1 && choice <= List.length player_pokemon.base.moves then (
           let chosen_move = List.nth player_pokemon.base.moves (choice - 1) in
           printf "You chose %s!\n" chosen_move.name;
-          Pokemon.attack chosen_move opponent player_pokemon;
-          battle_loop player_pokemon opponent player
+          Pokemon.attack chosen_move opponent player_pokemon;  (* Apply player's chosen move *)
+          false  (* Do not end the battle yet, proceed to AI's turn *)
         )
         else if choice = List.length player_pokemon.base.moves + 1 then (
           let new_pokemon, updated_player = choose_new_pokemon player in
           printf "Go %s!\n" new_pokemon.base.name;
-          battle_loop new_pokemon opponent updated_player
+          battle_loop new_pokemon opponent updated_player  (* New Pokémon, start a new battle loop iteration *)
         )
         else (
           printf "Invalid choice. Please enter a valid number: ";
@@ -97,6 +97,34 @@ let rec battle_loop player_pokemon opponent player =
           get_player_choice ()
       | _ ->
           printf "An unexpected error occurred. Exiting the battle.\n";
-          false  (* An error occurred, assuming loss *)
+          false
     in
-    get_player_choice ())
+
+    if get_player_choice () then
+      true  (* Battle ended, player won *)
+    else if opponent.hp <= 0 then
+      true  (* Opponent's Pokémon fainted, player won *)
+    else (
+      (* AI's turn *)
+      let ai_move = Ai.choose_move opponent in
+      printf "Wild %s chose %s!\n" (Pokemon.name opponent) ai_move.name;
+      Pokemon.attack ai_move player_pokemon opponent;
+
+      if player_pokemon.hp <= 0 then (
+        (* Handle player's Pokémon fainting after AI's turn *)
+        let available_pokemon = List.filter (fun p -> not p.feint) player.team in
+        if List.length available_pokemon = 0 then (
+          printf "All your Pokemon have fainted. You lost the battle!\n";
+          false (* Player lost *)
+        )
+        else (
+          let new_pokemon, updated_player = choose_new_pokemon player in
+          printf "Go %s!\n" new_pokemon.base.name;
+          battle_loop new_pokemon opponent updated_player
+        )
+      )
+      else
+        (* Continue the battle if the player's Pokémon didn't faint *)
+        battle_loop player_pokemon opponent player
+    )
+  )
