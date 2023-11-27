@@ -261,24 +261,26 @@ let base_psyduck =
     evolution = Some (33, base_golduck);
   }
 
-let base_sandshrew = 
-    {
-      name = "Sandshrew";
-      ptype = Ground;
-      max_hp = 50;
-      moves = [ sand_attack ];
-      learnable_moves = [ (30, bulldoze) ];
-      evolution = Some (35, base_sandslash);
-    }
 let base_sandslash =
-    {
-      name = "Sandslash";
-      ptype = Ground;
-      max_hp = 85;
-      moves = [ sand_attack ];
-      learnable_moves = [ (45, dig) ];
-      evolution = None;
-    }
+  {
+    name = "Sandslash";
+    ptype = Ground;
+    max_hp = 85;
+    moves = [ sand_attack ];
+    learnable_moves = [ (45, dig) ];
+    evolution = None;
+  }
+
+let base_sandshrew =
+  {
+    name = "Sandshrew";
+    ptype = Ground;
+    max_hp = 50;
+    moves = [ sand_attack ];
+    learnable_moves = [ (30, bulldoze) ];
+    evolution = Some (35, base_sandslash);
+  }
+
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle ]
 
 let wild_pokemon_base =
