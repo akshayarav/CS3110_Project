@@ -1,4 +1,4 @@
-type ptype = Fire | Water | Grass | Electric | Flying | Normal | Psychic
+type ptype = Fire | Water | Grass | Electric | Flying | Normal | Psychic | Ground
 type move = { name : string; damage : int; m_ptype : ptype }
 
 type base_pokemon = {
@@ -27,6 +27,7 @@ let ptype_to_string = function
   | Grass -> "Grass Type"
   | Flying -> "Flying Type"
   | Psychic -> "Psychic Type"
+  | Ground -> "Ground Type"
 
 (** Creates a new pokemon *)
 let create base level =

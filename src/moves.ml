@@ -34,6 +34,9 @@ let hyper_voice = { name = "Hyper Voice"; damage = 20; m_ptype = Normal }
 let confusion = { name = "Confusion"; damage = 10; m_ptype = Psychic }
 let fury_swipes = { name = "Fury Swipes"; damage = 15; m_ptype = Normal }
 let disable = { name = "Disable"; damage = 10; m_ptype = Normal }
+let sand_attack = { name = "Sand Attack"; damage = 0; m_ptype = Ground}
+let bulldoze = { name = "Bulldoze"; damage = 15; m_ptype = Ground}
+let dig = { name = "Dig"; damage = 40; m_ptype = Ground}
 
 let all_moves =
   [
@@ -70,4 +73,7 @@ let all_moves =
     hyper_voice;
     confusion;
     fury_swipes;
+    sand_attack;
+    bulldoze;
+    dig;
   ]
