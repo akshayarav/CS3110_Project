@@ -1,9 +1,9 @@
-# dune build
+# dune exec ./main.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: /Users/junchoi/3110/3110_Project
-# Auto-detected concurrency: 8
-$ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj0lyt8x6rg9d07ds_27_qqh0000gn/T/dune_31404c_output
+# Workspace root: /Users/danweizuo/Documents/CS-3110/final-project
+# Auto-detected concurrency: 10
+$ /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/6v/3m2jy2ts1yxgklk_t3cylwkh0000gn/T/dune_e0bd10_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -12,42 +12,45 @@ $ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = In_build_dir "default"
-#  ; ocaml_bin = External "/Users/junchoi/.opam/cs3110-2023fa/bin"
-#  ; ocaml = Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocaml"
-#  ; ocamlc = External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt"
+#  ; ocaml_bin = External "/Users/danweizuo/.opam/cs3110-2023fa/bin"
+#  ; ocaml = Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocaml"
+#  ; ocamlc = External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt"
+#      Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamldep.opt"
+#      Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamlmklib.opt"
+#      Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
 #        { "DUNE_OCAML_HARDCODED" :
-#            "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml:/Users/junchoi/.opam/cs3110-2023fa/lib"
-#        ; "DUNE_OCAML_STDLIB" : "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
-#        ; "DUNE_SOURCEROOT" : "/Users/junchoi/3110/3110_Project"
-#        ; "INSIDE_DUNE" : "/Users/junchoi/3110/3110_Project/_build/default"
+#            "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml:/Users/danweizuo/.opam/cs3110-2023fa/lib"
+#        ; "DUNE_OCAML_STDLIB" :
+#            "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" :
+#            "/Users/danweizuo/Documents/CS-3110/final-project"
+#        ; "INSIDE_DUNE" :
+#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/Users/junchoi/3110/3110_Project/_build/install/default/lib"
+#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/Users/junchoi/3110/3110_Project/_build/install/default/lib"
+#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/Users/junchoi/3110/3110_Project/_build/install/default/lib/toplevel"
+#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
 #  ; findlib_paths =
-#      [ External "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
-#      ; External "/Users/junchoi/.opam/cs3110-2023fa/lib"
+#      [ External "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
+#      ; External "/Users/danweizuo/.opam/cs3110-2023fa/lib"
 #      ]
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "5.0.0"
 #      ; standard_library_default =
-#          "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
-#      ; standard_library = "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
+#          "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
+#      ; standard_library = "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
 #      ; c_compiler = "cc"
@@ -93,8 +96,8 @@ $ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "aarch64-apple-darwin22.3.0"
-#      ; target = "aarch64-apple-darwin22.3.0"
+#      ; host = "aarch64-apple-darwin22.5.0"
+#      ; target = "aarch64-apple-darwin22.5.0"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false
@@ -114,20 +117,9 @@ $ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj
 #      ; windows_unicode = false
 #      }
 #  }
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamldep.opt -modules -impl src/pokemon.ml) > _build/default/src/.main.eobjs/dune__exe__Pokemon.impl.d
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamldep.opt -modules -impl src/pokedex.ml) > _build/default/src/.main.eobjs/dune__exe__Pokedex.impl.d
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Pokemon.cmo -c -impl src/pokemon.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Ai.cmo -c -impl src/ai.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Player.cmo -c -impl src/player.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Moves.cmo -c -impl src/moves.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Battle.cmo -c -impl src/battle.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Pokedex.cmo -c -impl src/pokedex.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Main.cmo -c -impl src/main.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Player.cmx -c -impl src/player.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Battle.cmx -c -impl src/battle.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Ai.cmx -c -impl src/ai.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Moves.cmx -c -impl src/moves.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Pokemon.cmx -c -impl src/pokemon.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Main.cmx -c -impl src/main.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Pokedex.cmx -c -impl src/pokedex.ml)
-$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o src/main.exe src/.main.eobjs/native/dune__exe.cmx src/.main.eobjs/native/dune__exe__Pokemon.cmx src/.main.eobjs/native/dune__exe__Ai.cmx src/.main.eobjs/native/dune__exe__Player.cmx src/.main.eobjs/native/dune__exe__Battle.cmx src/.main.eobjs/native/dune__exe__Moves.cmx src/.main.eobjs/native/dune__exe__Pokedex.cmx src/.main.eobjs/native/dune__exe__Main.cmx)
+$ (cd _build/default && /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamldep.opt -modules -impl src/battle.ml) > _build/default/src/.main.eobjs/dune__exe__Battle.impl.d
+$ (cd _build/default && /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Battle.cmo -c -impl src/battle.ml)
+$ (cd _build/default && /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Main.cmo -c -impl src/main.ml)
+$ (cd _build/default && /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Battle.cmx -c -impl src/battle.ml)
+$ (cd _build/default && /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Main.cmx -c -impl src/main.ml)
+$ (cd _build/default && /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o src/main.exe src/.main.eobjs/native/dune__exe.cmx src/.main.eobjs/native/dune__exe__Pokemon.cmx src/.main.eobjs/native/dune__exe__Player.cmx src/.main.eobjs/native/dune__exe__Battle.cmx src/.main.eobjs/native/dune__exe__Moves.cmx src/.main.eobjs/native/dune__exe__Pokedex.cmx src/.main.eobjs/native/dune__exe__Main.cmx)

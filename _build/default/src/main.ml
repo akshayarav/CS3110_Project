@@ -93,7 +93,7 @@ and wild_battle () =
   in
   printf "A wild %s appears!\n" opponent.base.name;
 
-  let won = Battle.battle_loop player_pokemon opponent in
+  let won = Battle.battle_loop player_pokemon opponent !player in
   if won then (
     let xp_gained = Pokemon.calculate_xp_gained opponent.level in
     let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
