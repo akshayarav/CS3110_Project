@@ -6,6 +6,9 @@ module Ai = Dune__exe__Ai
 (** @canonical Dune__exe.Battle *)
 module Battle = Dune__exe__Battle
 
+(** @canonical Dune__exe.Elitefour *)
+module Elitefour = Dune__exe__Elitefour
+
 (** @canonical Dune__exe.Main *)
 module Main = Dune__exe__Main
 
@@ -20,3 +23,6 @@ module Pokedex = Dune__exe__Pokedex
 
 (** @canonical Dune__exe.Pokemon *)
 module Pokemon = Dune__exe__Pokemon
+
+(** @canonical Dune__exe.Trainer *)
+module Trainer = Dune__exe__Trainer
