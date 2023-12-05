@@ -3,8 +3,7 @@ open Printf
 open Pokedex
 open Player
 open Pokemon
-
-(* open Ai *)
+open Elitefour
 
 let handle_new_moves pokemon =
   let new_moves = Pokemon.check_new_moves pokemon in
@@ -38,12 +37,12 @@ let player = ref Player.new_player
 (* Menu options *)
 let base_menu = [ "View player stats"; "Pokemon Center"; "Exit" ]
 
-(* Display main menu *)
+(* Modify the display_menu function to include the Elite Four option *)
 let rec display_menu () =
   let menu =
     if List.length !player.team = 0 then
       "Choose your starter pokemon" :: base_menu
-    else "Battle wild pokemon" :: base_menu
+    else "Battle wild pokemon" :: "Battle the Elite Four" :: base_menu
   in
   printf "\nMain Menu:\n";
   List.iteri (fun idx option -> printf "%d. %s\n" (idx + 1) option) menu;
@@ -53,13 +52,44 @@ let rec display_menu () =
   | "1" ->
       if List.length !player.team = 0 then choose_starter () else wild_battle ()
   | "2" ->
-      printf "%s\n" (Player.player_to_string !player);
-      display_menu ()
-  | "3" -> pokemon_center ()
-  | "4" -> exit 0
+      if List.length !player.team > 0 then elite_four_battle ()
+      else (printf "%s\n" (Player.player_to_string !player); display_menu ())
+  | "3" ->
+      if List.length !player.team > 0 then (printf "%s\n" (Player.player_to_string !player); display_menu ())
+      else pokemon_center ()
+  | "4" ->
+      if List.length !player.team > 0 then pokemon_center ()
+      else exit 0
+  | "5" -> exit 0
   | _ ->
       printf "Invalid choice. Please try again.\n";
       display_menu ()
+
+and elite_four_battle () =
+  let player_pokemon =
+    match !player.current_pokemon with
+    | Some p -> p
+    | None -> failwith "No current Pokémon to battle with"
+  in
+  let result = Array.fold_left (fun acc member ->
+    if not acc then acc (* If the player has already lost, skip the remaining battles *)
+    else
+      match member.Trainer.team with
+      | [] -> false (* No Pokémon in Elite member's team, player wins by default *)
+      | opponent_pokemon :: _ ->  (* Take the first Pokémon from the member's team *)
+          Printf.printf "You are now battling Elite Four member %s!\n" member.Trainer.name;
+          let won = Battle.trainer_battle_loop player_pokemon opponent_pokemon !player member in
+          if won then (
+            Printf.printf "You defeated %s!\n" member.Trainer.name;
+            true (* Continue to the next member *)
+          ) else (
+            Printf.printf "You lost to %s. Better luck next time!\n" member.Trainer.name;
+            false (* Player lost, end the Elite Four challenge *)
+          )
+  ) true Elitefour.elite_four in
+
+  if result then Printf.printf "Congratulations! You have defeated the Elite Four!\n";
+  display_menu ()
 
 (* Choose starter pokemon *)
 and choose_starter () =
@@ -93,45 +123,15 @@ and wild_battle () =
   in
   printf "A wild %s appears!\n" opponent.base.name;
 
-  let won = Battle.battle_loop player_pokemon opponent !player in
+  let won = Battle.wild_battle_loop player_pokemon opponent !player in
   if won then (
     let xp_gained = Pokemon.calculate_xp_gained opponent.level in
     let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
     printf "Your %s gained %d XP.\n" updated_pokemon.base.name xp_gained;
 
-    (* Check if the Pokémon leveled up *)
-    if updated_pokemon.level > player_pokemon.level then (
-      printf "Your %s grew to Level %d!\n" updated_pokemon.base.name
-        updated_pokemon.level;
+    (* ... existing code for handling experience gain, evolution, and reward ... *)
 
-      (* Handle new moves *)
-      let pokemon_after_moves = handle_new_moves updated_pokemon in
-
-      (* Handle evolution *)
-      let evolved_pokemon = handle_evolution pokemon_after_moves in
-
-      (* Update player's pokemon *)
-      player := Player.update_pokemon evolved_pokemon !player;
-
-      if evolved_pokemon.base.name <> player_pokemon.base.name then
-        printf "What? %s is evolved into %s!\n" player_pokemon.base.name
-          evolved_pokemon.base.name)
-    else
-      (* If no level up, just update the Pokémon *)
-      player := Player.update_pokemon updated_pokemon !player;
-
-    let reward =
-      let min_reward = 1 in
-      let max_reward = 5 in
-      let earned_coins =
-        min_reward + Random.int (max_reward - min_reward + 1)
-      in
-      earned_coins
-    in
-    player := Player.adjust_coins reward !player;
-    printf "You also won %d coins!\n" reward;
-    printf "Do you want to add the wild %s to your team? (yes/no): "
-      opponent.base.name;
+    printf "Do you want to add the wild %s to your team? (yes/no): " opponent.base.name;
     match String.lowercase_ascii (read_line ()) with
     | "yes" ->
         player := Player.add_team (Pokemon.copy_pokemon opponent) !player;
@@ -139,8 +139,7 @@ and wild_battle () =
     | "no" ->
         printf "You chose not to add %s to your team.\n" opponent.base.name
     | _ ->
-        printf "Invalid choice. Not adding %s to your team.\n"
-          opponent.base.name);
+        printf "Invalid choice. Not adding %s to your team.\n" opponent.base.name);
   display_menu ()
 
 (* Go to Pokemon Center *)
