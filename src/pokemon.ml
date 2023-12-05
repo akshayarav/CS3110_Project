@@ -69,11 +69,13 @@ let create base level =
     damage_modifier = 1.;
   }
 
-(** Creates a new pokemon with a random hp *)
+(** Creates a new pokemon with a random hp, ensuring it's at least half of the max HP *)
 let create_random base level =
+  let min_hp = base.max_hp / 2 in  (* Minimum HP is half of the max HP *)
+  let random_hp = min_hp + Random.int (base.max_hp - min_hp + 1) in
   {
     base;
-    hp = Random.int base.max_hp;
+    hp = random_hp;
     level;
     xp = (0, 10 * level);
     feint = false;

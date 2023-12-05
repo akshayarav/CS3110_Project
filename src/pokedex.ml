@@ -322,6 +322,127 @@ let base_arcanine =
     evolution = None;
   }
 
+(* Tangela *)
+let base_tangela =
+  {
+    name = "Tangela";
+    ptype = Grass;
+    max_hp = 65;
+    moves = [ vine_whip; leech_seed; solar_beam; sleep_powder ];
+    learnable_moves = [ (40, razor_leaf) ];
+    evolution = None;
+  }
+
+(* Victreebel *)
+let base_victreebel =
+  {
+    name = "Victreebel";
+    ptype = Grass;
+    max_hp = 80;
+    moves = [ razor_leaf; sleep_powder; solar_beam; leech_seed ];
+    learnable_moves = [ (50, hyper_beam) ];
+    evolution = None;
+  }
+
+(* Exeggutor *)
+let base_exeggutor =
+  {
+    name = "Exeggutor";
+    ptype = Grass;
+    max_hp = 95;
+    moves = [ confusion; leech_seed; solar_beam; psychic ];
+    learnable_moves = [ (50, hyper_beam) ];
+    evolution = None;
+  }
+
+(* Ninetales *)
+let base_ninetales =
+  {
+    name = "Ninetales";
+    ptype = Fire;
+    max_hp = 73;
+    moves = [ ember; quick_attack; fire_blast; confuse_ray ];
+    learnable_moves = [ (45, flamethrower) ];
+    evolution = None;
+  }
+
+(* Rapidash *)
+let base_rapidash =
+  {
+    name = "Rapidash";
+    ptype = Fire;
+    max_hp = 65;
+    moves = [ ember; quick_attack; fire_blast; stomp ];
+    learnable_moves = [ (40, flamethrower) ];
+    evolution = None;
+  }
+
+(* Magmar *)
+let base_magmar =
+  {
+    name = "Magmar";
+    ptype = Fire;
+    max_hp = 65;
+    moves = [ ember; leer; fire_punch; fire_blast ];
+    learnable_moves = [ (43, flamethrower) ];
+    evolution = None;
+  }
+
+(* Flareon *)
+let base_flareon =
+  {
+    name = "Flareon";
+    ptype = Fire;
+    max_hp = 65;
+    moves = [ ember; quick_attack; fire_blast; bite ];
+    learnable_moves = [ (36, flamethrower) ];
+    evolution = None;
+  }
+
+(* Vaporeon *)
+let base_vaporeon =
+  {
+    name = "Vaporeon";
+    ptype = Water;
+    max_hp = 130;
+    moves = [ water_gun; quick_attack; hydro_pump; aurora_beam ];
+    learnable_moves = [ (42, water_pulse) ];
+    evolution = None;
+  }
+
+(* Lapras *)
+let base_lapras =
+  {
+    name = "Lapras";
+    ptype = Water;
+    max_hp = 130;
+    moves = [ water_gun; growl; ice_beam; hydro_pump ];
+    learnable_moves = [ (50, blizzard) ];
+    evolution = None;
+  }
+
+(* Tentacruel *)
+let base_tentacruel =
+  {
+    name = "Tentacruel";
+    ptype = Water;
+    max_hp = 80;
+    moves = [ bubble; water_gun; wrap; hydro_pump ];
+    learnable_moves = [ (50, blizzard) ];
+    evolution = None;
+  }
+
+(* Aerodactyl *)
+let base_aerodactyl =
+  {
+    name = "Aerodactyl";
+    ptype = Flying;
+    max_hp = 80;
+    moves = [ wing_attack; bite; fly; hyper_beam ];
+    learnable_moves = [ (60, dragon_claw) ];
+    evolution = None;
+  }
+
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle ]
 
 let wild_pokemon_base =
