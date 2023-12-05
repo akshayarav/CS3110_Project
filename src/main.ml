@@ -274,12 +274,21 @@ and practice_trainer_battle () =
     player := Player.adjust_coins 50 !player;
     Printf.printf "You earned 50 coins. Total coins: %d\n" !player.coins;
 
+    (* Award experience points to all Pokémon on the player's team *)
+    let xp_gained = Pokemon.calculate_xp_gained trainer.current_pokemon.level in
+    player := {
+      !player with
+      team = List.map (fun pkmn -> Pokemon.add_xp pkmn xp_gained) !player.team
+    };
+    Printf.printf "All your team Pokémon gained %d XP.\n" xp_gained;
+
     choose_reward Pokedex.reward_pokemon_base
 
   end else begin
     Printf.printf "You lost to Trainer %s. Better luck next time!\n" trainer.name;
     display_menu ()
   end
+
 
 (* Go to Pokemon Center *)
 and pokemon_center () =
