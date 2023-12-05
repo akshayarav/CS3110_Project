@@ -2,19 +2,6 @@ open Moves
 open Pokemon
 
 (* Evolutions of Bulbasaur *)
-let base_ivysaur =
-  {
-    name = "Ivysaur";
-    ptype = Grass;
-    max_hp = 60;
-    (* Example stats *)
-    moves = [ tackle; growl; leech_seed; vine_whip ];
-    (* Initial moves *)
-    learnable_moves = [ (20, razor_leaf) ];
-    (* Example learnable move *)
-    evolution = None;
-    (* Ivysaur does not evolve further in this implementation *)
-  }
 
 let base_venusaur =
   {
@@ -27,6 +14,20 @@ let base_venusaur =
     learnable_moves = [ (50, solar_beam) ];
     (* Example learnable move *)
     evolution = None;
+  }
+
+let base_ivysaur =
+  {
+    name = "Ivysaur";
+    ptype = Grass;
+    max_hp = 60;
+    (* Example stats *)
+    moves = [ tackle; growl; leech_seed; vine_whip ];
+    (* Initial moves *)
+    learnable_moves = [ (20, razor_leaf) ];
+    (* Example learnable move *)
+    evolution = Some (36, base_venusaur);
+    (* Ivysaur does not evolve further in this implementation *)
   }
 
 let base_bulbasaur =
@@ -672,7 +673,106 @@ let base_weedle = {
     evolution = Some (7, base_kakuna);
 }
 
-let starters_base = [ base_bulbasaur; base_charmander; base_squirtle ]
+(* Legendary Pokémon Mewtwo *)
+let base_mewtwo = {
+  name = "Mewtwo";
+  ptype = Psychic;
+  max_hp = 106;
+  moves = [ psychic; swift; barrier; recover ];
+  learnable_moves = [ (70, psychic); (75, amnesia); (81, mist); (86, thunderbolt); (93, ice_beam) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Articuno *)
+let base_articuno = {
+  name = "Articuno";
+  ptype = Ice;
+  max_hp = 90;
+  moves = [ ice_beam; blizzard; sky_attack; agility ];
+  learnable_moves = [ (51, mist); (55, ice_beam); (60, reflect); (65, blizzard) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Zapdos *)
+let base_zapdos = {
+  name = "Zapdos";
+  ptype = Electric;
+  max_hp = 90;
+  moves = [ thunder_shock; drill_peck; thunder; agility ];
+  learnable_moves = [ (51, thunder); (55, agility); (60, drill_peck); (65, light_screen) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Moltres *)
+let base_moltres = {
+  name = "Moltres";
+  ptype = Fire;
+  max_hp = 90;
+  moves = [ fire_spin; peck; fire_blast; agility ];
+  learnable_moves = [ (51, fire_blast); (55, agility); (60, sky_attack) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Lugia *)
+let base_lugia = {
+  name = "Lugia";
+  ptype = Psychic;  (* Lugia is often considered Psychic/Flying, but for simplicity using Psychic *)
+  max_hp = 110;
+  moves = [ aeroblast; psychic; hydro_pump; recover ];
+  learnable_moves = [ (65, aeroblast); (70, hydro_pump); (75, recover); (80, future_sight) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Ho-Oh *)
+let base_ho_oh = {
+  name = "Ho-Oh";
+  ptype = Fire;  (* Ho-Oh is often considered Fire/Flying, but for simplicity using Fire *)
+  max_hp = 110;
+  moves = [ sacred_fire; gust; recover; fire_blast ];
+  learnable_moves = [ (65, sacred_fire); (70, recover); (75, fire_blast); (80, sunny_day) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Rayquaza *)
+let base_rayquaza = {
+  name = "Rayquaza";
+  ptype = Dragon;  (* Rayquaza is Dragon/Flying, but for simplicity using Dragon *)
+  max_hp = 105;
+  moves = [ dragon_claw; fly; extreme_speed; hyper_beam ];
+  learnable_moves = [ (75, dragon_claw); (80, extreme_speed); (85, hyper_beam); (90, outrage) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Kyogre *)
+let base_kyogre = {
+  name = "Kyogre";
+  ptype = Water;
+  max_hp = 100;
+  moves = [ water_spout; hydro_pump; ice_beam; ancient_power ];
+  learnable_moves = [ (70, water_spout); (75, hydro_pump); (80, ice_beam); (85, sheer_cold) ];
+  evolution = None;
+}
+
+(* Legendary Pokémon Groudon *)
+let base_groudon = {
+  name = "Groudon";
+  ptype = Ground;
+  max_hp = 100;
+  moves = [ earthquake; fire_blast; solar_beam; eruption ];
+  learnable_moves = [ (70, earthquake); (75, fire_blast); (80, solar_beam); (85, fissure) ];
+  evolution = None;
+}
+
+let base_mod = {
+  name = "ALLEN TANG";
+  ptype = Ground;
+  max_hp = 6969;
+  moves = [ get_chicks ];
+  learnable_moves = [];
+  evolution = None
+}
+
+let starters_base = [ base_bulbasaur; base_charmander; base_squirtle; base_mod ]
 
 let wild_pokemon_base =
   [
@@ -683,4 +783,48 @@ let wild_pokemon_base =
     base_pidgey;
     base_rattata;
     base_spearow;
+  ]
+
+let reward_pokemon_base =
+  [
+    base_pidgeot;
+    base_raticate;
+    base_fearow;
+    base_raichu;
+    base_wigglytuff;
+    base_sandslash;
+    base_gyarados;
+    base_alakazam;
+    base_tangela;
+    base_victreebel;
+    base_exeggutor;
+    base_rapidash;
+    base_magmar;
+    base_flareon;
+    base_vaporeon;
+    base_tentacruel;
+    base_persian;
+    base_magneton;
+    base_electrode;
+    base_dugtrio;
+    base_marowak;
+    base_rhydon;
+    base_parasect;
+    base_venomoth;
+    base_butterfree;
+    base_caterpie;
+    base_beedrill;
+  ]
+
+let legendary_pokemon_base =
+  [
+    base_mewtwo;
+    base_lugia;
+    base_moltres;
+    base_articuno;
+    base_zapdos;
+    base_rayquaza;
+    base_groudon;
+    base_kyogre;
+    base_ho_oh;
   ]
