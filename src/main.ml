@@ -85,7 +85,7 @@ and elite_four_battle () =
             Printf.printf "You lost to %s. Better luck next time!\n" member.Trainer.name;
             false (* Player lost, end the Elite Four challenge *)
           )
-  ) true Elitefour.elite_four in
+  ) true Alltrainers.elite_four in
 
   if result then Printf.printf "Congratulations! You have defeated the Elite Four!\n";
   display_menu ()
