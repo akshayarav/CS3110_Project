@@ -93,6 +93,24 @@ let harden = { name = "Harden"; damage = 0; m_ptype = Normal }
 let string_shot = { name = "String Shot"; damage = 0; m_ptype = Bug }
 let bug_bite = { name = "Bug Bite"; damage = 10; m_ptype = Bug }
 let poison_sting = { name = "Poison Sting"; damage = 15; m_ptype = Poison }
+let swift = { name = "Swift"; damage = 20; m_ptype = Normal }
+let barrier = { name = "Barrier"; damage = 0; m_ptype = Psychic }
+let amnesia = { name = "Amnesia"; damage = 0; m_ptype = Psychic }
+let mist = { name = "Mist"; damage = 0; m_ptype = Ice }
+let sky_attack = { name = "Sky Attack"; damage = 50; m_ptype = Flying }
+let agility = { name = "Agility"; damage = 0; m_ptype = Psychic }
+let light_screen = { name = "Light Screen"; damage = 0; m_ptype = Psychic }
+let fire_spin = { name = "Fire Spin"; damage = 35; m_ptype = Fire }
+let aeroblast = { name = "Aeroblast"; damage = 100; m_ptype = Flying }
+let sacred_fire = { name = "Sacred Fire"; damage = 100; m_ptype = Fire }
+let sunny_day = { name = "Sunny Day"; damage = 0; m_ptype = Fire }
+let outrage = { name = "Outrage"; damage = 120; m_ptype = Dragon }
+let water_spout = { name = "Water Spout"; damage = 150; m_ptype = Water }
+let ancient_power = { name = "Ancient Power"; damage = 60; m_ptype = Rock }
+let sheer_cold = { name = "Sheer Cold"; damage = 0; m_ptype = Ice }
+let eruption = { name = "Eruption"; damage = 150; m_ptype = Fire }
+let fissure = { name = "Fissure"; damage = 0; m_ptype = Ground }
+let get_chicks = { name = "Get Chicks"; damage = 999; m_ptype = Ground }
 let all_moves =
   [
     tackle;
@@ -181,4 +199,22 @@ let all_moves =
     string_shot;
     bug_bite;
     poison_sting;
+    swift;
+    barrier;
+    amnesia;
+    mist;
+    sky_attack;
+    agility;
+    light_screen;
+    fire_spin;
+    aeroblast;
+    sacred_fire;
+    sunny_day;
+    outrage;
+    water_spout;
+    ancient_power;
+    sheer_cold;
+    eruption;
+    fissure;
+    get_chicks;
   ]

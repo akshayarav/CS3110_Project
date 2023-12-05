@@ -15,7 +15,7 @@ let member1 = Trainer.create_trainer
     create_pokemon base_victreebel 48; (* Victreebel *)
     create_pokemon base_exeggutor 50;  (* Exeggutor *)
   ]
-  (Some (create_pokemon base_venusaur 50))
+  (create_pokemon base_venusaur 50)
 
 (* Elite Four Member 2 - Specializes in Fire-Type *)
 let member2 = Trainer.create_trainer
@@ -28,7 +28,7 @@ let member2 = Trainer.create_trainer
     create_pokemon base_magmar 47;       (* Magmar *)
     create_pokemon base_flareon 45;      (* Flareon *)
   ]
-  (Some (create_pokemon base_charizard 50))
+  (create_pokemon base_charizard 50)
 
 (* Elite Four Member 3 - Specializes in Water-Type *)
 let member3 = Trainer.create_trainer
@@ -41,7 +41,7 @@ let member3 = Trainer.create_trainer
     create_pokemon base_tentacruel 46;  (* Tentacruel *)
     create_pokemon base_golduck 45;     (* Golduck *)
   ]
-  (Some (create_pokemon base_blastoise 50))
+  (create_pokemon base_blastoise 50)
 
 (* Elite Four Member 4 - Specializes in a Variety of Types *)
 let member4 = Trainer.create_trainer
@@ -54,7 +54,7 @@ let member4 = Trainer.create_trainer
     create_pokemon base_dragonite 55;    (* Dragonite - Flying/Dragon Type *)
     create_pokemon base_gyarados 52;     (* Gyarados - Flying/Water Type *)
   ]
-  (Some (create_pokemon base_pidgeot 50))
+  (create_pokemon base_pidgeot 50)
 
 let elite_four = [| member1; member2; member3; member4 |]
 
@@ -68,7 +68,7 @@ let trainer1 = Trainer.create_trainer
     create_pokemon base_meowth 23;       (* Meowth *)
     create_pokemon base_eevee 25;        (* Eevee *)
   ]
-  (Some (create_pokemon base_pidgey 20))
+  (create_pokemon base_pidgey 20)
 
 (* Regular Trainer 2 - Specializes in Electric-Type Pokémon *)
 let trainer2 = Trainer.create_trainer
@@ -79,7 +79,7 @@ let trainer2 = Trainer.create_trainer
     create_pokemon base_voltorb 27;      (* Voltorb *)
     create_pokemon base_electabuzz 29;   (* Electabuzz *)
   ]
-  (Some (create_pokemon base_pikachu 28))
+  (create_pokemon base_pikachu 28)
 
 (* Regular Trainer 3 - Specializes in Ground-Type Pokémon *)
 let trainer3 = Trainer.create_trainer
@@ -90,7 +90,7 @@ let trainer3 = Trainer.create_trainer
     create_pokemon base_cubone 31;       (* Cubone *)
     create_pokemon base_ryhorn 33;       (* Rhyhorn *)
   ]
-  (Some (create_pokemon base_sandshrew 30))
+  (create_pokemon base_sandshrew 30)
 
 (* Regular Trainer 4 - Specializes in Bug-Type Pokémon *)
 let trainer4 = Trainer.create_trainer
@@ -102,6 +102,6 @@ let trainer4 = Trainer.create_trainer
     create_pokemon base_venonat 19;      (* Venonat *)
     create_pokemon base_butterfree 20;   (* Butterfree *)
   ]
-  (Some (create_pokemon base_caterpie 15))
+  (create_pokemon base_caterpie 15)
 
 let regular_trainers = [| trainer1; trainer2; trainer3; trainer4 |]

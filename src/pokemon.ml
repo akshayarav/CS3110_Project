@@ -32,11 +32,13 @@ type base_pokemon = {
 type pokemon = {
   base : base_pokemon;
   mutable hp : int;
+  mutable current_max_hp : int;
   mutable level : int;
   mutable xp : int * int;
   mutable feint : bool;
   mutable damage_modifier : float;
 }
+
 
 let ptype_to_string = function
   | Normal -> "Normal Type"
@@ -63,6 +65,7 @@ let create base level =
   {
     base;
     hp = base.max_hp;
+    current_max_hp = base.max_hp; (* Initialize current max HP *)
     level;
     xp = (0, 10 * level);
     feint = false;
@@ -76,11 +79,13 @@ let create_random base level =
   {
     base;
     hp = random_hp;
+    current_max_hp = base.max_hp; (* Initialize current max HP *)
     level;
     xp = (0, 10 * level);
     feint = false;
     damage_modifier = 1.;
   }
+
 
 (** Creates a deep copy of a pokemon *)
 let copy_pokemon p =
@@ -122,22 +127,20 @@ let level_up pokemon =
     let current_xp, next_level_xp = pokemon.xp in
     if current_xp >= next_level_xp && pokemon.level < max_level then
       let new_level = pokemon.level + 1 in
-      let new_max_hp = pokemon.base.max_hp + (new_level * 2) in
-      (* Example stat increase *)
+      let new_max_hp = pokemon.current_max_hp + (new_level * 2) in  (* Updated to use current_max_hp *)
       let damage_increase = 0.1 in
 
-      (* Modify as needed *)
       let updated_pokemon =
         {
           pokemon with
           level = new_level;
-          hp = new_max_hp;
+          current_max_hp = new_max_hp; (* Update current max HP *)
+          hp = if pokemon.hp > 0 then new_max_hp else pokemon.hp; (* Heal if not feinted *)
           damage_modifier = pokemon.damage_modifier +. damage_increase;
           xp = (current_xp - next_level_xp, next_level_xp + (20 * new_level));
         }
       in
-      level_up_helper
-        updated_pokemon (* Recursive call for multiple level-ups *)
+      level_up_helper updated_pokemon
     else pokemon
   in
   level_up_helper pokemon

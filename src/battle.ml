@@ -128,6 +128,9 @@ let rec wild_battle_loop player_pokemon opponent player =
     )
   )
 
+let update_trainer_team (trainer: trainer) (new_team: pokemon list) =
+  { trainer with team = new_team }
+
 let rec trainer_battle_loop player_pokemon opponent player trainer =
   if player_pokemon.hp <= 0 then (
     printf "Your %s fainted.\n" player_pokemon.base.name;
@@ -143,14 +146,15 @@ let rec trainer_battle_loop player_pokemon opponent player trainer =
     )
   ) else if opponent.hp <= 0 then (
     printf "You defeated Trainer %s's %s!\n" trainer.name (Pokemon.name opponent);
-    let available_pokemon = List.filter (fun p -> not p.feint) trainer.team in
-    match available_pokemon with
+    let remaining_opponents = List.filter (fun p -> not p.feint) trainer.team in
+    match remaining_opponents with
     | [] ->
         printf "You have defeated all of Trainer %s's Pokemon!\n" trainer.name;
-        true
-    | new_opponent :: _ ->
+        true (* End the loop, indicating the player has won *)
+    | new_opponent :: rest ->
+        let updated_trainer = update_trainer_team trainer rest in
         printf "Trainer %s sends out %s!\n" trainer.name new_opponent.base.name;
-        trainer_battle_loop player_pokemon new_opponent player trainer
+        trainer_battle_loop player_pokemon new_opponent player updated_trainer
   ) else (
     printf "\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp;
     printf "Trainer %s's %s's HP: %d\n" trainer.name (Pokemon.name opponent) opponent.hp;
