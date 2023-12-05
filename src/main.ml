@@ -3,7 +3,6 @@ open Printf
 open Pokedex
 open Player
 open Pokemon
-open Elitefour
 
 let handle_new_moves pokemon =
   let new_moves = Pokemon.check_new_moves pokemon in
@@ -129,7 +128,26 @@ and wild_battle () =
     let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
     printf "Your %s gained %d XP.\n" updated_pokemon.base.name xp_gained;
 
-    (* ... existing code for handling experience gain, evolution, and reward ... *)
+    (* Check if the Pokémon leveled up *)
+    if updated_pokemon.level > player_pokemon.level then (
+      printf "Your %s grew to Level %d!\n" updated_pokemon.base.name
+        updated_pokemon.level;
+
+      (* Handle new moves *)
+      let pokemon_after_moves = handle_new_moves updated_pokemon in
+
+      (* Handle evolution *)
+      let evolved_pokemon = handle_evolution pokemon_after_moves in
+
+      (* Update player's pokemon *)
+      player := Player.update_pokemon evolved_pokemon !player;
+
+      if evolved_pokemon.base.name <> player_pokemon.base.name then
+        printf "What? %s is evolved into %s!\n" player_pokemon.base.name
+          evolved_pokemon.base.name)
+    else
+      (* If no level up, just update the Pokémon *)
+      player := Player.update_pokemon updated_pokemon !player;
 
     printf "Do you want to add the wild %s to your team? (yes/no): " opponent.base.name;
     match String.lowercase_ascii (read_line ()) with
@@ -159,7 +177,8 @@ and pokemon_center () =
      | "1" -> (
          printf "\nWhich Pokemon would you like to heal (cost: 2 coins)?\n";
          List.iteri
-           (fun i x -> printf "%d. %s\n" (i + 1) (Pokemon.to_string x))
+           (fun i pokemon ->
+             printf "%d. %s (Current HP: %d)\n" (i + 1) (Pokemon.to_string pokemon) pokemon.hp)
            !player.team;
          printf "%d. Exit\n" (List.length !player.team + 1);
          printf "> ";
@@ -186,6 +205,7 @@ and pokemon_center () =
          printf "Invalid choice. Please try again.\n";
          pokemon_center ());
   display_menu ()
+
 
 let () =
   Random.self_init ();
