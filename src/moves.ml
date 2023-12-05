@@ -60,6 +60,11 @@ let reflect = { name = "Reflect"; damage = 0; m_ptype = Psychic }
 let recover = { name = "Recover"; damage = 0; m_ptype = Normal }
 let roar = { name = "Roar"; damage = 0; m_ptype = Normal }
 let take_down = { name = "Take Down"; damage = 25; m_ptype = Normal }
+let fly = { name = "Fly"; damage = 15; m_ptype = Flying }
+let stomp = { name = "Stomp"; damage = 10; m_ptype = Normal }
+let confuse_ray = { name = "Confuse Ray"; damage = 0; m_ptype = Ghost }
+let aurora_beam = { name = "Aurora Beam"; damage = 10; m_ptype = Ice }
+let wrap = { name = "Wrap"; damage = 5; m_ptype = Normal }
 let all_moves =
   [
     tackle;
@@ -118,4 +123,9 @@ let all_moves =
     recover;
     roar;
     take_down;
+    fly;
+    stomp;
+    confuse_ray;
+    aurora_beam;
+    wrap;
   ]

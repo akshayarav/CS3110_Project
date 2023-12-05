@@ -103,7 +103,8 @@ and choose_starter () =
   | ("1" | "2" | "3") as choice ->
       let base_pokemon = List.nth starters_base (int_of_string choice - 1) in
       let starter_pokemon = Pokemon.create base_pokemon 5 in
-      player := Player.add_team starter_pokemon !player;
+      let new_player, _ = Player.add_team starter_pokemon !player in
+      player := new_player;
       printf "You chose %s!\n" starter_pokemon.base.name;
       display_menu ()
   | _ ->
@@ -152,12 +153,18 @@ and wild_battle () =
     printf "Do you want to add the wild %s to your team? (yes/no): " opponent.base.name;
     match String.lowercase_ascii (read_line ()) with
     | "yes" ->
-        player := Player.add_team (Pokemon.copy_pokemon opponent) !player;
-        printf "Added %s to your team.\n" opponent.base.name
+        let (new_player, was_added) = Player.add_team (Pokemon.copy_pokemon opponent) !player in
+        player := new_player;
+        if was_added then
+          printf "Added %s to your team.\n" opponent.base.name
+        else
+          printf "%s was not added to your team.\n" opponent.base.name
     | "no" ->
         printf "You chose not to add %s to your team.\n" opponent.base.name
     | _ ->
-        printf "Invalid choice. Not adding %s to your team.\n" opponent.base.name);
+        let name = opponent.base.name in
+        printf "Invalid choice. Not adding %s to your team.\n" name
+  );
   display_menu ()
 
 (* Go to Pokemon Center *)
