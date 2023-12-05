@@ -1,4 +1,5 @@
 open Moves
+open Pokemon
 
 (* Evolutions of Bulbasaur *)
 let base_ivysaur =
@@ -57,7 +58,7 @@ let base_charmeleon =
     ptype = Fire;
     max_hp = 58;
     moves = [ scratch; growl; ember ];
-    learnable_moves = [ (24, flame_thrower) ];
+    learnable_moves = [ (24, flamethrower) ];
     evolution = Some (36, base_charizard);
     (* Evolves into Charizard at level 36 *)
   }
@@ -68,7 +69,7 @@ let base_charmander =
     ptype = Fire;
     max_hp = 39;
     moves = [ scratch; growl; ember ];
-    learnable_moves = [ (12, flame_thrower) ];
+    learnable_moves = [ (12, flamethrower) ];
     evolution = Some (16, base_charmeleon);
     (* Evolves into Charmeleon at level 16 *)
   }
@@ -279,6 +280,46 @@ let base_sandshrew =
     moves = [ sand_attack ];
     learnable_moves = [ (30, bulldoze) ];
     evolution = Some (35, base_sandslash);
+  }
+
+let base_gyarados =
+  {
+    name = "Gyarados";
+    ptype = Water;
+    max_hp = 95;
+    moves = [ hydro_pump; bite; dragon_rage; leer ];
+    learnable_moves = [ (55, hyper_beam) ];
+    evolution = None;
+  }
+
+let base_dragonite =
+  {
+    name = "Dragonite";
+    ptype = Flying;
+    max_hp = 91;
+    moves = [ wing_attack; thunder_wave; dragon_rage; slam ];
+    learnable_moves = [ (60, hyper_beam) ];
+    evolution = None;
+  }
+
+let base_alakazam =
+  {
+    name = "Alakazam";
+    ptype = Psychic;
+    max_hp = 55;
+    moves = [ psybeam; reflect; recover; psychic ];
+    learnable_moves = [ (45, future_sight) ];
+    evolution = None;
+  }
+
+let base_arcanine =
+  {
+    name = "Arcanine";
+    ptype = Fire;
+    max_hp = 90;
+    moves = [ fire_blast; bite; roar; take_down ];
+    learnable_moves = [ (50, extreme_speed) ];
+    evolution = None;
   }
 
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle ]

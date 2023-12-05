@@ -1,1 +1,1 @@
-src/main.ml: Battle List Player Pokedex Pokemon Printf Random String
+src/main.ml: Array Battle Elitefour List Player Pokedex Pokemon Printf Random String Trainer

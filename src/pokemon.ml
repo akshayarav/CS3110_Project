@@ -1,4 +1,23 @@
-type ptype = Fire | Water | Grass | Electric | Flying | Normal | Psychic | Ground
+type ptype =
+  | Normal
+  | Fire
+  | Water
+  | Electric
+  | Grass
+  | Ice
+  | Fighting
+  | Poison
+  | Ground
+  | Flying
+  | Psychic
+  | Bug
+  | Rock
+  | Ghost
+  | Dragon
+  | Dark
+  | Steel
+  | Fairy
+
 type move = { name : string; damage : int; m_ptype : ptype }
 
 type base_pokemon = {
@@ -25,9 +44,19 @@ let ptype_to_string = function
   | Water -> "Water Type"
   | Electric -> "Electric Type"
   | Grass -> "Grass Type"
+  | Ice -> "Ice Type"
+  | Fighting -> "Fighting Type"
+  | Poison -> "Poison Type"
+  | Ground -> "Ground Type"
   | Flying -> "Flying Type"
   | Psychic -> "Psychic Type"
-  | Ground -> "Ground Type"
+  | Bug -> "Bug Type"
+  | Rock -> "Rock Type"
+  | Ghost -> "Ghost Type"
+  | Dragon -> "Dragon Type"
+  | Dark -> "Dark Type"
+  | Steel -> "Steel Type"
+  | Fairy -> "Fairy Type"
 
 (** Creates a new pokemon *)
 let create base level =
