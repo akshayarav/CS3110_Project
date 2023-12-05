@@ -443,6 +443,235 @@ let base_aerodactyl =
     evolution = None;
   }
 
+(* Persian and Meowth *)
+let base_persian =
+  {
+    name = "Persian";
+    ptype = Normal;
+    max_hp = 65;  (* Example stat *)
+    moves = [ scratch; bite; fake_out; fury_swipes ];  (* Example moves *)
+    learnable_moves = [ (25, payday); (32, slash) ];  (* Example learnable moves *)
+    evolution = None;  (* Persian does not evolve further *)
+  }
+
+let base_meowth = {
+    name = "Meowth";
+    ptype = Normal;
+    max_hp = 40;
+    moves = [ scratch; bite; fake_out; fury_swipes ];
+    learnable_moves = [ (30, payday) ];  (* Example of learnable move *)
+    evolution = Some (28, base_persian);  (* Evolves into Persian at level 28 *)
+}
+
+(* Eevee *)
+let base_eevee = {
+    name = "Eevee";
+    ptype = Normal;
+    max_hp = 55;
+    moves = [ tackle; tail_whip; quick_attack; bite ];
+    learnable_moves = [];  (* Eevee has a unique evolution mechanic *)
+    evolution = None;  (* Eevee can evolve into various forms, but let's keep it simple *)
+}
+
+(* Magneton and Magnemite *)
+let base_magneton =
+  {
+    name = "Magneton";
+    ptype = Electric;
+    max_hp = 50;
+    moves = [ thunder_shock; thunder_wave; spark; sonic_boom ];
+    learnable_moves = [ (30, thunderbolt); (35, tri_attack) ];
+    evolution = None;
+  }
+
+let base_magnemite = {
+    name = "Magnemite";
+    ptype = Electric;
+    max_hp = 25;
+    moves = [ thunder_shock; sonic_boom; spark; mirror_shot ];
+    learnable_moves = [ (30, thunderbolt) ];  (* Example of learnable move *)
+    evolution = Some (30, base_magneton);  (* Evolves into Magneton at level 30 *)
+}
+
+(* Electrode and Voltorb *)
+let base_electrode =
+  {
+    name = "Electrode";
+    ptype = Electric;
+    max_hp = 60;
+    moves = [ tackle; spark; thunder_shock; thunderbolt ];
+    learnable_moves = [ (40, thunder) ];
+    evolution = None
+  }
+
+let base_voltorb = {
+    name = "Voltorb";
+    ptype = Electric;
+    max_hp = 40;
+    moves = [ tackle; sonic_boom; spark; self_destruct ];
+    learnable_moves = [ (26, electro_ball) ];  (* Example of learnable move *)
+    evolution = Some (30, base_electrode);  (* Evolves into Electrode at level 30 *)
+}
+
+(* Electabuzz *)
+let base_electabuzz = {
+    name = "Electabuzz";
+    ptype = Electric;
+    max_hp = 65;
+    moves = [ thunder_punch; quick_attack; thunder_wave; shock_wave ];
+    learnable_moves = [];  (* Electabuzz is a final form in many games *)
+    evolution = None;
+}
+
+(* Dugtrio and Diglett *)
+let base_dugtrio = {
+  name = "Dugtrio";
+  ptype = Ground;
+  max_hp = 35;
+  moves = [ scratch; mud_slap; bulldoze; earthquake ];
+  learnable_moves = [ (26, dig) ];
+  evolution = None;
+}
+
+let base_diglett = {
+    name = "Diglett";
+    ptype = Ground;
+    max_hp = 20;
+    moves = [ scratch; sand_attack; dig; mud_slap ];
+    learnable_moves = [ (26, bulldoze) ];  (* Example of learnable move *)
+    evolution = Some (26, base_dugtrio);  (* Evolves into Dugtrio at level 26 *)
+}
+
+(* Marowak and Cubone *)
+let base_marowak = {
+  name = "Marowak";
+  ptype = Ground;
+  max_hp = 60;
+  moves = [ bone_club; headbutt; stomp; earthquake ];
+  learnable_moves = [ (33, bone_rush); (43, double_edge) ];
+  evolution = None;
+}
+
+let base_cubone = {
+    name = "Cubone";
+    ptype = Ground;
+    max_hp = 50;
+    moves = [ bone_club; headbutt; leer; focus_energy ];
+    learnable_moves = [ (28, bonemerang) ];  (* Example of learnable move *)
+    evolution = Some (28, base_marowak);  (* Evolves into Marowak at level 28 *)
+}
+
+(* Rhydon and Rhyhorn *)
+let base_rhydon = {
+  name = "Rhydon";
+  ptype = Ground;
+  max_hp = 105;
+  moves = [tackle; stomp; earthquake; rock_slide];
+  learnable_moves = [];
+  evolution = None;
+}
+
+let base_ryhorn = {
+    name = "Rhyhorn";
+    ptype = Ground;
+    max_hp = 80;
+    moves = [ horn_attack; stomp; fury_attack; tail_whip ];
+    learnable_moves = [ (35, bulldoze) ];  (* Example of learnable move *)
+    evolution = Some (42, base_rhydon);  (* Evolves into Rhydon at level 42 *)
+}
+
+(* Parasect and Paras *)
+let base_parasect = {
+    name = "Parasect";
+    ptype = Bug;
+    max_hp = 60;
+    moves = [ scratch; leech_life; spore; poison_powder ];
+    learnable_moves = [ (54, giga_drain) ];
+    evolution = None;
+}
+let base_paras = {
+    name = "Paras";
+    ptype = Bug;
+    max_hp = 35;
+    moves = [ scratch; stun_spore; leech_life; spore ];
+    learnable_moves = [ (24, slash) ];  (* Example of learnable move *)
+    evolution = Some (24, base_parasect);  (* Evolves into Parasect at level 24 *)
+}
+
+(* Venomoth and Venonat *)
+let base_venomoth = {
+    name = "Venomoth";
+    ptype = Bug;
+    max_hp = 70;
+    moves = [ tackle; poison_powder; leech_life; confusion ];
+    learnable_moves = [ (28, psychic) ];
+    evolution = None;
+}
+
+let base_venonat = {
+    name = "Venonat";
+    ptype = Bug;
+    max_hp = 60;
+    moves = [ tackle; disable; poison_powder; leech_life ];
+    learnable_moves = [ (31, psybeam) ];  (* Example of learnable move *)
+    evolution = Some (31, base_venomoth);  (* Evolves into Venomoth at level 31 *)
+}
+
+(* Butterfree *)
+let base_butterfree = {
+    name = "Butterfree";
+    ptype = Bug;
+    max_hp = 60;
+    moves = [ confusion; poison_powder; sleep_powder; gust ];
+    learnable_moves = [ (34, psybeam) ];  (* Example of learnable move *)
+    evolution = None;  (* Butterfree is a final form *)
+}
+
+let base_metapod = {
+    name = "Metapod";
+    ptype = Bug;
+    max_hp = 50;
+    moves = [ harden ];
+    learnable_moves = [ (10, string_shot) ];
+    evolution = Some (10, base_butterfree);
+}
+
+let base_caterpie = {
+    name = "Caterpie";
+    ptype = Bug;
+    max_hp = 45;
+    moves = [ tackle; string_shot ];
+    learnable_moves = [ (7, bug_bite) ];
+    evolution = Some (7, base_metapod);
+}
+
+let base_beedrill = {
+    name = "Beedrill";
+    ptype = Bug;
+    max_hp = 65;
+    moves = [ poison_sting; string_shot; fury_attack; focus_energy ];
+    learnable_moves = [];
+    evolution = None;
+}
+
+let base_kakuna = {
+    name = "Kakuna";
+    ptype = Bug;
+    max_hp = 45;
+    moves = [ poison_sting; string_shot ];
+    learnable_moves = [];
+    evolution = Some (10, base_beedrill);
+}
+
+let base_weedle = {
+    name = "Weedle";
+    ptype = Bug;
+    max_hp = 40;
+    moves = [ poison_sting; string_shot ];
+    learnable_moves = [ (7, horn_attack) ];
+    evolution = Some (7, base_kakuna);
+}
+
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle ]
 
 let wild_pokemon_base =

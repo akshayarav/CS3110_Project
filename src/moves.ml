@@ -65,6 +65,34 @@ let stomp = { name = "Stomp"; damage = 10; m_ptype = Normal }
 let confuse_ray = { name = "Confuse Ray"; damage = 0; m_ptype = Ghost }
 let aurora_beam = { name = "Aurora Beam"; damage = 10; m_ptype = Ice }
 let wrap = { name = "Wrap"; damage = 5; m_ptype = Normal }
+let fake_out = { name = "Fake Out"; damage = 10; m_ptype = Normal }
+let payday = { name = "Payday"; damage = 10; m_ptype = Normal }
+let sonic_boom = { name = "Sonic Boom"; damage = 20; m_ptype = Normal }
+let self_destruct = { name = "Self-Destruct"; damage = 50; m_ptype = Normal }
+let mirror_shot = { name = "Mirror Shot"; damage = 15; m_ptype = Steel }
+let bone_club = { name = "Bone Club"; damage = 15; m_ptype = Ground }
+let headbutt = { name = "Headbutt"; damage = 15; m_ptype = Normal }
+let focus_energy = { name = "Focus Energy"; damage = 0; m_ptype = Normal }
+let bonemerang = { name = "Bonemerang"; damage = 20; m_ptype = Ground }
+let horn_attack = { name = "Horn Attack"; damage = 15; m_ptype = Normal }
+let fury_attack = { name = "Fury Attack"; damage = 5; m_ptype = Normal }
+let leech_life = { name = "Leech Life"; damage = 10; m_ptype = Bug }
+let spore = { name = "Spore"; damage = 0; m_ptype = Grass }
+let slash = { name = "Slash"; damage = 20; m_ptype = Normal }
+let spark = { name = "Spark"; damage = 20; m_ptype = Electric; }
+let thunderbolt = { name = "Thunderbolt"; damage = 25; m_ptype = Electric; }
+let tri_attack = { name = "Tri Attack"; damage = 20; m_ptype = Normal }
+let shock_wave = { name = "Shock Wave"; damage = 15; m_ptype = Electric; }
+let mud_slap = { name = "Mud-Slap"; damage = 10; m_ptype = Ground; }
+let bone_rush = { name = "Bone Rush"; damage = 25; m_ptype = Ground }
+let double_edge = { name = "Double-Edge"; damage = 30; m_ptype = Normal }
+let rock_slide = { name = "Rock Slide"; damage = 20; m_ptype = Rock }
+let stun_spore = { name = "Stun Spore"; damage = 0; m_ptype = Grass }
+let giga_drain = { name = "Giga Drain"; damage = 15; m_ptype = Grass; }
+let harden = { name = "Harden"; damage = 0; m_ptype = Normal }
+let string_shot = { name = "String Shot"; damage = 0; m_ptype = Bug }
+let bug_bite = { name = "Bug Bite"; damage = 10; m_ptype = Bug }
+let poison_sting = { name = "Poison Sting"; damage = 15; m_ptype = Poison }
 let all_moves =
   [
     tackle;
@@ -128,4 +156,29 @@ let all_moves =
     confuse_ray;
     aurora_beam;
     wrap;
+    fake_out;
+    payday;
+    sonic_boom;
+    self_destruct;
+    mirror_shot;
+    bone_club;
+    headbutt;
+    focus_energy;
+    bonemerang;
+    horn_attack;
+    fury_attack;
+    leech_life;
+    spore;
+    slash;
+    spark;
+    thunderbolt;
+    shock_wave;
+    mud_slap;
+    rock_slide;
+    stun_spore;
+    giga_drain;
+    harden;
+    string_shot;
+    bug_bite;
+    poison_sting;
   ]

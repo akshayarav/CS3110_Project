@@ -57,3 +57,51 @@ let member4 = Trainer.create_trainer
   (Some (create_pokemon base_pidgeot 50))
 
 let elite_four = [| member1; member2; member3; member4 |]
+
+(* Regular Trainer 1 - Specializes in Normal-Type Pokémon *)
+let trainer1 = Trainer.create_trainer
+  "Lucy"
+  [
+    create_pokemon base_pidgey 20;       (* Pidgey *)
+    create_pokemon base_rattata 22;      (* Rattata *)
+    create_pokemon base_jigglypuff 24;   (* Jigglypuff *)
+    create_pokemon base_meowth 23;       (* Meowth *)
+    create_pokemon base_eevee 25;        (* Eevee *)
+  ]
+  (Some (create_pokemon base_pidgey 20))
+
+(* Regular Trainer 2 - Specializes in Electric-Type Pokémon *)
+let trainer2 = Trainer.create_trainer
+  "Max"
+  [
+    create_pokemon base_pikachu 28;      (* Pikachu *)
+    create_pokemon base_magnemite 26;    (* Magnemite *)
+    create_pokemon base_voltorb 27;      (* Voltorb *)
+    create_pokemon base_electabuzz 29;   (* Electabuzz *)
+  ]
+  (Some (create_pokemon base_pikachu 28))
+
+(* Regular Trainer 3 - Specializes in Ground-Type Pokémon *)
+let trainer3 = Trainer.create_trainer
+  "Sandra"
+  [
+    create_pokemon base_sandshrew 30;    (* Sandshrew *)
+    create_pokemon base_diglett 32;      (* Diglett *)
+    create_pokemon base_cubone 31;       (* Cubone *)
+    create_pokemon base_ryhorn 33;       (* Rhyhorn *)
+  ]
+  (Some (create_pokemon base_sandshrew 30))
+
+(* Regular Trainer 4 - Specializes in Bug-Type Pokémon *)
+let trainer4 = Trainer.create_trainer
+  "Ethan"
+  [
+    create_pokemon base_caterpie 15;     (* Caterpie *)
+    create_pokemon base_weedle 16;       (* Weedle *)
+    create_pokemon base_paras 18;        (* Paras *)
+    create_pokemon base_venonat 19;      (* Venonat *)
+    create_pokemon base_butterfree 20;   (* Butterfree *)
+  ]
+  (Some (create_pokemon base_caterpie 15))
+
+let regular_trainers = [| trainer1; trainer2; trainer3; trainer4 |]
