@@ -1,9 +1,9 @@
-# dune exec ./src/main.exe
+# dune exec ./src/test.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
 # Workspace root: /Users/junchoi/3110/3110_Project
 # Auto-detected concurrency: 8
-$ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj0lyt8x6rg9d07ds_27_qqh0000gn/T/dune_5c66d6_output
+$ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj0lyt8x6rg9d07ds_27_qqh0000gn/T/dune_c6f721_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -114,3 +114,7 @@ $ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj
 #      ; windows_unicode = false
 #      }
 #  }
+$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamldep.opt -modules -impl src/test.ml) > _build/default/src/.main.eobjs/dune__exe__Test.impl.d
+$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -bin-annot -I src/.main.eobjs/byte -I /Users/junchoi/.opam/cs3110-2023fa/lib/ocaml/unix -I /Users/junchoi/.opam/cs3110-2023fa/lib/ounit2 -I /Users/junchoi/.opam/cs3110-2023fa/lib/ounit2/advanced -I /Users/junchoi/.opam/cs3110-2023fa/lib/seq -I /Users/junchoi/.opam/cs3110-2023fa/lib/stdlib-shims -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/byte/dune__exe__Test.cmo -c -impl src/test.ml)
+$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -I src/.main.eobjs/byte -I src/.main.eobjs/native -I /Users/junchoi/.opam/cs3110-2023fa/lib/ocaml/unix -I /Users/junchoi/.opam/cs3110-2023fa/lib/ounit2 -I /Users/junchoi/.opam/cs3110-2023fa/lib/ounit2/advanced -I /Users/junchoi/.opam/cs3110-2023fa/lib/seq -I /Users/junchoi/.opam/cs3110-2023fa/lib/stdlib-shims -intf-suffix .ml -no-alias-deps -opaque -open Dune__exe -o src/.main.eobjs/native/dune__exe__Test.cmx -c -impl src/test.ml)
+$ (cd _build/default && /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62-40 -strict-sequence -strict-formats -short-paths -keep-locs -g -o src/test.exe /Users/junchoi/.opam/cs3110-2023fa/lib/ocaml/unix/unix.cmxa /Users/junchoi/.opam/cs3110-2023fa/lib/stdlib-shims/stdlib_shims.cmxa /Users/junchoi/.opam/cs3110-2023fa/lib/ounit2/advanced/oUnitAdvanced.cmxa /Users/junchoi/.opam/cs3110-2023fa/lib/ounit2/oUnit.cmxa src/.main.eobjs/native/dune__exe.cmx src/.main.eobjs/native/dune__exe__Pokemon.cmx src/.main.eobjs/native/dune__exe__Moves.cmx src/.main.eobjs/native/dune__exe__Pokedex.cmx src/.main.eobjs/native/dune__exe__Test.cmx)
