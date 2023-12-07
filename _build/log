@@ -1,9 +1,9 @@
-# dune build
+# dune exec ./src/main.exe
 # OCAMLPARAM: unset
 # Shared cache: disabled
-# Workspace root: /Users/danweizuo/Documents/CS-3110/final-project
-# Auto-detected concurrency: 10
-$ /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/6v/3m2jy2ts1yxgklk_t3cylwkh0000gn/T/dune_92e5d0_output
+# Workspace root: /Users/junchoi/3110/3110_Project
+# Auto-detected concurrency: 8
+$ /Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/nf/lj0lyt8x6rg9d07ds_27_qqh0000gn/T/dune_5c66d6_output
 # Dune context:
 #  { name = "default"
 #  ; kind = "default"
@@ -12,45 +12,42 @@ $ /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/6v/
 #  ; for_host = None
 #  ; fdo_target_exe = None
 #  ; build_dir = In_build_dir "default"
-#  ; ocaml_bin = External "/Users/danweizuo/.opam/cs3110-2023fa/bin"
-#  ; ocaml = Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocaml"
-#  ; ocamlc = External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt"
+#  ; ocaml_bin = External "/Users/junchoi/.opam/cs3110-2023fa/bin"
+#  ; ocaml = Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocaml"
+#  ; ocamlc = External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamlc.opt"
 #  ; ocamlopt =
-#      Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlopt.opt"
+#      Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamlopt.opt"
 #  ; ocamldep =
-#      Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamldep.opt"
+#      Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamldep.opt"
 #  ; ocamlmklib =
-#      Ok External "/Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlmklib.opt"
+#      Ok External "/Users/junchoi/.opam/cs3110-2023fa/bin/ocamlmklib.opt"
 #  ; env =
 #      map
 #        { "DUNE_OCAML_HARDCODED" :
-#            "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml:/Users/danweizuo/.opam/cs3110-2023fa/lib"
-#        ; "DUNE_OCAML_STDLIB" :
-#            "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
-#        ; "DUNE_SOURCEROOT" :
-#            "/Users/danweizuo/Documents/CS-3110/final-project"
-#        ; "INSIDE_DUNE" :
-#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/default"
+#            "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml:/Users/junchoi/.opam/cs3110-2023fa/lib"
+#        ; "DUNE_OCAML_STDLIB" : "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
+#        ; "DUNE_SOURCEROOT" : "/Users/junchoi/3110/3110_Project"
+#        ; "INSIDE_DUNE" : "/Users/junchoi/3110/3110_Project/_build/default"
 #        ; "OCAMLFIND_IGNORE_DUPS_IN" :
-#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/install/default/lib"
+#            "/Users/junchoi/3110/3110_Project/_build/install/default/lib"
 #        ; "OCAMLPATH" :
-#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/install/default/lib"
+#            "/Users/junchoi/3110/3110_Project/_build/install/default/lib"
 #        ; "OCAMLTOP_INCLUDE_PATH" :
-#            "/Users/danweizuo/Documents/CS-3110/final-project/_build/install/default/lib/toplevel"
+#            "/Users/junchoi/3110/3110_Project/_build/install/default/lib/toplevel"
 #        ; "OCAML_COLOR" : "always"
 #        ; "OPAMCOLOR" : "always"
 #        }
 #  ; findlib_paths =
-#      [ External "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
-#      ; External "/Users/danweizuo/.opam/cs3110-2023fa/lib"
+#      [ External "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
+#      ; External "/Users/junchoi/.opam/cs3110-2023fa/lib"
 #      ]
 #  ; natdynlink_supported = true
 #  ; supports_shared_libraries = true
 #  ; ocaml_config =
 #      { version = "5.0.0"
 #      ; standard_library_default =
-#          "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
-#      ; standard_library = "/Users/danweizuo/.opam/cs3110-2023fa/lib/ocaml"
+#          "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
+#      ; standard_library = "/Users/junchoi/.opam/cs3110-2023fa/lib/ocaml"
 #      ; standard_runtime = "the_standard_runtime_variable_was_deleted"
 #      ; ccomp_type = "cc"
 #      ; c_compiler = "cc"
@@ -96,8 +93,8 @@ $ /Users/danweizuo/.opam/cs3110-2023fa/bin/ocamlc.opt -config > /var/folders/6v/
 #      ; os_type = "Unix"
 #      ; default_executable_name = "a.out"
 #      ; systhread_supported = true
-#      ; host = "aarch64-apple-darwin22.5.0"
-#      ; target = "aarch64-apple-darwin22.5.0"
+#      ; host = "aarch64-apple-darwin22.3.0"
+#      ; target = "aarch64-apple-darwin22.3.0"
 #      ; profiling = false
 #      ; flambda = false
 #      ; spacetime = false

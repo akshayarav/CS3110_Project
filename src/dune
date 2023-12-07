@@ -1,3 +1,4 @@
-(executable
- (name main)
- (modules :standard))
+(executables
+(names main test)
+(modules :standard)
+(libraries ounit2))
