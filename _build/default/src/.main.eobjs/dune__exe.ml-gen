@@ -24,5 +24,8 @@ module Pokedex = Dune__exe__Pokedex
 (** @canonical Dune__exe.Pokemon *)
 module Pokemon = Dune__exe__Pokemon
 
+(** @canonical Dune__exe.Test *)
+module Test = Dune__exe__Test
+
 (** @canonical Dune__exe.Trainer *)
 module Trainer = Dune__exe__Trainer

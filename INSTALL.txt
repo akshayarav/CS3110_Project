@@ -1,4 +1,3 @@
 Instructions on how to install the system:
-- In a terminal, cd into the src directory and run: 
-      dune build main.exe
-- Run dune exec ./main.exe to start the game
+- Make sure you are in the root folder
+- Run make run to start the game in the terminal
