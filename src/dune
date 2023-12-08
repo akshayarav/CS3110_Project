@@ -1,4 +1,4 @@
-(executables
-(names main test)
-(modules :standard)
-(libraries ounit2))
+(library
+ (name mylib)
+ (public_name mylib)
+ (modules :standard))

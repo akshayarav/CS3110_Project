@@ -1,7 +1,7 @@
 .PHONY: test check
 
 run:
-	dune exec ./src/main.exe
+	dune exec ./main/main.exe
 
 build:
 	dune build
@@ -10,7 +10,7 @@ utop:
 	OCAMLRUNPARAM=b dune utop src
 
 test:
-	OCAMLRUNPARAM=b dune exec ./src/test.exe
+	OCAMLRUNPARAM=b dune exec ./test/test.exe
 
 bisect: bisect-clean
 	-dune exec --instrument-with bisect_ppx --force test/main.exe
