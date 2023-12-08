@@ -1,4 +1,5 @@
 open OUnit2
+open Mylib
 open Pokemon
 open Pokedex
 open Player

@@ -1,4 +1,5 @@
-open Pokedex
+(* open Pokedex
+open Trainer
 
 (* Helper function to create Pokémon with specified level *)
 let create_pokemon base_pokemon level =
@@ -104,4 +105,4 @@ let trainer4 = Trainer.create_trainer
   ]
   (create_pokemon base_caterpie 15)
 
-let regular_trainers = [| trainer1; trainer2; trainer3; trainer4 |]
+let regular_trainers = [| trainer1; trainer2; trainer3; trainer4 |] *)

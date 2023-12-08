@@ -1,4 +1,5 @@
 (* File to start the UI  *)
+open Mylib
 open Printf
 open Pokedex
 open Player
