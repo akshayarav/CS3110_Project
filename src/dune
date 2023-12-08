@@ -1,4 +1,6 @@
 (library
  (name mylib)
  (public_name mylib)
- (modules :standard))
+ (modules :standard)
+ (instrumentation (backend bisect_ppx))
+ )
