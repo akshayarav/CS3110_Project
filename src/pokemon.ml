@@ -161,15 +161,20 @@ let copy_pokemon p =
 let attack move opponent_pokemon player_pokemon =
   let effectiveness =
     match Hashtbl.find_opt type_effectiveness move.m_ptype with
-    | Some(eff) ->
+    | Some eff ->
         if List.mem (get_type opponent_pokemon) eff then 2.0
         else
           (match Hashtbl.find_opt type_ineffectiveness move.m_ptype with
           | Some ineff ->
               if List.mem (get_type opponent_pokemon) ineff then 0.5
-              else 1.0
-          | None -> 1.0)
-    | None -> 1.0
+              else
+                (match Hashtbl.find_opt type_noneffective move.m_ptype with
+                | Some noneff ->
+                    if List.mem (get_type opponent_pokemon) noneff then 0.0
+                    else 1.0
+                | None -> failwith "Type_Effectiveness Inexhaustive")
+          | None -> failwith "Type_Effectiveness Inexhaustive")
+    | None -> failwith "Type_Effectiveness Inexhaustive"
   in
   let damage_multiplier = effectiveness *. player_pokemon.damage_modifier in
   let new_hp =
@@ -180,6 +185,7 @@ let attack move opponent_pokemon player_pokemon =
     opponent_pokemon.feint <- true)
   else opponent_pokemon.hp <- new_hp
 
+  
 (** Prints out pokemon and its stats *)
 let to_string pokemon =
   let feint_status = if pokemon.feint then " - FEINTED" else "" in
