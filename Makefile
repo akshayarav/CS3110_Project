@@ -14,7 +14,7 @@ test:
 	@$(MAKE) bisect-clean
 
 bisect: bisect-clean
-	@dune exec --profile=coverage --force ./test/main.exe
+	@DUNE_INSTRUMENT_WITH=bisect_ppx dune exec --profile=coverage --force ./test/main.exe
 	@bisect-ppx-report html
 
 bisect-clean:
