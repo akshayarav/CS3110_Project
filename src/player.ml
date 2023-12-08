@@ -6,6 +6,10 @@ type player = {
   current_pokemon : pokemon option;
   coins : int;
 }
+
+(* Returns players team *)
+let get_team (p:player) = p.team
+
 (** A player has a team, a first pokemon to send out, and the current pokemon in battle *)
 
 (** Creates a new player with an empty team*)
