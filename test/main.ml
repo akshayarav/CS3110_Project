@@ -1,7 +1,7 @@
 open OUnit2
 open Mylib
-open Pokemon
 open Pokedex
+open Moves
 let squirtle1 = Pokemon.create base_squirtle 10
 
 let player = ref (Player.new_player)
@@ -94,7 +94,6 @@ let battle_tests =
       assert_equal ~msg:"Updated HP" ~printer:string_of_bool
         true (player_pokemon.hp <= player_pokemon.current_max_hp);
     );
-
     "simulated battle" >:: (fun _ ->
       let player_pokemon = squirtle1 in
       let opponent_pokemon = Pokemon.create base_charmander 5 in
@@ -105,6 +104,27 @@ let battle_tests =
 
       assert_equal ~printer:string_of_bool result true;
     );
+    "damage multiplier check" >:: (fun _ ->
+      let player1 = Player.new_player in
+      let player2 = Player.new_player in
+    
+      let poke1_player1 = Pokemon.create base_wartortle 10 in
+      let poke2_player2 = Pokemon.create base_sandshrew 10 in
+    
+      Player.add_team poke1_player1 player1 |> ignore;
+      Player.add_team poke2_player2 player2 |> ignore;
+    
+      let orig_hp_player2 = poke2_player2.hp in
+
+      Pokemon.attack water_gun poke1_player1 poke2_player2;
+    
+      Printf.printf "Original HP for Player2's Pokémon: %d\n" orig_hp_player2;
+      Printf.printf "After attack - Player2's Pokémon HP: %d\n" poke2_player2.hp;
+      
+      (* supposed to be 0 will fix later *)
+      assert_equal (orig_hp_player2 - poke2_player2.hp = 0) true;
+    )
+    
   ]
 
   let all_tests = "All Tests" >::: [
