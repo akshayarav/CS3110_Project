@@ -335,6 +335,7 @@ and pokemon_center () =
         pokemon_center ()
   );
   display_menu ()
+  
 
 let () =
   Random.self_init ();
