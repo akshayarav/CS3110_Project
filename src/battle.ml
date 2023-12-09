@@ -93,7 +93,7 @@ let rec wild_battle_loop player_pokemon opponent player callback callback_choice
   ) 
 )
 
-let on_move_chosen (move: move option) player_pokemon opponent update_ui next_turn_ui (result : bool ref)=
+let on_move_chosen (move: move option) player_pokemon opponent update_ui next_turn_ui (result) =
   (* Here you would add the logic to apply the move, like reducing HP, etc. *)
   let process_move (move: move option) = 
     match move with 
@@ -106,16 +106,18 @@ let on_move_chosen (move: move option) player_pokemon opponent update_ui next_tu
     | None -> failwith "Switching pokemon unimplemented"; 
     in
   process_move move;
+  update_ui (sprintf "\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp);
+  update_ui (sprintf "Wild %s's HP: %d\n" (Pokemon.name opponent) opponent.hp);
   (* Check if the battle is over and handle accordingly *)
   let continue = ref true in
   if player_pokemon.hp <= 0 then (
     update_ui "Your Pokemon fainted!";
-    result := false;
+    result false;
     continue := false;
   )
   else if opponent.hp <= 0 then (
     update_ui "You won the battle!";
-    result := true;
+    result true;
     continue := false;
   );
   if !continue then next_turn_ui else ()
