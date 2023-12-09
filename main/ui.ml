@@ -32,6 +32,38 @@ let create_ok_button dialog = (
       dialog#destroy (); 
     )
   );)
+
+let message_ui parent_window message = (
+  let dialog = GWindow.message_dialog 
+    ~message 
+    ~parent:parent_window
+    ~destroy_with_parent:true
+    ~message_type:`INFO
+    ~buttons:GWindow.Buttons.ok 
+    ~modal:true 
+    () in
+
+  (* Run the dialog and capture the response *)
+  let _ = dialog#run () in
+
+  (* Destroy the dialog after the user responds *)
+  dialog#destroy ();)
+
+let raise_error_ui parent_window message = (
+  let dialog = GWindow.message_dialog 
+    ~message 
+    ~parent:parent_window
+    ~destroy_with_parent:true
+    ~message_type:`ERROR
+    ~buttons:GWindow.Buttons.ok 
+    ~modal:true 
+    () in
+
+  (* Run the dialog and capture the response *)
+  let _ = dialog#run () in
+
+  (* Destroy the dialog after the user responds *)
+  dialog#destroy ();)
   
 
 let rec update_ui_moves dialog moves player_pokemon opponent result = (
@@ -65,20 +97,154 @@ let rec display_menu () =
   ignore (create_button "View Player Stats" vbox (fun () -> player_stats ()));
   
   if List.length !player.team = 0 then 
-    ignore (create_button "Choose your starter pokemon" vbox (fun () -> choose_starter ()));
+    ignore (create_button "Choose Your Starter!!!" vbox (fun () -> choose_starter ()));
   if List.length !player.team > 0 then 
-    ignore (create_button "Battle wild pokemon" vbox (fun () ->  wild_battle()));
+    ignore (create_button "BATTLE Wild Pokemon" vbox (fun () ->  wild_battle()));
+  ignore (window#connect#destroy ~callback:GMain.Main.quit);
+    ignore (create_button "Pokemon Center" vbox (fun () ->  pokemon_center()));
   ignore (window#connect#destroy ~callback:GMain.Main.quit);
 
   window#show ();
-  main_menu := Some window;  (* Update the main_menu reference *)
+  main_menu := Some window; 
 
-  (* Start the GTK main loop *)
   GMain.Main.main ()
+
+  and pokemon_center () =
+    if List.length !player.team = 0 then (
+      raise_error_ui (get_main_menu()) "Obtain a pokemon first!";
+    )
+    else
+      let dialog = GWindow.dialog
+        ~title:"Poke Center"
+        ~parent:(get_main_menu()) 
+        ~width:500
+        ~height:300
+        ~destroy_with_parent:true
+        ~modal:true
+        () in
+  
+      (* Create a VBox for vertical arrangement of buttons *)
+      let vbox = GPack.vbox ~spacing:10 ~packing:dialog#vbox#add () in
+  
+      (* Add buttons to the vbox *)
+      let button_heal = GButton.button ~label:"Heal Pokemon (2 coins per pokemon)" ~packing:vbox#add () in
+      ignore (button_heal#connect#clicked ~callback:(fun () -> on_heal dialog));
+  
+      let button_buy_legend = GButton.button ~label:"Purchase Legendary Pokemon (100 coins)" ~packing:vbox#add () in
+      ignore (button_buy_legend#connect#clicked ~callback:(fun () -> on_buy_legend dialog));
+
+      create_ok_button dialog ;
+  
+      dialog#show ();  
+
+and on_heal dialog = 
+  if List.length !player.team = 0 then raise_error_ui dialog "Choose a Pokemon First" else
+  let healable_pokemon = List.filter (fun( p:Pokemon.pokemon) -> p.hp < p.current_max_hp) !player.team in
+  let total_cost = 2 * List.length healable_pokemon in
+  if total_cost > !player.coins then (
+    message_ui dialog "Not enough coins!";
+    pokemon_center ()
+  ) else 
+    List.iter (fun (pokemon: Pokemon.pokemon) ->
+      if pokemon.hp < pokemon.current_max_hp then (
+        pokemon.hp <- pokemon.current_max_hp;
+        pokemon.feint <- false
+      )
+    ) !player.team;
+    player := Player.adjust_coins (-total_cost) !player;
+    message_ui dialog (sprintf "All Pokemon Healed! (%i coins used)" total_cost);
+
+and on_buy_legend dialog = 
+  if !player.coins < 50 then (
+    raise_error_ui dialog "Not enough coins.\n";
+    pokemon_center ()
+  ) else (
+    let rec take_n n lst acc =
+      if n = 0 then
+        acc
+      else
+        match lst with
+        | [] -> acc
+        | hd :: tl -> take_n (n - 1) tl (hd :: acc)
+    in
+    let pokemon_list = Pokedex.legendary_pokemon_base in
+    (* Shuffle the list to randomize the order *)
+    let shuffled_pokemon_list = List.sort (fun _ _ -> if Random.bool () then 1 else -1) pokemon_list in
+  
+    (* Select the first three Pokémon from the shuffled list *)
+    let chosen_pokemon_list = take_n 3 shuffled_pokemon_list [] in
+  
+    let choose_pokemon parent poke_list = (
+      let dialog = GWindow.dialog
+        ~title:"Choose Legendary"
+        ~parent:parent
+        ~width:500
+        ~height:300
+        ~destroy_with_parent:true
+        ~modal:true
+        () in
+
+      let add_legend chosen_pokemon = 
+        let new_pokemon = Pokemon.create chosen_pokemon 30 in
+
+        (* Add the chosen Pokémon to the player's team or swap it *)
+        add_team new_pokemon dialog;
+      in
+      
+      let options poke_list = (
+        let vbox = GPack.vbox ~packing:dialog#vbox#add () in
+        List.iter (fun (p:Pokemon.base_pokemon) ->
+            let button = GButton.button
+              ~label:(sprintf "%s" (p.name))
+              ~packing:vbox#add () in
+      
+            ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); add_legend p; player := (Player.adjust_coins (-50) !player )));
+          ) poke_list; 
+          )
+        in
+      options poke_list;
+      create_ok_button dialog;
+      dialog#show ();
+      )
+      in 
+    choose_pokemon dialog chosen_pokemon_list
+    )
+
+and add_team new_pokemon par : unit =
+  let team_size = List.length (Player.get_team !player) in
+  if team_size < 6 then player :=
+    {!player with team = !player.team @ [new_pokemon]};
+  if team_size >= 6 then
+    begin
+      let dialog = GWindow.dialog
+        ~title:"Choose a Pokemon to Swap"
+        ~parent: par
+        ~width:500
+        ~height:300
+        ~destroy_with_parent:true
+        ~modal:true
+        () in
+      let vbox = GPack.vbox ~packing:dialog#vbox#add () in
+
+      List.iter (fun (p) ->
+        let button = GButton.button
+          ~label:(sprintf "%s" (Pokemon.name p))
+          ~packing:vbox#add () in
+  
+        ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); swap_pokemon p new_pokemon;));
+      ) (Player.get_team !player); 
+    dialog#show ();
+    end
+  
+and swap_pokemon old new_pokemon = 
+  let replaced_team = List.map (fun p -> if Pokemon.name p = Pokemon.name old then new_pokemon else p) (Player.get_team !player) in
+  player := {!player with team = replaced_team };
+
+
 and player_stats () = 
   let dialog = GWindow.dialog
   ~title:"Player Stats"
-  ~parent:(get_main_menu())  (* Access the main_menu reference *)
+  ~parent:(get_main_menu()) 
   ~width:300
   ~height:200
   ~destroy_with_parent:true
@@ -122,6 +288,7 @@ and wild_battle () =
 
 and on_wild_result dialog player_pokemon opponent won = 
   if won then (
+    clear_container dialog#vbox;
     let reward =
       let min_reward = 1 in
       let max_reward = 5 in
@@ -129,7 +296,8 @@ and on_wild_result dialog player_pokemon opponent won =
       earned_coins
     in
     player := Player.adjust_coins reward !player;
-    update_ui_string dialog (sprintf "You also won %d coins!\n" reward);
+    update_ui_string dialog (sprintf "You defeated the wild %s!\n"(Pokemon.name opponent));
+    update_ui_string dialog (sprintf "You won %d coins!\n" reward);
     let xp_gained = Pokemon.calculate_xp_gained opponent.level in
     let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
     update_ui_string dialog (sprintf "Your %s gained %d XP.\n" updated_pokemon.base.name xp_gained);
