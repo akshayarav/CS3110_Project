@@ -1,4 +1,4 @@
 (executable
-(name main)
+(name ui)
 (libraries mylib)
 )

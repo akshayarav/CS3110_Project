@@ -77,6 +77,7 @@ let init_tests = "Test Suite for Pokemon" >::: [
   (fun _ -> assert_equal ~msg:"new_player coins check" 10 Player.new_player.coins);
 ]
 
+
 let battle_tests =
   "suite" >::: [
     "wild battle" >:: (fun _ ->
