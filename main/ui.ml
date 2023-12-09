@@ -268,7 +268,6 @@ and wild_battle () =
     | Some p -> p
     | None -> failwith "No current Pokémon to battle with"
   in
-
   let dialog = GWindow.dialog
   ~title: (sprintf "Wild Battle with %s!!" opponent.base.name)
   ~parent:(get_main_menu()) 
@@ -277,6 +276,8 @@ and wild_battle () =
   ~destroy_with_parent:true
   ~modal:true
   () in
+  let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
+  if List.length available_pokemon = 0 then raise_error_ui dialog "All Your Pokemon are Feinted" else
 
   let label = GMisc.label ~text:(Printf.sprintf "A wild %s appears!" opponent.base.name) () in
   ignore (dialog#vbox#add (label :> GObj.widget));
@@ -304,24 +305,51 @@ and on_wild_result dialog player_pokemon opponent won =
 
     (* TODO: ADD LEVEL UP AND EVOLUTION *)
     player := Player.update_pokemon updated_pokemon !player;
-    create_ok_button dialog;
-(* 
-    printf "Do you want to add the wild %s to your team? (yes/no): " opponent.base.name;
-    match String.lowercase_ascii (read_line ()) with
-    | "yes" ->
-        let (new_player, was_added) = Player.add_team (Pokemon.copy_pokemon opponent) !player in
-        player := new_player;
-        if was_added then
-          printf "Added %s to your team.\n" opponent.base.name
-        else
-          printf "%s was not added to your team.\n" opponent.base.name
-    | "no" ->
-        printf "You chose not to add %s to your team.\n" opponent.base.name
-    | _ ->
-        let name = opponent.base.name in
-        printf "Invalid choice. Not adding %s to your team.\n" name *)
-  );
 
+    update_ui_string dialog (sprintf "Add %s to team?" (Pokemon.name opponent));
+
+    let button = GButton.button ~label:"Yes" ~packing:dialog#vbox#add () in
+    ignore (button#connect#clicked ~callback:(fun () -> ignore(add_team (Pokemon.copy_pokemon opponent) dialog); dialog#destroy ()));
+    let button = GButton.button ~label:"No" ~packing:dialog#vbox#add () in
+    ignore (button#connect#clicked ~callback:(fun () -> ignore(dialog#destroy ();));
+    )
+  )
+  else handle_feint_wild dialog opponent
+and handle_feint_wild dialog opponent= 
+  let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
+    if List.length available_pokemon = 0 then (
+      update_ui_string dialog "All Pokemon have feinted. You lost the battle";
+      create_ok_button dialog; )
+    else (
+      clear_container dialog#vbox;
+      choose_new_pokemon dialog available_pokemon opponent;
+      )
+
+and choose_new_pokemon par available_pokemon opponent= 
+  let dialog = GWindow.dialog
+    ~title:"Choose Pokemon to send in Battle"
+    ~parent:par  (* Access the main_menu reference *)
+    ~width:300
+    ~height:200
+    ~destroy_with_parent:true
+    ~modal:true
+  () in
+  List.iteri
+  (fun index (pokemon) ->
+    let button_label = Printf.sprintf "%d. %s" (index + 1) (Pokemon.name pokemon) in
+    ignore (create_button button_label (dialog#vbox) (fun _ -> on_choose_new pokemon par opponent; dialog#destroy ()));
+  )
+  available_pokemon;
+  dialog#show ();
+
+and on_choose_new pokemon dialog opponent: unit= 
+  player := {!player with current_pokemon = Some pokemon};
+  let player_pokemon =
+    match !player.current_pokemon with
+    | Some p -> p
+    | None -> failwith "No current Pokémon to battle with"
+  in
+  update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_wild_result dialog player_pokemon opponent); 
 
 and choose_starter () =
   let dialog = GWindow.dialog
