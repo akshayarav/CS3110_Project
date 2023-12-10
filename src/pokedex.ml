@@ -49,7 +49,7 @@ let find_pokemon_by_name name =
 
 let starters_base =
   List.map find_pokemon_by_name
-    [ "Bulbasaur"; "Charmander"; "Squirtle"; "ALLEN TANG" ]
+    [ "Bulbasaur"; "Charmander"; "Squirtle";]
 
 let wild_pokemon_base =
   List.map find_pokemon_by_name

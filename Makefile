@@ -1,7 +1,13 @@
 .PHONY: test check
 
 run:
-	dune exec ./main/ui.exe
+	dune exec ./main/main.exe
+
+gui:
+	dune exec ./ui/ui.exe
+
+text-based:
+	dune exec ./text/text.exe
 
 build:
 	dune build
