@@ -3,6 +3,12 @@ open Mylib
 open Pokedex
 open Moves
 let squirtle1 = Pokemon.create base_squirtle 10
+let sandshrew1 = Pokemon.create base_sandshrew 10
+let copy_squirtle1 = Pokemon.copy_pokemon squirtle1
+
+let xp_up_squirtle = Pokemon.add_xp squirtle1 (calculate_xp_gained squirtle1.level)
+let level_up_squirtle = Pokemon.level_up xp_up_squirtle
+let charmander = Pokemon.create base_charmander 20
 
 let player = ref (Player.new_player)
 
@@ -50,7 +56,7 @@ let choose_player_move player_pokemon =
       )
     in
     battle_loop player_pokemon opponent_pokemon player  
-let init_tests = "Test Suite for Pokemon" >::: [
+let pokemon_tests = "Test Suite for Pokemon" >::: [
   "squirtle to string" >:: (fun _ ->
     assert_equal ~msg:"squirtle to string" ~printer:(fun x -> x) "Squirtle: Water Type, Level: 10, XP: 0/100" (Pokemon.to_string squirtle1)
   );
@@ -75,8 +81,122 @@ let init_tests = "Test Suite for Pokemon" >::: [
   (fun _ -> assert_equal ~msg:"new_player current_pokemon check" None Player.new_player.current_pokemon);
   "new_player coins check" >::
   (fun _ -> assert_equal ~msg:"new_player coins check" 10 Player.new_player.coins);
+
+  "copy_pokemon hp" >::
+  (fun _ -> assert_equal copy_squirtle1.hp squirtle1.hp);
+  "copy_pokemon level" >::
+  (fun _ -> assert_equal copy_squirtle1.level squirtle1.level);
+  "copy_pokemon xp" >::
+  (fun _ -> assert_equal copy_squirtle1.xp squirtle1.xp);
+  "copy_pokemon feint" >::
+  (fun _ -> assert_equal copy_squirtle1.feint squirtle1.feint);
+  "copy_pokemon base" >::
+  (fun _ -> assert_equal copy_squirtle1.base squirtle1.base);
+
+  "name" >::
+  (fun _ -> assert_equal "Squirtle" (Pokemon.name squirtle1));
+
+  "level_up pokemon" >::
+  (fun _ -> assert_equal (11) level_up_squirtle.level);
+
+  "new_moves none" >:: (fun _ ->
+    let test_squirtle = squirtle1 in
+    let new_moves = Pokemon.check_new_moves test_squirtle in
+    let expected_moves = [] in
+
+    assert_equal expected_moves new_moves;
+  );
+  "new_moves existing" >:: (fun _ ->
+    let test_squirtle = {squirtle1 with level = 13} in
+    let new_moves = Pokemon.check_new_moves test_squirtle in
+    let expected_moves = [(13, water_pulse)] in
+
+    assert_equal expected_moves new_moves;
+  );
+  "check_ev non_existent" >:: (fun _ ->
+    let test_blastoise = Pokemon.create base_blastoise 10 in
+    let option_ev = Pokemon.check_evolution test_blastoise in
+
+    assert_equal option_ev None;
+  );
+  "check_ev existent" >:: (fun _ ->
+    let test_squirtle = Pokemon.create base_squirtle 16 in
+    let option_ev = Pokemon.check_evolution test_squirtle in
+
+    assert_equal option_ev (Some base_wartortle);
+  );
+  "evolve pokemon" >:: (fun _ ->
+    let test_squirtle = Pokemon.create base_squirtle 16 in
+    let test_wartortle = Pokemon.evolve_pokemon test_squirtle base_wartortle in
+
+    assert_equal base_wartortle test_wartortle.base;
+  );
+  "new_move test" >:: (fun _ ->
+    let test_charmander = Pokemon.create base_charmander 12 in
+    let new_charmander = Pokemon.learn_move test_charmander flamethrower 1 in
+    let updated_moves = new_charmander.base.moves in
+  
+    assert_equal [scratch; flamethrower; ember] updated_moves;
+  )
+  
 ]
 
+let ptype_tests =
+  "Test Suite for Pokemon Types" >::: 
+[
+    "grass type" >:: (fun _ -> assert_equal ~msg:"grass type" 
+    ~printer:(fun x -> x) "Grass Type" (Pokemon.ptype_to_string Grass));
+
+    "fire type" >:: (fun _ -> assert_equal ~msg:"fire type" 
+    ~printer:(fun x -> x) "Fire Type" (Pokemon.ptype_to_string Fire));
+    "water type" >:: (fun _ -> assert_equal ~msg:"water type" 
+    ~printer:(fun x -> x) "Water Type" (Pokemon.ptype_to_string Water));
+
+    "electric type" >:: (fun _ -> assert_equal ~msg:"electric type" 
+    ~printer:(fun x -> x) "Electric Type" (Pokemon.ptype_to_string Electric));
+
+    "normal type" >:: (fun _ -> assert_equal ~msg:"normal type" 
+    ~printer:(fun x -> x) "Normal Type" (Pokemon.ptype_to_string Normal));
+
+    "flying type" >:: (fun _ -> assert_equal ~msg:"flying type" 
+    ~printer:(fun x -> x) "Flying Type" (Pokemon.ptype_to_string Flying));
+
+    "bug type" >:: (fun _ -> assert_equal ~msg:"bug type" 
+    ~printer:(fun x -> x) "Bug Type" (Pokemon.ptype_to_string Bug));
+
+    "poison type" >:: (fun _ -> assert_equal ~msg:"poison type" 
+    ~printer:(fun x -> x) "Poison Type" (Pokemon.ptype_to_string Poison));
+
+    "fighting type" >:: (fun _ -> assert_equal ~msg:"fighting type" 
+    ~printer:(fun x -> x) "Fighting Type" (Pokemon.ptype_to_string Fighting));
+
+    "ground type" >:: (fun _ -> assert_equal ~msg:"ground type" 
+    ~printer:(fun x -> x) "Ground Type" (Pokemon.ptype_to_string Ground));
+
+    "rock type" >:: (fun _ -> assert_equal ~msg:"rock type" 
+    ~printer:(fun x -> x) "Rock Type" (Pokemon.ptype_to_string Rock));
+
+    "ghost type" >:: (fun _ -> assert_equal ~msg:"ghost type" 
+    ~printer:(fun x -> x) "Ghost Type" (Pokemon.ptype_to_string Ghost));
+
+    "steel type" >:: (fun _ -> assert_equal ~msg:"steel type" 
+    ~printer:(fun x -> x) "Steel Type" (Pokemon.ptype_to_string Steel));
+
+    "ice type" >:: (fun _ -> assert_equal ~msg:"ice type" 
+    ~printer:(fun x -> x) "Ice Type" (Pokemon.ptype_to_string Ice));
+
+    "psychic type" >:: (fun _ -> assert_equal ~msg:"psychic type" 
+    ~printer:(fun x -> x) "Psychic Type" (Pokemon.ptype_to_string Psychic));
+
+    "dragon type" >:: (fun _ -> assert_equal ~msg:"dragon type" 
+    ~printer:(fun x -> x) "Dragon Type" (Pokemon.ptype_to_string Dragon));
+
+    "dark type" >:: (fun _ -> assert_equal ~msg:"dark type" 
+    ~printer:(fun x -> x) "Dark Type" (Pokemon.ptype_to_string Dark));
+
+    "fairy type" >:: (fun _ -> assert_equal ~msg:"fairy type" 
+    ~printer:(fun x -> x) "Fairy Type" (Pokemon.ptype_to_string Fairy));
+]
 
 let battle_tests =
   "suite" >::: [
@@ -118,21 +238,56 @@ let battle_tests =
       let orig_hp_player2 = poke2_player2.hp in
 
       Pokemon.attack water_gun poke1_player1 poke2_player2;
-    
-      Printf.printf "Original HP for Player2's Pokémon: %d\n" orig_hp_player2;
-      Printf.printf "After attack - Player2's Pokémon HP: %d\n" poke2_player2.hp;
       
       (* supposed to be 0 will fix later *)
       assert_equal (orig_hp_player2 - poke2_player2.hp = 0) true;
+      
+      let test_poke = Pokemon.create base_test 10 in
+      assert_raises (Failure "No available moves for this Pokemon.") (fun _ -> Ai.choose_move test_poke)
     )
-    
   ]
 
+let player1 = Player.new_player
+let empty_player = Player.new_player
+let player_with_one_pokemon = 
+  { empty_player with team = [copy_squirtle1]; current_pokemon = Some copy_squirtle1 }
+let player_with_two_pokemon = 
+  { empty_player with team = [copy_squirtle1; sandshrew1]; current_pokemon = Some copy_squirtle1 }
+(* let full_team_player = { empty_player with team = [copy_squirtle1; new_pokemon2; new_pokemon3; new_pokemon4; new_pokemon5; new_pokemon6]; current_pokemon = Some new_pokemon1 } *)
+  let player_tests = "suite" >::: [
+  "new player team" >:: (fun _ -> 
+    assert_equal player1.team []);
+  "new player curr_poke" >:: (fun _ -> 
+    assert_equal player1.current_pokemon None);
+  "new player coins" >:: (fun _ -> 
+    assert_equal player1.coins 10);
+  "get_team new player" >:: (fun _ -> 
+    assert_equal (Player.get_team player1) []);
+      "Empty + Addition" >:: (fun _ ->
+    let result, success = Player.add_team copy_squirtle1 empty_player in
+    assert_equal ~msg:"Empty + Addition" { empty_player with team = [copy_squirtle1]; current_pokemon = Some copy_squirtle1 } result;
+    assert_equal ~msg:"Success flag for Empty + Addition" true success
+  );
+
+  "Non-Empty + Addition" >:: (fun _ ->
+    let result, success = Player.add_team sandshrew1 player_with_one_pokemon in
+    assert_equal ~msg:"Non-Empty + Addition" { player_with_one_pokemon with team = player_with_one_pokemon.team @ [sandshrew1] } result;
+    assert_equal ~msg:"Success flag for Non-Empty + Addition" true success
+  );
+
+  "Team Full + Swap" >:: (fun _ ->
+    let result, success = Player.add_team charmander player_with_two_pokemon in
+    assert_equal ~msg:"Team Full + Swap" { player_with_two_pokemon with team = [copy_squirtle1; sandshrew1; charmander] } result;
+    assert_equal ~msg:"Success flag for Team Full + Swap" true success
+  );
+
+]
   let all_tests = "All Tests" >::: [
-    init_tests;
+    pokemon_tests;
     battle_tests;
+    ptype_tests;
+    player_tests
   ]
   
   let () =
     run_test_tt_main all_tests
-  

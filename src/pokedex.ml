@@ -772,6 +772,15 @@ let base_mod = {
   evolution = None
 }
 
+let base_test = {
+  name = "0 Moves";
+  ptype = Fairy;
+  max_hp = 12;
+  moves = [];
+  learnable_moves = [];
+  evolution = None
+}
+
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle; base_mod ]
 
 let wild_pokemon_base =
