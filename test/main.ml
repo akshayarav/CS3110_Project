@@ -1,3 +1,25 @@
+(* Test Plan
+All the primary modules in our source code are tested through our automated 
+OUnit testing (ai, battle, move, player, pokedex, pokemon, trainer). The attack 
+and battle system in our (previously) terminal base is handled through our 
+simulation functions like choose_player_move and simulate_battle. The contents 
+of UI.ml is tested through manual run throughs of the game itself as well as 
+attempts to trigger errors in edge cases (e.g. attempting to heal pokemon with 
+insufficient coins).
+
+Our tests were developed through a glass-box testing approach to ensure that 
+all potential branches within functions activated by a player were accounted 
+for. This was conducted through systematic coverage development of bisect 
+until all essential functions were tested and only errors not meant to be 
+reached were left.
+
+We believe that our testing approach through our OUnit tests and manual run 
+throughs of the game are comprehensive and demonstrate correctness of the system
+ because it leaves no code untested nor unaccounted for. By covering all the 
+ possible functions executed we ensure that the game will behave accordingly, 
+ and by having all of us run through the different approaches to the games UI 
+ we ensure there are no issues with interface outputs and reception of inputs.*)
+
 open OUnit2
 open Mylib
 open Pokedex
