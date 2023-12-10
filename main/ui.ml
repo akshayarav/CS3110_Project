@@ -12,12 +12,11 @@ let get_main_menu () =
 let player = ref Player.new_player
 let starters_base = Pokedex.starters_base
 let on_move_chosen (move: move option) player_pokemon opponent update_ui next_turn_ui (result) =
-  (* Here you would add the logic to apply the move, like reducing HP, etc. *)
   let process_move (move: move option) = 
     match move with 
     | Some chosen_move ->
         update_ui (sprintf "%s used %s!\n" (Pokemon.name player_pokemon) chosen_move.name);
-        Pokemon.attack chosen_move opponent player_pokemon;  (* Apply player's chosen move *)
+        Pokemon.attack chosen_move opponent player_pokemon; 
         let ai_move = Ai.choose_move opponent in
         update_ui (sprintf "%s used %s!\n" (Pokemon.name opponent) ai_move.name);
         Pokemon.attack ai_move player_pokemon opponent;
@@ -70,10 +69,8 @@ let message_ui parent_window message = (
     ~modal:true 
     () in
 
-  (* Run the dialog and capture the response *)
   let _ = dialog#run () in
 
-  (* Destroy the dialog after the user responds *)
   dialog#destroy ();)
 
 let raise_error_ui parent_window message = (
@@ -190,10 +187,8 @@ and pokemon_center () =
       ~modal:true
       () in
 
-    (* Create a VBox for vertical arrangement of buttons *)
     let vbox = GPack.vbox ~spacing:10 ~packing:dialog#vbox#add () in
 
-    (* Add buttons to the vbox *)
     let button_heal = GButton.button ~label:"Heal Pokemon (2 coins per pokemon)" ~packing:vbox#add () in
     ignore (button_heal#connect#clicked ~callback:(fun () -> on_heal dialog));
 
@@ -238,10 +233,8 @@ and choose_pokemon parent poke_list = (
       | [] -> acc
       | hd :: tl -> take_n (n - 1) tl (hd :: acc)
   in
-  (* Shuffle the list to randomize the order *)
   let shuffled_pokemon_list = List.sort (fun _ _ -> if Random.bool () then 1 else -1) poke_list in
 
-  (* Select the first three Pokémon from the shuffled list *)
   let chosen_pokemon_list = take_n 3 shuffled_pokemon_list [] in
   let dialog = GWindow.dialog
     ~title:"Choose Pokemon"
@@ -356,7 +349,6 @@ and trainer_battle_e4 (trainer: Trainer.trainer) rest=
 and trainer_battle () = 
   let regular_trainers = Trainer.create_regular_trainers () in
 
-  (* Randomly select a trainer from regular_trainers *)
   let trainer_index = Random.int (Array.length regular_trainers) in
   let trainer = regular_trainers.(trainer_index) in
   let player_pokemon =
@@ -442,7 +434,7 @@ and handle_feint_trainer dialog trainer =
 and choose_new_pokemon_trainer par available_pokemon trainer= 
   let dialog = GWindow.dialog
     ~title:"Choose Pokemon to send in Battle"
-    ~parent:par  (* Access the main_menu reference *)
+    ~parent:par
     ~width:300
     ~height:200
     ~destroy_with_parent:true
@@ -509,7 +501,6 @@ and on_wild_result dialog player_pokemon opponent won =
     let updated_pokemon = Pokemon.add_xp player_pokemon xp_gained in
     update_ui_string dialog (sprintf "Your %s gained %d XP.\n" updated_pokemon.base.name xp_gained);
 
-    (* TODO: ADD LEVEL UP AND EVOLUTION *)
     let updated_pokemon_moves = handle_new_moves updated_pokemon dialog in 
     let updated_pokemon_evo = handle_evolution dialog updated_pokemon_moves in
     player := Player.update_pokemon updated_pokemon_evo !player;
@@ -531,7 +522,6 @@ and handle_new_moves pokemon dialog =
       if List.length acc_pokemon.base.moves < 4 then
         Pokemon.learn_move acc_pokemon new_move (-1)
       else
-        (* Randomly select a move to be replaced *)
         let move_to_replace = Random.int (List.length acc_pokemon.base.moves) in
         update_ui_string dialog (sprintf "%s learns the move %s, replacing %s.\n" acc_pokemon.base.name new_move.name 
         (List.nth acc_pokemon.base.moves move_to_replace).name); 
@@ -559,7 +549,7 @@ and handle_feint_wild dialog opponent=
 and choose_new_pokemon par available_pokemon opponent= 
   let dialog = GWindow.dialog
     ~title:"Choose Pokemon to send in Battle"
-    ~parent:par  (* Access the main_menu reference *)
+    ~parent:par
     ~width:300
     ~height:200
     ~destroy_with_parent:true
@@ -585,7 +575,7 @@ and on_choose_new pokemon dialog opponent: unit=
 and choose_starter () =
   let dialog = GWindow.dialog
     ~title:"Choose your starter pokemon"
-    ~parent:(get_main_menu ())  (* Access the main_menu reference *)
+    ~parent:(get_main_menu ())  
     ~width:300
     ~height:200
     ~destroy_with_parent:true
@@ -607,18 +597,14 @@ and on_starter_selected base_pokemon =
   player := new_player;
   print_endline (Player.player_to_string !player);
   
-  (* Destroy the existing main menu window *)
   match !main_menu with
   | Some window ->
       window#destroy ();
-      main_menu := None;  (* Reset the main_menu reference to None *)
-      (* Redisplay the main menu to update with the chosen starter *)
+      main_menu := None; 
       display_menu ()
   | None -> ()
 
 let () =
-  (* Initialize GTK *)
   ignore (GMain.Main.init ());
 
-  (* Start the application *)
   display_menu ()
