@@ -64,15 +64,15 @@ let horn_attack = { name = "Horn Attack"; damage = 15; m_ptype = Normal }
 let fury_attack = { name = "Fury Attack"; damage = 5; m_ptype = Normal }
 let leech_life = { name = "Leech Life"; damage = 10; m_ptype = Bug }
 let slash = { name = "Slash"; damage = 20; m_ptype = Normal }
-let spark = { name = "Spark"; damage = 20; m_ptype = Electric; }
-let thunderbolt = { name = "Thunderbolt"; damage = 25; m_ptype = Electric; }
+let spark = { name = "Spark"; damage = 20; m_ptype = Electric }
+let thunderbolt = { name = "Thunderbolt"; damage = 25; m_ptype = Electric }
 let tri_attack = { name = "Tri Attack"; damage = 20; m_ptype = Normal }
-let shock_wave = { name = "Shock Wave"; damage = 15; m_ptype = Electric; }
-let mud_slap = { name = "Mud-Slap"; damage = 10; m_ptype = Ground; }
+let shock_wave = { name = "Shock Wave"; damage = 15; m_ptype = Electric }
+let mud_slap = { name = "Mud-Slap"; damage = 10; m_ptype = Ground }
 let bone_rush = { name = "Bone Rush"; damage = 25; m_ptype = Ground }
 let double_edge = { name = "Double-Edge"; damage = 30; m_ptype = Normal }
 let rock_slide = { name = "Rock Slide"; damage = 20; m_ptype = Rock }
-let giga_drain = { name = "Giga Drain"; damage = 15; m_ptype = Grass; }
+let giga_drain = { name = "Giga Drain"; damage = 15; m_ptype = Grass }
 let bug_bite = { name = "Bug Bite"; damage = 10; m_ptype = Bug }
 let poison_sting = { name = "Poison Sting"; damage = 15; m_ptype = Poison }
 let swift = { name = "Swift"; damage = 20; m_ptype = Normal }
@@ -85,6 +85,7 @@ let water_spout = { name = "Water Spout"; damage = 150; m_ptype = Water }
 let ancient_power = { name = "Ancient Power"; damage = 60; m_ptype = Rock }
 let eruption = { name = "Eruption"; damage = 150; m_ptype = Fire }
 let get_chicks = { name = "Get Chicks"; damage = 999; m_ptype = Ground }
+
 let all_moves =
   [
     tackle;

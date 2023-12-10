@@ -3,5 +3,5 @@
  (public_name mylib)
  (modules :standard)
  (libraries lablgtk2)
- (instrumentation (backend bisect_ppx))
- )
+ (instrumentation
+  (backend bisect_ppx)))

@@ -268,7 +268,7 @@ let base_sandslash =
     name = "Sandslash";
     ptype = Ground;
     max_hp = 85;
-    moves = [ quick_attack ; bulldoze ];
+    moves = [ quick_attack; bulldoze ];
     learnable_moves = [ (45, dig) ];
     evolution = None;
   }
@@ -449,30 +449,40 @@ let base_persian =
   {
     name = "Persian";
     ptype = Normal;
-    max_hp = 65;  (* Example stat *)
-    moves = [ scratch; bite; fake_out; fury_swipes ];  (* Example moves *)
-    learnable_moves = [ (25, payday); (32, slash) ];  (* Example learnable moves *)
-    evolution = None;  (* Persian does not evolve further *)
+    max_hp = 65;
+    (* Example stat *)
+    moves = [ scratch; bite; fake_out; fury_swipes ];
+    (* Example moves *)
+    learnable_moves = [ (25, payday); (32, slash) ];
+    (* Example learnable moves *)
+    evolution = None;
+    (* Persian does not evolve further *)
   }
 
-let base_meowth = {
+let base_meowth =
+  {
     name = "Meowth";
     ptype = Normal;
     max_hp = 40;
     moves = [ scratch; bite; fake_out; fury_swipes ];
-    learnable_moves = [ (30, payday) ];  (* Example of learnable move *)
-    evolution = Some (28, base_persian);  (* Evolves into Persian at level 28 *)
-}
+    learnable_moves = [ (30, payday) ];
+    (* Example of learnable move *)
+    evolution = Some (28, base_persian);
+    (* Evolves into Persian at level 28 *)
+  }
 
 (* Eevee *)
-let base_eevee = {
+let base_eevee =
+  {
     name = "Eevee";
     ptype = Normal;
     max_hp = 55;
     moves = [ tackle; quick_attack; bite ];
-    learnable_moves = [];  (* Eevee has a unique evolution mechanic *)
-    evolution = None;  (* Eevee can evolve into various forms, but let's keep it simple *)
-}
+    learnable_moves = [];
+    (* Eevee has a unique evolution mechanic *)
+    evolution = None;
+    (* Eevee can evolve into various forms, but let's keep it simple *)
+  }
 
 (* Magneton and Magnemite *)
 let base_magneton =
@@ -485,14 +495,17 @@ let base_magneton =
     evolution = None;
   }
 
-let base_magnemite = {
+let base_magnemite =
+  {
     name = "Magnemite";
     ptype = Electric;
     max_hp = 25;
     moves = [ thunder_shock; sonic_boom; spark; mirror_shot ];
-    learnable_moves = [ (30, thunderbolt) ];  (* Example of learnable move *)
-    evolution = Some (30, base_magneton);  (* Evolves into Magneton at level 30 *)
-}
+    learnable_moves = [ (30, thunderbolt) ];
+    (* Example of learnable move *)
+    evolution = Some (30, base_magneton);
+    (* Evolves into Magneton at level 30 *)
+  }
 
 (* Electrode and Voltorb *)
 let base_electrode =
@@ -502,284 +515,335 @@ let base_electrode =
     max_hp = 60;
     moves = [ tackle; spark; thunder_shock; thunderbolt ];
     learnable_moves = [ (40, thunder) ];
-    evolution = None
+    evolution = None;
   }
 
-let base_voltorb = {
+let base_voltorb =
+  {
     name = "Voltorb";
     ptype = Electric;
     max_hp = 40;
     moves = [ tackle; sonic_boom; spark; self_destruct ];
-    learnable_moves = [ (26, electro_ball) ];  (* Example of learnable move *)
-    evolution = Some (30, base_electrode);  (* Evolves into Electrode at level 30 *)
-}
+    learnable_moves = [ (26, electro_ball) ];
+    (* Example of learnable move *)
+    evolution = Some (30, base_electrode);
+    (* Evolves into Electrode at level 30 *)
+  }
 
 (* Electabuzz *)
-let base_electabuzz = {
+let base_electabuzz =
+  {
     name = "Electabuzz";
     ptype = Electric;
     max_hp = 65;
     moves = [ thunder_punch; quick_attack; shock_wave ];
-    learnable_moves = [];  (* Electabuzz is a final form in many games *)
+    learnable_moves = [];
+    (* Electabuzz is a final form in many games *)
     evolution = None;
-}
+  }
 
 (* Dugtrio and Diglett *)
-let base_dugtrio = {
-  name = "Dugtrio";
-  ptype = Ground;
-  max_hp = 35;
-  moves = [ scratch; mud_slap; bulldoze; earthquake ];
-  learnable_moves = [ (26, dig) ];
-  evolution = None;
-}
+let base_dugtrio =
+  {
+    name = "Dugtrio";
+    ptype = Ground;
+    max_hp = 35;
+    moves = [ scratch; mud_slap; bulldoze; earthquake ];
+    learnable_moves = [ (26, dig) ];
+    evolution = None;
+  }
 
-let base_diglett = {
+let base_diglett =
+  {
     name = "Diglett";
     ptype = Ground;
     max_hp = 20;
     moves = [ scratch; dig; mud_slap ];
-    learnable_moves = [ (26, bulldoze) ];  (* Example of learnable move *)
-    evolution = Some (26, base_dugtrio);  (* Evolves into Dugtrio at level 26 *)
-}
+    learnable_moves = [ (26, bulldoze) ];
+    (* Example of learnable move *)
+    evolution = Some (26, base_dugtrio);
+    (* Evolves into Dugtrio at level 26 *)
+  }
 
 (* Marowak and Cubone *)
-let base_marowak = {
-  name = "Marowak";
-  ptype = Ground;
-  max_hp = 60;
-  moves = [ bone_club; headbutt; stomp; earthquake ];
-  learnable_moves = [ (33, bone_rush); (43, double_edge) ];
-  evolution = None;
-}
+let base_marowak =
+  {
+    name = "Marowak";
+    ptype = Ground;
+    max_hp = 60;
+    moves = [ bone_club; headbutt; stomp; earthquake ];
+    learnable_moves = [ (33, bone_rush); (43, double_edge) ];
+    evolution = None;
+  }
 
-let base_cubone = {
+let base_cubone =
+  {
     name = "Cubone";
     ptype = Ground;
     max_hp = 50;
     moves = [ bone_club; headbutt ];
-    learnable_moves = [ (28, bonemerang) ];  (* Example of learnable move *)
-    evolution = Some (28, base_marowak);  (* Evolves into Marowak at level 28 *)
-}
+    learnable_moves = [ (28, bonemerang) ];
+    (* Example of learnable move *)
+    evolution = Some (28, base_marowak);
+    (* Evolves into Marowak at level 28 *)
+  }
 
 (* Rhydon and Rhyhorn *)
-let base_rhydon = {
-  name = "Rhydon";
-  ptype = Ground;
-  max_hp = 105;
-  moves = [tackle; stomp; earthquake; rock_slide];
-  learnable_moves = [];
-  evolution = None;
-}
+let base_rhydon =
+  {
+    name = "Rhydon";
+    ptype = Ground;
+    max_hp = 105;
+    moves = [ tackle; stomp; earthquake; rock_slide ];
+    learnable_moves = [];
+    evolution = None;
+  }
 
-let base_ryhorn = {
+let base_ryhorn =
+  {
     name = "Rhyhorn";
     ptype = Ground;
     max_hp = 80;
     moves = [ horn_attack; stomp; fury_attack ];
-    learnable_moves = [ (35, bulldoze) ];  (* Example of learnable move *)
-    evolution = Some (42, base_rhydon);  (* Evolves into Rhydon at level 42 *)
-}
+    learnable_moves = [ (35, bulldoze) ];
+    (* Example of learnable move *)
+    evolution = Some (42, base_rhydon);
+    (* Evolves into Rhydon at level 42 *)
+  }
 
 (* Parasect and Paras *)
-let base_parasect = {
+let base_parasect =
+  {
     name = "Parasect";
     ptype = Bug;
     max_hp = 60;
     moves = [ scratch; leech_life ];
     learnable_moves = [ (54, giga_drain) ];
     evolution = None;
-}
-let base_paras = {
+  }
+
+let base_paras =
+  {
     name = "Paras";
     ptype = Bug;
     max_hp = 35;
     moves = [ scratch; leech_life ];
-    learnable_moves = [ (24, slash) ];  (* Example of learnable move *)
-    evolution = Some (24, base_parasect);  (* Evolves into Parasect at level 24 *)
-}
+    learnable_moves = [ (24, slash) ];
+    (* Example of learnable move *)
+    evolution = Some (24, base_parasect);
+    (* Evolves into Parasect at level 24 *)
+  }
 
 (* Venomoth and Venonat *)
-let base_venomoth = {
+let base_venomoth =
+  {
     name = "Venomoth";
     ptype = Bug;
     max_hp = 70;
     moves = [ tackle; leech_life; confusion ];
     learnable_moves = [ (28, psychic) ];
     evolution = None;
-}
+  }
 
-let base_venonat = {
+let base_venonat =
+  {
     name = "Venonat";
     ptype = Bug;
     max_hp = 60;
     moves = [ tackle; disable; leech_life ];
-    learnable_moves = [ (31, psybeam) ];  (* Example of learnable move *)
-    evolution = Some (31, base_venomoth);  (* Evolves into Venomoth at level 31 *)
-}
+    learnable_moves = [ (31, psybeam) ];
+    (* Example of learnable move *)
+    evolution = Some (31, base_venomoth);
+    (* Evolves into Venomoth at level 31 *)
+  }
 
 (* Butterfree *)
-let base_butterfree = {
+let base_butterfree =
+  {
     name = "Butterfree";
     ptype = Bug;
     max_hp = 60;
-    moves = [ confusion; gust ; razor_leaf];
-    learnable_moves = [ (34, psybeam) ];  (* Example of learnable move *)
-    evolution = None;  (* Butterfree is a final form *)
-}
+    moves = [ confusion; gust; razor_leaf ];
+    learnable_moves = [ (34, psybeam) ];
+    (* Example of learnable move *)
+    evolution = None;
+    (* Butterfree is a final form *)
+  }
 
-let base_metapod = {
+let base_metapod =
+  {
     name = "Metapod";
     ptype = Bug;
     max_hp = 50;
     moves = [ giga_drain ];
     learnable_moves = [ (10, razor_leaf) ];
     evolution = Some (10, base_butterfree);
-}
+  }
 
-let base_caterpie = {
+let base_caterpie =
+  {
     name = "Caterpie";
     ptype = Bug;
     max_hp = 45;
     moves = [ tackle ];
     learnable_moves = [ (7, bug_bite) ];
     evolution = Some (7, base_metapod);
-}
+  }
 
-let base_beedrill = {
+let base_beedrill =
+  {
     name = "Beedrill";
     ptype = Bug;
     max_hp = 65;
     moves = [ poison_sting; fury_attack ];
     learnable_moves = [];
     evolution = None;
-}
+  }
 
-let base_kakuna = {
+let base_kakuna =
+  {
     name = "Kakuna";
     ptype = Bug;
     max_hp = 45;
     moves = [ poison_sting ];
     learnable_moves = [];
     evolution = Some (10, base_beedrill);
-}
+  }
 
-let base_weedle = {
+let base_weedle =
+  {
     name = "Weedle";
     ptype = Bug;
     max_hp = 40;
     moves = [ poison_sting ];
     learnable_moves = [ (7, horn_attack) ];
     evolution = Some (7, base_kakuna);
-}
+  }
 
 (* Legendary Pokémon Mewtwo *)
-let base_mewtwo = {
-  name = "Mewtwo";
-  ptype = Psychic;
-  max_hp = 106;
-  moves = [ psychic; swift ];
-  learnable_moves = [ (70, psychic); (86, thunderbolt); (93, ice_beam) ];
-  evolution = None;
-}
+let base_mewtwo =
+  {
+    name = "Mewtwo";
+    ptype = Psychic;
+    max_hp = 106;
+    moves = [ psychic; swift ];
+    learnable_moves = [ (70, psychic); (86, thunderbolt); (93, ice_beam) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Articuno *)
-let base_articuno = {
-  name = "Articuno";
-  ptype = Ice;
-  max_hp = 90;
-  moves = [ ice_beam; blizzard; sky_attack ];
-  learnable_moves = [ (55, ice_beam); (65, blizzard) ];
-  evolution = None;
-}
+let base_articuno =
+  {
+    name = "Articuno";
+    ptype = Ice;
+    max_hp = 90;
+    moves = [ ice_beam; blizzard; sky_attack ];
+    learnable_moves = [ (55, ice_beam); (65, blizzard) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Zapdos *)
-let base_zapdos = {
-  name = "Zapdos";
-  ptype = Electric;
-  max_hp = 90;
-  moves = [ thunder_shock; drill_peck; thunder ];
-  learnable_moves = [ (51, thunder); (60, drill_peck); ];
-  evolution = None;
-}
+let base_zapdos =
+  {
+    name = "Zapdos";
+    ptype = Electric;
+    max_hp = 90;
+    moves = [ thunder_shock; drill_peck; thunder ];
+    learnable_moves = [ (51, thunder); (60, drill_peck) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Moltres *)
-let base_moltres = {
-  name = "Moltres";
-  ptype = Fire;
-  max_hp = 90;
-  moves = [ fire_spin; peck; fire_blast ];
-  learnable_moves = [ (51, fire_blast); (60, sky_attack) ];
-  evolution = None;
-}
+let base_moltres =
+  {
+    name = "Moltres";
+    ptype = Fire;
+    max_hp = 90;
+    moves = [ fire_spin; peck; fire_blast ];
+    learnable_moves = [ (51, fire_blast); (60, sky_attack) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Lugia *)
-let base_lugia = {
-  name = "Lugia";
-  ptype = Psychic;  (* Lugia is often considered Psychic/Flying, but for simplicity using Psychic *)
-  max_hp = 110;
-  moves = [ aeroblast; psychic; hydro_pump ];
-  learnable_moves = [ (65, aeroblast); (70, hydro_pump); (80, future_sight) ];
-  evolution = None;
-}
+let base_lugia =
+  {
+    name = "Lugia";
+    ptype = Psychic;
+    (* Lugia is often considered Psychic/Flying, but for simplicity using Psychic *)
+    max_hp = 110;
+    moves = [ aeroblast; psychic; hydro_pump ];
+    learnable_moves = [ (65, aeroblast); (70, hydro_pump); (80, future_sight) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Ho-Oh *)
-let base_ho_oh = {
-  name = "Ho-Oh";
-  ptype = Fire;  (* Ho-Oh is often considered Fire/Flying, but for simplicity using Fire *)
-  max_hp = 110;
-  moves = [ sacred_fire; gust; fire_blast ];
-  learnable_moves = [ (65, sacred_fire); (75, fire_blast) ];
-  evolution = None;
-}
+let base_ho_oh =
+  {
+    name = "Ho-Oh";
+    ptype = Fire;
+    (* Ho-Oh is often considered Fire/Flying, but for simplicity using Fire *)
+    max_hp = 110;
+    moves = [ sacred_fire; gust; fire_blast ];
+    learnable_moves = [ (65, sacred_fire); (75, fire_blast) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Rayquaza *)
-let base_rayquaza = {
-  name = "Rayquaza";
-  ptype = Dragon;  (* Rayquaza is Dragon/Flying, but for simplicity using Dragon *)
-  max_hp = 105;
-  moves = [ dragon_claw; fly; extreme_speed; hyper_beam ];
-  learnable_moves = [ (75, dragon_claw); (80, extreme_speed); (85, hyper_beam); (90, outrage) ];
-  evolution = None;
-}
+let base_rayquaza =
+  {
+    name = "Rayquaza";
+    ptype = Dragon;
+    (* Rayquaza is Dragon/Flying, but for simplicity using Dragon *)
+    max_hp = 105;
+    moves = [ dragon_claw; fly; extreme_speed; hyper_beam ];
+    learnable_moves =
+      [
+        (75, dragon_claw); (80, extreme_speed); (85, hyper_beam); (90, outrage);
+      ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Kyogre *)
-let base_kyogre = {
-  name = "Kyogre";
-  ptype = Water;
-  max_hp = 100;
-  moves = [ water_spout; hydro_pump; ice_beam; ancient_power ];
-  learnable_moves = [ (70, water_spout); (75, hydro_pump); (80, ice_beam) ];
-  evolution = None;
-}
+let base_kyogre =
+  {
+    name = "Kyogre";
+    ptype = Water;
+    max_hp = 100;
+    moves = [ water_spout; hydro_pump; ice_beam; ancient_power ];
+    learnable_moves = [ (70, water_spout); (75, hydro_pump); (80, ice_beam) ];
+    evolution = None;
+  }
 
 (* Legendary Pokémon Groudon *)
-let base_groudon = {
-  name = "Groudon";
-  ptype = Ground;
-  max_hp = 100;
-  moves = [ earthquake; fire_blast; solar_beam; eruption ];
-  learnable_moves = [ (70, earthquake); (75, fire_blast); (80, solar_beam) ];
-  evolution = None;
-}
+let base_groudon =
+  {
+    name = "Groudon";
+    ptype = Ground;
+    max_hp = 100;
+    moves = [ earthquake; fire_blast; solar_beam; eruption ];
+    learnable_moves = [ (70, earthquake); (75, fire_blast); (80, solar_beam) ];
+    evolution = None;
+  }
 
-let base_mod = {
-  name = "ALLEN TANG";
-  ptype = Ground;
-  max_hp = 6969;
-  moves = [ get_chicks ];
-  learnable_moves = [];
-  evolution = None
-}
+let base_mod =
+  {
+    name = "ALLEN TANG";
+    ptype = Ground;
+    max_hp = 6969;
+    moves = [ get_chicks ];
+    learnable_moves = [];
+    evolution = None;
+  }
 
-let base_test = {
-  name = "0 Moves";
-  ptype = Fairy;
-  max_hp = 12;
-  moves = [];
-  learnable_moves = [];
-  evolution = None
-}
+let base_test =
+  {
+    name = "0 Moves";
+    ptype = Fairy;
+    max_hp = 12;
+    moves = [];
+    learnable_moves = [];
+    evolution = None;
+  }
 
 let starters_base = [ base_bulbasaur; base_charmander; base_squirtle; base_mod ]
 
