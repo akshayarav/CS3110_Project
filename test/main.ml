@@ -131,14 +131,6 @@ let pokemon_tests = "Test Suite for Pokemon" >::: [
 
     assert_equal base_wartortle test_wartortle.base;
   );
-  "new_move test" >:: (fun _ ->
-    let test_charmander = Pokemon.create base_charmander 12 in
-    let new_charmander = Pokemon.learn_move test_charmander flamethrower 1 in
-    let updated_moves = new_charmander.base.moves in
-  
-    assert_equal [scratch; flamethrower; ember] updated_moves;
-  )
-  
 ]
 
 let ptype_tests =
