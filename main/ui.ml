@@ -606,5 +606,4 @@ and on_starter_selected base_pokemon =
 
 let () =
   ignore (GMain.Main.init ());
-
   display_menu ()
