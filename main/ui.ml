@@ -21,12 +21,11 @@ let on_move_chosen (move: move option) player_pokemon opponent update_ui next_tu
         let ai_move = Ai.choose_move opponent in
         update_ui (sprintf "%s used %s!\n" (Pokemon.name opponent) ai_move.name);
         Pokemon.attack ai_move player_pokemon opponent;
-    | None -> failwith "Switching pokemon unimplemented"; 
+    | None -> failwith "Swapping Unimplemented" ; 
     in
   process_move move;
   update_ui (sprintf "\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp);
   update_ui (sprintf "%s's HP: %d\n" (Pokemon.name opponent) opponent.hp);
-  (* Check if the battle is over and handle accordingly *)
   let continue = ref true in
   if player_pokemon.hp <= 0 then (
     update_ui "Your Pokemon fainted!";
@@ -40,7 +39,6 @@ let on_move_chosen (move: move option) player_pokemon opponent update_ui next_tu
   );
   if !continue then next_turn_ui else ()
 
-(** Callback to update the UI during battles *)
 let update_ui_string dialog message =
   let label = GMisc.label ~text:message () in
   ignore (dialog#vbox#add (label :> GObj.widget));
@@ -88,15 +86,45 @@ let raise_error_ui parent_window message = (
     ~modal:true 
     () in
 
-  (* Run the dialog and capture the response *)
   let _ = dialog#run () in
 
-  (* Destroy the dialog after the user responds *)
   dialog#destroy ();)
+
+let swap_team par func opponent result= (
+  let dialog = GWindow.dialog
+  ~title:"Choose a Pokemon to Swap"
+  ~parent: par
+  ~width:500
+  ~height:300
+  ~destroy_with_parent:true
+  ~modal:true
+  () in
+  let vbox = GPack.vbox ~packing:dialog#vbox#add () in
+
+
+
+  let swap_current pokemon = 
+    player := {!player with current_pokemon = Some pokemon};
+    let player_pokemon =
+      match !player.current_pokemon with
+      | Some p -> p
+      | None -> failwith "No current Pokémon to battle with"
+    in
+    func par player_pokemon.base.moves player_pokemon opponent result in
+
+  List.iter (fun (p) ->
+    let button = GButton.button
+      ~label:(sprintf "%s" (Pokemon.name p))
+      ~packing:vbox#add () in
+
+    ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); swap_current p;));
+  ) (Player.get_team !player); 
+  dialog#show ())
   
 
 let rec update_ui_moves dialog moves player_pokemon opponent result = (
   clear_container dialog#vbox;
+  update_ui_string dialog (sprintf "Your %s is fighting %s!!!" player_pokemon.base.name (Pokemon.name opponent));
   List.iteri
     (fun i (move: Pokemon.move) ->
       let label_text = Printf.sprintf "%d. %s (Type: %s, Damage: %d)\n" (i + 1) move.name
@@ -109,7 +137,12 @@ let rec update_ui_moves dialog moves player_pokemon opponent result = (
         )
       );
     ) 
-    moves;  (* This is the list being iterated over *)
+    moves; 
+    let button = GButton.button ~label:"Switch Pokemon" ~packing:dialog#vbox#add () in
+    ignore (
+      button#connect#clicked ~callback:(fun () ->
+        swap_team dialog update_ui_moves opponent result;
+      ));
   dialog#show ();
 )
 
@@ -127,6 +160,7 @@ let rec display_menu () =
   
   if List.length !player.team = 0 then (
     ignore (create_button "Choose Your Starter!!!" vbox (fun () -> choose_starter ())); 
+    ignore (create_button "Quit" vbox (fun () -> window# destroy(); GMain.Main.quit ()));
     window#show ();
     main_menu := Some window; 
 
@@ -136,11 +170,11 @@ else if List.length !player.team != 0 then(
     ignore (create_button "BATTLE: Trainer" vbox (fun () ->  trainer_battle()));
     ignore (create_button "BATTLE: Elite Four" vbox (fun () ->  elite_four_battle()));
     ignore (create_button "Pokemon Center" vbox (fun () ->  pokemon_center()));
+    ignore (create_button "Quit" vbox (fun () -> window# destroy(); GMain.Main.quit ()));
     window#show ();
     main_menu := Some window; 
 
     GMain.Main.main () )
-  
 
 and pokemon_center () =
   if List.length !player.team = 0 then (
@@ -221,7 +255,6 @@ and choose_pokemon parent poke_list = (
   let add_legend chosen_pokemon = 
     let new_pokemon = Pokemon.create chosen_pokemon 30 in
 
-    (* Add the chosen Pokémon to the player's team or swap it *)
     add_team new_pokemon dialog;
   in
   
@@ -349,7 +382,7 @@ and trainer_battle () =
 
   update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_trainer_result dialog player_pokemon trainer None) 
 
-and on_trainer_result dialog player_pokemon trainer rest won = 
+and on_trainer_result dialog player_pokemon trainer (rest) won = 
   if won then (
     update_ui_string dialog (sprintf "You defeated trainer %s's %s!\n"(trainer.name) (Pokemon.name trainer.current_pokemon));
     let remaining_opponents = List.filter (fun (p:Pokemon.pokemon) -> not p.feint) trainer.team in
@@ -369,14 +402,18 @@ and on_trainer_result dialog player_pokemon trainer rest won =
         update_ui_string dialog (sprintf "All your team Pokémon gained %d XP.\n" xp_gained);
         begin
         match rest with 
-        | Some (h :: t) -> trainer_battle_e4 h t
+        | Some (h :: t) -> print_endline "NEXT TRAINER"; trainer_battle_e4 h t
         | Some [] -> dialog# destroy() ; beat_elite_four ()
-        | None -> choose_pokemon dialog Pokedex.reward_pokemon_base
+        | None -> failwith "Unimplemented"
         end
-    | new_opponent :: rest ->
-        let updated_trainer = Battle.update_trainer_team trainer rest in
+    | new_opponent :: next_mon ->
+        let updated_trainer = Battle.update_trainer_team trainer next_mon in
         update_ui_string dialog (sprintf "Trainer %s sends out %s!\n" trainer.name new_opponent.base.name);
-        update_ui_moves dialog player_pokemon.base.moves player_pokemon new_opponent (on_trainer_result dialog player_pokemon updated_trainer None); end )
+        begin
+        match rest with 
+        | Some trainers ->
+        update_ui_moves dialog player_pokemon.base.moves player_pokemon new_opponent (on_trainer_result dialog player_pokemon updated_trainer (Some trainers)); 
+        | None -> update_ui_moves dialog player_pokemon.base.moves player_pokemon new_opponent (on_trainer_result dialog player_pokemon updated_trainer (None)) end end )
     else handle_feint_trainer dialog trainer
 and beat_elite_four () = 
   let dialog = GWindow.dialog
