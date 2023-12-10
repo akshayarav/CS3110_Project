@@ -131,11 +131,11 @@ let rec update_ui_moves dialog moves player_pokemon opponent result = (
         (Pokemon.ptype_to_string move.m_ptype)
         move.damage in
       let button = GButton.button ~label:label_text ~packing:dialog#vbox#add () in
-      ignore (
-        button#connect#clicked ~callback:(fun () ->
-          on_move_chosen (Some move) player_pokemon opponent (update_ui_string dialog) (update_ui_moves dialog moves player_pokemon opponent result) result;
-        )
-      );
+    ignore (
+      button#connect#clicked ~callback:(fun () ->
+        on_move_chosen (Some move) player_pokemon opponent (update_ui_string dialog) (update_ui_moves dialog moves player_pokemon opponent result) result;
+      )
+    );
     ) 
     moves; 
     let button = GButton.button ~label:"Switch Pokemon" ~packing:dialog#vbox#add () in
@@ -222,7 +222,7 @@ and on_heal dialog =
     message_ui dialog (sprintf "All Pokemon Healed! (%i coins used)" total_cost);
 
 and on_buy_legend dialog = 
-  if !player.coins < 50 then (
+  if !player.coins < 100 then (
     raise_error_ui dialog "Not enough coins.\n";
     pokemon_center ()
   ) else (
@@ -265,7 +265,7 @@ and choose_pokemon parent poke_list = (
           ~label:(sprintf "%s" (p.name))
           ~packing:vbox#add () in
   
-        ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); add_legend p; player := (Player.adjust_coins (-50) !player )));
+        ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); add_legend p; player := (Player.adjust_coins (-100) !player )));
       ) poke_list; 
       )
     in
@@ -275,14 +275,11 @@ and choose_pokemon parent poke_list = (
   )
 and add_team new_pokemon par : unit =
   let team_size = List.length (Player.get_team !player) in
-  print_endline "REACHED";
-  print_endline (string_of_int team_size) ;
   if team_size < 6 then player :=
     {!player with team = new_pokemon :: !player.team};
     par# destroy ();
   if team_size >= 6 then
     begin
-      print_endline "REACHED TEAM SIZE";
       let dialog = GWindow.dialog
         ~title:"Choose a Pokemon to Swap"
         ~parent: par
@@ -513,7 +510,9 @@ and on_wild_result dialog player_pokemon opponent won =
     update_ui_string dialog (sprintf "Your %s gained %d XP.\n" updated_pokemon.base.name xp_gained);
 
     (* TODO: ADD LEVEL UP AND EVOLUTION *)
-    player := Player.update_pokemon updated_pokemon !player;
+    let updated_pokemon_moves = handle_new_moves updated_pokemon dialog in 
+    let updated_pokemon_evo = handle_evolution dialog updated_pokemon_moves in
+    player := Player.update_pokemon updated_pokemon_evo !player;
 
     update_ui_string dialog (sprintf "Add %s to team?" (Pokemon.name opponent));
 
@@ -524,6 +523,29 @@ and on_wild_result dialog player_pokemon opponent won =
     )
   )
   else handle_feint_wild dialog opponent
+
+and handle_new_moves pokemon dialog =
+  let new_moves = Pokemon.check_new_moves pokemon in
+  List.fold_left
+    (fun acc_pokemon (_, new_move) ->
+      if List.length acc_pokemon.base.moves < 4 then
+        Pokemon.learn_move acc_pokemon new_move (-1)
+      else
+        (* Randomly select a move to be replaced *)
+        let move_to_replace = Random.int (List.length acc_pokemon.base.moves) in
+        update_ui_string dialog (sprintf "%s learns the move %s, replacing %s.\n" acc_pokemon.base.name new_move.name 
+        (List.nth acc_pokemon.base.moves move_to_replace).name); 
+          
+        Pokemon.learn_move acc_pokemon new_move move_to_replace)
+    pokemon new_moves
+
+and handle_evolution dialog pokemon =
+  match Pokemon.check_evolution pokemon with
+  | Some evolved_form ->
+      update_ui_string dialog (sprintf"%s IS EVOLVING INTO %s!\n" pokemon.base.name evolved_form.name);
+      Pokemon.evolve_pokemon pokemon evolved_form
+  | None -> pokemon
+
 and handle_feint_wild dialog opponent= 
   let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
     if List.length available_pokemon = 0 then (
@@ -580,7 +602,7 @@ and choose_starter () =
   dialog#show ();
 
 and on_starter_selected base_pokemon =
-  let starter_pokemon = Pokemon.create base_pokemon 5 in
+  let starter_pokemon = Pokemon.create base_pokemon 15 in
   let new_player, _ = Player.add_team starter_pokemon !player in
   player := new_player;
   print_endline (Player.player_to_string !player);
