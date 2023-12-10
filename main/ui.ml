@@ -1,6 +1,6 @@
 open Mylib
+open Pokemon
 open Printf
-open Moves
 
 let main_menu : (GWindow.window option) ref = ref None
 
@@ -11,8 +11,8 @@ let get_main_menu () =
 
 let player = ref Player.new_player
 let starters_base = Pokedex.starters_base
-let on_move_chosen (move: move option) player_pokemon opponent update_ui next_turn_ui (result) =
-  let process_move (move: move option) = 
+let on_move_chosen (move: Pokemon.move option) player_pokemon opponent update_ui next_turn_ui (result) =
+  let process_move (move: Pokemon.move option) = 
     match move with 
     | Some chosen_move ->
         update_ui (sprintf "%s used %s!\n" (Pokemon.name player_pokemon) chosen_move.name);

@@ -51,6 +51,14 @@ val get_type : pokemon -> ptype
 val ptype_to_string : ptype -> string
 (** [ptype_to_string ptype] converts a Pokémon type to its string representation. *)
 
+val string_to_ptype : string -> ptype
+(** [string_to_ptype str] converts a string representation of a Pokémon type
+    to its corresponding [ptype] variant. The string must match one of the
+    recognized Pokémon type names exactly (e.g., "Normal", "Fire", "Water", etc.).
+    The function is case-sensitive and will raise a [Failure] exception
+    with the message "Unknown ptype" if the provided string does not correspond
+    to any known Pokémon type. *)
+
 val create : base_pokemon -> int -> pokemon
 (** [create base level] creates a new Pokémon with specified base characteristics and level. *)
 

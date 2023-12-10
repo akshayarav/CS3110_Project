@@ -1,0 +1,747 @@
+[
+    {
+        "name": "Bulbasaur",
+        "ptype": "Grass",
+        "max_hp": 45,
+        "moves": ["Tackle", "Leech Seed", "Vine Whip"],
+        "learnable_moves": [
+            {"level": 8, "move": "Razor Leaf"}
+        ],
+        "evolution": {"level": 16, "evolves_into": "Ivysaur"}
+    },
+    {
+        "name": "Ivysaur",
+        "ptype": "Grass",
+        "max_hp": 60,
+        "moves": ["Tackle", "Leech Seed", "Vine Whip"],
+        "learnable_moves": [
+            {"level": 20, "move": "Razor Leaf"}
+        ],
+        "evolution": {"level": 36, "evolves_into": "Venusaur"}
+    },
+    {
+        "name": "Venusaur",
+        "ptype": "Grass",
+        "max_hp": 80,
+        "moves": ["Tackle", "Leech Seed", "Vine Whip"],
+        "learnable_moves": [
+            {"level": 50, "move": "Solar Beam"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Charmander",
+        "ptype": "Fire",
+        "max_hp": 39,
+        "moves": ["Scratch", "Ember"],
+        "learnable_moves": [
+            {"level": 12, "move": "Flamethrower"}
+        ],
+        "evolution": {"level": 16, "evolves_into": "Charmeleon"}
+    },
+    {
+        "name": "Charmeleon",
+        "ptype": "Fire",
+        "max_hp": 58,
+        "moves": ["Scratch", "Ember"],
+        "learnable_moves": [
+            {"level": 24, "move": "Flamethrower"}
+        ],
+        "evolution": {"level": 36, "evolves_into": "Charizard"}
+    },
+    {
+        "name": "Charizard",
+        "ptype": "Fire",
+        "max_hp": 78,
+        "moves": ["Scratch", "Ember"],
+        "learnable_moves": [
+            {"level": 46, "move": "Fire Blast"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Squirtle",
+        "ptype": "Water",
+        "max_hp": 44,
+        "moves": ["Tackle", "Water Gun"],
+        "learnable_moves": [
+            {"level": 13, "move": "Water Pulse"}
+        ],
+        "evolution": {"level": 16, "evolves_into": "Wartortle"}
+    },
+    {
+        "name": "Wartortle",
+        "ptype": "Water",
+        "max_hp": 59,
+        "moves": ["Tackle", "Water Gun"],
+        "learnable_moves": [
+            {"level": 25, "move": "Water Pulse"}
+        ],
+        "evolution": {"level": 36, "evolves_into": "Blastoise"}
+    },
+    {
+        "name": "Blastoise",
+        "ptype": "Water",
+        "max_hp": 79,
+        "moves": ["Tackle", "Water Gun"],
+        "learnable_moves": [
+            {"level": 45, "move": "Hydro Pump"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Pidgey",
+        "ptype": "Normal",
+        "max_hp": 31,
+        "moves": ["Quick Attack", "Gust"],
+        "learnable_moves": [
+            {"level": 9, "move": "Wing Attack"}
+        ],
+        "evolution": {"level": 18, "evolves_into": "Pidgeotto"}
+    },
+    {
+        "name": "Pidgeotto",
+        "ptype": "Normal",
+        "max_hp": 49,
+        "moves": ["Quick Attack", "Gust"],
+        "learnable_moves": [
+            {"level": 22, "move": "Wing Attack"}
+        ],
+        "evolution": {"level": 36, "evolves_into": "Pidgeot"}
+    },
+    {
+        "name": "Pidgeot",
+        "ptype": "Normal",
+        "max_hp": 63,
+        "moves": ["Quick Attack", "Gust"],
+        "learnable_moves": [
+            {"level": 40, "move": "Hurricane"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Rattata",
+        "ptype": "Normal",
+        "max_hp": 31,
+        "moves": ["Tackle", "Quick Attack"],
+        "learnable_moves": [
+            {"level": 14, "move": "Hyper Fang"}
+        ],
+        "evolution": {"level": 20, "evolves_into": "Raticate"}
+    },
+    {
+        "name": "Raticate",
+        "ptype": "Normal",
+        "max_hp": 55,
+        "moves": ["Tackle", "Quick Attack"],
+        "learnable_moves": [
+            {"level": 20, "move": "Hyper Fang"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Spearow",
+        "ptype": "Normal",
+        "max_hp": 31,
+        "moves": ["Peck"],
+        "learnable_moves": [
+            {"level": 20, "move": "Drill Peck"}
+        ],
+        "evolution": {"level": 20, "evolves_into": "Fearow"}
+    },
+    {
+        "name": "Fearow",
+        "ptype": "Normal",
+        "max_hp": 65,
+        "moves": ["Peck"],
+        "learnable_moves": [
+            {"level": 25, "move": "Drill Peck"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Pikachu",
+        "ptype": "Electric",
+        "max_hp": 35,
+        "moves": ["Thunder Shock"],
+        "learnable_moves": [
+          {"level": 22, "move": "Electro Ball"}
+        ],
+        "evolution": {"level": 30, "evolves_into": "Raichu"}
+    },
+    {
+        "name": "Raichu",
+        "ptype": "Electric",
+        "max_hp": 60,
+        "moves": ["Thunder Shock", "Quick Attack"],
+        "learnable_moves": [
+          {"level": 50, "move": "Thunder"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Jigglypuff",
+        "ptype": "Normal",
+        "max_hp": 45,
+        "moves": ["Pound"],
+        "learnable_moves": [
+          {"level": 18, "move": "Double Slap"}
+        ],
+        "evolution": {"level": 36, "evolves_into": "Wigglytuff"}
+    },
+    {
+        "name": "Wigglytuff",
+        "ptype": "Normal",
+        "max_hp": 70,
+        "moves": ["Double Slap", "Disable"],
+        "learnable_moves": [
+          {"level": 45, "move": "Hyper Voice"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Psyduck",
+        "ptype": "Water",
+        "max_hp": 50,
+        "moves": ["Water Gun"],
+        "learnable_moves": [
+          {"level": 16, "move": "Confusion"},
+          {"level": 23, "move": "Fury Swipes"}
+        ],
+        "evolution": {"level": 33, "evolves_into": "Golduck"}
+    },
+    {
+        "name": "Golduck",
+        "ptype": "Water",
+        "max_hp": 80,
+        "moves": ["Water Gun", "Confusion", "Disable"],
+        "learnable_moves": [
+          {"level": 52, "move": "Hydro Pump"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Sandshrew",
+        "ptype": "Ground",
+        "max_hp": 50,
+        "moves": ["Quick Attack"],
+        "learnable_moves": [
+          {"level": 30, "move": "Bulldoze"}
+        ],
+        "evolution": {"level": 35, "evolves_into": "Sandslash"}
+    },
+    {
+        "name": "Sandslash",
+        "ptype": "Ground",
+        "max_hp": 85,
+        "moves": ["Quick Attack", "Bulldoze"],
+        "learnable_moves": [
+          {"level": 45, "move": "Dig"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Gyarados",
+        "ptype": "Water",
+        "max_hp": 95,
+        "moves": ["Hydro Pump", "Bite", "Dragon Rage"],
+        "learnable_moves": [
+          {"level": 55, "move": "Hyper Beam"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Dragonite",
+        "ptype": "Flying",
+        "max_hp": 91,
+        "moves": ["Wing Attack", "Dragon Rage", "Slam"],
+        "learnable_moves": [
+          {"level": 60, "move": "Hyper Beam"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Alakazam",
+        "ptype": "Psychic",
+        "max_hp": 55,
+        "moves": ["Psybeam", "Psychic"],
+        "learnable_moves": [
+          {"level": 45, "move": "Future Sight"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Arcanine",
+        "ptype": "Fire",
+        "max_hp": 90,
+        "moves": ["Fire Blast", "Bite", "Take Down"],
+        "learnable_moves": [
+          {"level": 50, "move": "Extreme Speed"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Tangela",
+        "ptype": "Grass",
+        "max_hp": 65,
+        "moves": ["Vine Whip", "Leech Seed", "Solar Beam"],
+        "learnable_moves": [
+          {"level": 40, "move": "Razor Leaf"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Victreebel",
+        "ptype": "Grass",
+        "max_hp": 80,
+        "moves": ["Razor Leaf", "Solar Beam", "Leech Seed"],
+        "learnable_moves": [
+          {"level": 50, "move": "Hyper Beam"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Exeggutor",
+        "ptype": "Grass",
+        "max_hp": 95,
+        "moves": ["Confusion", "Leech Seed", "Solar Beam", "Psychic"],
+        "learnable_moves": [
+          {"level": 50, "move": "Hyper Beam"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Ninetales",
+        "ptype": "Fire",
+        "max_hp": 73,
+        "moves": ["Ember", "Quick Attack", "Fire Blast"],
+        "learnable_moves": [
+          {"level": 45, "move": "Flamethrower"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Rapidash",
+        "ptype": "Fire",
+        "max_hp": 65,
+        "moves": ["Ember", "Quick Attack", "Fire Blast", "Stomp"],
+        "learnable_moves": [
+          {"level": 40, "move": "Flamethrower"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Magmar",
+        "ptype": "Fire",
+        "max_hp": 65,
+        "moves": ["Ember", "Fire Punch", "Fire Blast"],
+        "learnable_moves": [
+          {"level": 43, "move": "Flamethrower"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Flareon",
+        "ptype": "Fire",
+        "max_hp": 65,
+        "moves": ["Ember", "Quick Attack", "Fire Blast", "Bite"],
+        "learnable_moves": [
+          {"level": 36, "move": "Flamethrower"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Vaporeon",
+        "ptype": "Water",
+        "max_hp": 130,
+        "moves": ["Water Gun", "Quick Attack", "Hydro Pump", "Aurora Beam"],
+        "learnable_moves": [
+          {"level": 42, "move": "Water Pulse"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Lapras",
+        "ptype": "Water",
+        "max_hp": 130,
+        "moves": ["Water Gun", "Ice Beam", "Hydro Pump"],
+        "learnable_moves": [
+          {"level": 50, "move": "Blizzard"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Tentacruel",
+        "ptype": "Water",
+        "max_hp": 80,
+        "moves": ["Bubble", "Water Gun", "Wrap", "Hydro Pump"],
+        "learnable_moves": [
+          {"level": 50, "move": "Blizzard"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Aerodactyl",
+        "ptype": "Flying",
+        "max_hp": 80,
+        "moves": ["Wing Attack", "Bite", "Fly", "Hyper Beam"],
+        "learnable_moves": [
+          {"level": 60, "move": "Dragon Claw"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Persian",
+        "ptype": "Normal",
+        "max_hp": 65,
+        "moves": ["Scratch", "Bite", "Fake Out", "Fury Swipes"],
+        "learnable_moves": [
+          {"level": 25, "move": "Payday"},
+          {"level": 32, "move": "Slash"}
+        ],
+        "evolution": null
+    },
+    {
+        "name": "Meowth",
+        "ptype": "Normal",
+        "max_hp": 40,
+        "moves": ["Scratch", "Bite", "Fake Out", "Fury Swipes"],
+        "learnable_moves": [
+          {"level": 30, "move": "Payday"}
+        ],
+        "evolution": {"level": 28, "evolves_into": "Persian"}
+      },
+      {
+        "name": "Eevee",
+        "ptype": "Normal",
+        "max_hp": 55,
+        "moves": ["Tackle", "Quick Attack", "Bite"],
+        "learnable_moves": [],
+        "evolution": null
+      },
+      {
+        "name": "Magneton",
+        "ptype": "Electric",
+        "max_hp": 50,
+        "moves": ["Thunder Shock", "Spark", "Sonic Boom"],
+        "learnable_moves": [
+          {"level": 30, "move": "Thunderbolt"},
+          {"level": 35, "move": "Tri Attack"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Magnemite",
+        "ptype": "Electric",
+        "max_hp": 25,
+        "moves": ["Thunder Shock", "Sonic Boom", "Spark", "Mirror Shot"],
+        "learnable_moves": [
+          {"level": 30, "move": "Thunderbolt"}
+        ],
+        "evolution": {"level": 30, "evolves_into": "Magneton"}
+      },
+      {
+        "name": "Voltorb",
+        "ptype": "Electric",
+        "max_hp": 40,
+        "moves": ["Tackle", "Sonic Boom", "Spark", "Self Destruct"],
+        "learnable_moves": [
+          {"level": 26, "move": "Electro Ball"}
+        ],
+        "evolution": {"level": 30, "evolves_into": "Electrode"}
+      },
+      {
+        "name": "Electrode",
+        "ptype": "Electric",
+        "max_hp": 60,
+        "moves": ["Tackle", "Spark", "Thunder Shock", "Thunderbolt"],
+        "learnable_moves": [
+          {"level": 40, "move": "Thunder"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Electabuzz",
+        "ptype": "Electric",
+        "max_hp": 65,
+        "moves": ["Thunder Punch", "Quick Attack", "Shock Wave"],
+        "learnable_moves": [],
+        "evolution": null
+      },
+      {
+        "name": "Diglett",
+        "ptype": "Ground",
+        "max_hp": 20,
+        "moves": ["Scratch", "Dig", "Mud Slap"],
+        "learnable_moves": [
+          {"level": 26, "move": "Bulldoze"}
+        ],
+        "evolution": {"level": 26, "evolves_into": "Dugtrio"}
+      },
+      {
+        "name": "Dugtrio",
+        "ptype": "Ground",
+        "max_hp": 35,
+        "moves": ["Scratch", "Mud Slap", "Bulldoze", "Earthquake"],
+        "learnable_moves": [
+          {"level": 26, "move": "Dig"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Cubone",
+        "ptype": "Ground",
+        "max_hp": 50,
+        "moves": ["Bone Club", "Headbutt"],
+        "learnable_moves": [
+          {"level": 28, "move": "Bonemerang"}
+        ],
+        "evolution": {"level": 28, "evolves_into": "Marowak"}
+      },
+      {
+        "name": "Marowak",
+        "ptype": "Ground",
+        "max_hp": 60,
+        "moves": ["Bone Club", "Headbutt", "Stomp", "Earthquake"],
+        "learnable_moves": [
+          {"level": 33, "move": "Bone Rush"},
+          {"level": 43, "move": "Double Edge"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Ryhorn",
+        "ptype": "Ground",
+        "max_hp": 80,
+        "moves": ["Horn Attack", "Stomp", "Fury Attack"],
+        "learnable_moves": [
+          {"level": 35, "move": "Bulldoze"}
+        ],
+        "evolution": {"level": 42, "evolves_into": "Rhydon"}
+      },
+      {
+        "name": "Rhydon",
+        "ptype": "Ground",
+        "max_hp": 105,
+        "moves": ["Tackle", "Stomp", "Earthquake", "Rock Slide"],
+        "learnable_moves": [],
+        "evolution": null
+      },
+      {
+        "name": "Paras",
+        "ptype": "Bug",
+        "max_hp": 35,
+        "moves": ["Scratch", "Leech Life"],
+        "learnable_moves": [
+          {"level": 24, "move": "Slash"}
+        ],
+        "evolution": {"level": 24, "evolves_into": "Parasect"}
+      },
+      {
+        "name": "Parasect",
+        "ptype": "Bug",
+        "max_hp": 60,
+        "moves": ["Scratch", "Leech Life"],
+        "learnable_moves": [
+          {"level": 54, "move": "Giga Drain"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Venonat",
+        "ptype": "Bug",
+        "max_hp": 60,
+        "moves": ["Tackle", "Disable", "Leech Life"],
+        "learnable_moves": [
+          {"level": 31, "move": "Psybeam"}
+        ],
+        "evolution": {"level": 31, "evolves_into": "Venomoth"}
+      },
+      {
+        "name": "Venomoth",
+        "ptype": "Bug",
+        "max_hp": 70,
+        "moves": ["Tackle", "Leech Life", "Confusion"],
+        "learnable_moves": [
+          {"level": 28, "move": "Psychic"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Caterpie",
+        "ptype": "Bug",
+        "max_hp": 45,
+        "moves": ["Tackle"],
+        "learnable_moves": [
+          {"level": 7, "move": "Bug Bite"}
+        ],
+        "evolution": {"level": 7, "evolves_into": "Metapod"}
+      },
+      {
+        "name": "Metapod",
+        "ptype": "Bug",
+        "max_hp": 50,
+        "moves": ["Giga Drain"],
+        "learnable_moves": [
+          {"level": 10, "move": "Razor Leaf"}
+        ],
+        "evolution": {"level": 10, "evolves_into": "Butterfree"}
+      },
+      {
+        "name": "Butterfree",
+        "ptype": "Bug",
+        "max_hp": 60,
+        "moves": ["Confusion", "Gust", "Razor Leaf"],
+        "learnable_moves": [
+          {"level": 34, "move": "Psybeam"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Weedle",
+        "ptype": "Bug",
+        "max_hp": 40,
+        "moves": ["Poison Sting"],
+        "learnable_moves": [
+          {"level": 7, "move": "Horn Attack"}
+        ],
+        "evolution": {"level": 7, "evolves_into": "Kakuna"}
+      },
+      {
+        "name": "Kakuna",
+        "ptype": "Bug",
+        "max_hp": 45,
+        "moves": ["Poison Sting"],
+        "learnable_moves": [],
+        "evolution": {"level": 10, "evolves_into": "Beedrill"}
+      },
+      {
+        "name": "Beedrill",
+        "ptype": "Bug",
+        "max_hp": 65,
+        "moves": ["Poison Sting", "Fury Attack"],
+        "learnable_moves": [],
+        "evolution": null
+      },
+      {
+        "name": "Mewtwo",
+        "ptype": "Psychic",
+        "max_hp": 106,
+        "moves": ["Psychic", "Swift"],
+        "learnable_moves": [
+          {"level": 70, "move": "Psychic"},
+          {"level": 86, "move": "Thunderbolt"},
+          {"level": 93, "move": "Ice Beam"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Articuno",
+        "ptype": "Ice",
+        "max_hp": 90,
+        "moves": ["Ice Beam", "Blizzard", "Sky Attack"],
+        "learnable_moves": [
+          {"level": 55, "move": "Ice Beam"},
+          {"level": 65, "move": "Blizzard"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Zapdos",
+        "ptype": "Electric",
+        "max_hp": 90,
+        "moves": ["Thunder Shock", "Drill Peck", "Thunder"],
+        "learnable_moves": [
+          {"level": 51, "move": "Thunder"},
+          {"level": 60, "move": "Drill Peck"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Moltres",
+        "ptype": "Fire",
+        "max_hp": 90,
+        "moves": ["Fire Spin", "Peck", "Fire Blast"],
+        "learnable_moves": [
+          {"level": 51, "move": "Fire Blast"},
+          {"level": 60, "move": "Sky Attack"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Lugia",
+        "ptype": "Psychic",
+        "max_hp": 110,
+        "moves": ["Aeroblast", "Psychic", "Hydro Pump"],
+        "learnable_moves": [
+          {"level": 65, "move": "Aeroblast"},
+          {"level": 70, "move": "Hydro Pump"},
+          {"level": 80, "move": "Future Sight"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Ho-Oh",
+        "ptype": "Fire",
+        "max_hp": 110,
+        "moves": ["Sacred Fire", "Gust", "Fire Blast"],
+        "learnable_moves": [
+          {"level": 65, "move": "Sacred Fire"},
+          {"level": 75, "move": "Fire Blast"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Rayquaza",
+        "ptype": "Dragon",
+        "max_hp": 105,
+        "moves": ["Dragon Claw", "Fly", "Extreme Speed", "Hyper Beam"],
+        "learnable_moves": [
+          {"level": 75, "move": "Dragon Claw"},
+          {"level": 80, "move": "Extreme Speed"},
+          {"level": 85, "move": "Hyper Beam"},
+          {"level": 90, "move": "Outrage"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Kyogre",
+        "ptype": "Water",
+        "max_hp": 100,
+        "moves": ["Water Spout", "Hydro Pump", "Ice Beam", "Ancient Power"],
+        "learnable_moves": [
+          {"level": 70, "move": "Water Spout"},
+          {"level": 75, "move": "Hydro Pump"},
+          {"level": 80, "move": "Ice Beam"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "Groudon",
+        "ptype": "Ground",
+        "max_hp": 100,
+        "moves": ["Earthquake", "Fire Blast", "Solar Beam", "Eruption"],
+        "learnable_moves": [
+          {"level": 70, "move": "Earthquake"},
+          {"level": 75, "move": "Fire Blast"},
+          {"level": 80, "move": "Solar Beam"}
+        ],
+        "evolution": null
+      },
+      {
+        "name": "ALLEN TANG",
+        "ptype": "Ground",
+        "max_hp": 6969,
+        "moves": ["Get Chicks"],
+        "learnable_moves": [],
+        "evolution": null
+      },
+      {
+        "name": "0 Moves",
+        "ptype": "Fairy",
+        "max_hp": 12,
+        "moves": [],
+        "learnable_moves": [],
+        "evolution": null
+      }
+]

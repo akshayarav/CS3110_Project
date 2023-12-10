@@ -1,0 +1,427 @@
+[
+    {
+        "name": "Get Chicks",
+        "damage": 999,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Tackle",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Scratch",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Ember",
+        "damage": 10,
+        "m_ptype": "Fire"
+    },
+    {
+        "name": "Leech Seed",
+        "damage": 5,
+        "m_ptype": "Grass"
+    },
+    {
+        "name": "Vine Whip",
+        "damage": 10,
+        "m_ptype": "Grass"
+    },
+    {
+        "name": "Water Gun",
+        "damage": 10,
+        "m_ptype": "Water"
+    },
+    {
+        "name": "Bubble",
+        "damage": 10,
+        "m_ptype": "Water"
+    },
+    {
+        "name": "Quick Attack",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Gust",
+        "damage": 10,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Peck",
+        "damage": 10,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Razor Leaf",
+        "damage": 15,
+        "m_ptype": "Grass"
+    },
+    {
+        "name": "Solar Beam",
+        "damage": 20,
+        "m_ptype": "Grass"
+    },
+    {
+        "name": "Flamethrower",
+        "damage": 15,
+        "m_ptype": "Fire"
+    },
+    {
+        "name": "Fire Blast",
+        "damage": 20,
+        "m_ptype": "Fire"
+    },
+    {
+        "name": "Water Pulse",
+        "damage": 15,
+        "m_ptype": "Water"
+    },
+    {
+        "name": "Hydro Pump",
+        "damage": 20,
+        "m_ptype": "Water"
+    },
+    {
+        "name": "Wing Attack",
+        "damage": 15,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Hurricane",
+        "damage": 20,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Hyper Fang",
+        "damage": 15,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Drill Peck",
+        "damage": 20,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Thunder Shock",
+        "damage": 10,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Electro Ball",
+        "damage": 15,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Thunder",
+        "damage": 20,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Pound",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Double Slap",
+        "damage": 15,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Hyper Voice",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Confusion",
+        "damage": 10,
+        "m_ptype": "Psychic"
+    },
+    {
+        "name": "Fury Swipes",
+        "damage": 15,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Disable",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Bulldoze",
+        "damage": 15,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Dig",
+        "damage": 40,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Hyper Beam",
+        "damage": 25,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Future Sight",
+        "damage": 20,
+        "m_ptype": "Psychic"
+    },
+    {
+        "name": "Extreme Speed",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Thunder Punch",
+        "damage": 15,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Ice Punch",
+        "damage": 15,
+        "m_ptype": "Ice"
+    },
+    {
+        "name": "Fire Punch",
+        "damage": 15,
+        "m_ptype": "Fire"
+    },
+    {
+        "name": "Earthquake",
+        "damage": 20,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Psychic",
+        "damage": 15,
+        "m_ptype": "Psychic"
+    },
+    {
+        "name": "Shadow Ball",
+        "damage": 15,
+        "m_ptype": "Ghost"
+    },
+    {
+        "name": "Dragon Claw",
+        "damage": 15,
+        "m_ptype": "Dragon"
+    },
+    {
+        "name": "Ice Beam",
+        "damage": 15,
+        "m_ptype": "Ice"
+    },
+    {
+        "name": "Blizzard",
+        "damage": 20,
+        "m_ptype": "Ice"
+    },
+    {
+        "name": "Bite",
+        "damage": 15,
+        "m_ptype": "Dark"
+    },
+    {
+        "name": "Dragon Rage",
+        "damage": 40,
+        "m_ptype": "Dragon"
+    },
+    {
+        "name": "Slam",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Psybeam",
+        "damage": 15,
+        "m_ptype": "Psychic"
+    },
+    {
+        "name": "Take Down",
+        "damage": 25,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Fly",
+        "damage": 15,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Stomp",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Aurora Beam",
+        "damage": 10,
+        "m_ptype": "Ice"
+    },
+    {
+        "name": "Wrap",
+        "damage": 5,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Fake Out",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Payday",
+        "damage": 10,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Sonic Boom",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Self Destruct",
+        "damage": 50,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Mirror Shot",
+        "damage": 15,
+        "m_ptype": "Steel"
+    },
+    {
+        "name": "Bone Club",
+        "damage": 15,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Headbutt",
+        "damage": 15,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Bonemerang",
+        "damage": 20,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Horn Attack",
+        "damage": 15,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Fury Attack",
+        "damage": 5,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Leech Life",
+        "damage": 10,
+        "m_ptype": "Bug"
+    },
+    {
+        "name": "Slash",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Spark",
+        "damage": 20,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Thunderbolt",
+        "damage": 25,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Tri Attack",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Shock Wave",
+        "damage": 15,
+        "m_ptype": "Electric"
+    },
+    {
+        "name": "Mud Slap",
+        "damage": 10,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Bone Rush",
+        "damage": 25,
+        "m_ptype": "Ground"
+    },
+    {
+        "name": "Double Edge",
+        "damage": 30,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Rock Slide",
+        "damage": 20,
+        "m_ptype": "Rock"
+    },
+    {
+        "name": "Giga Drain",
+        "damage": 15,
+        "m_ptype": "Grass"
+    },
+    {
+        "name": "Bug Bite",
+        "damage": 10,
+        "m_ptype": "Bug"
+    },
+    {
+        "name": "Poison Sting",
+        "damage": 15,
+        "m_ptype": "Poison"
+    },
+    {
+        "name": "Swift",
+        "damage": 20,
+        "m_ptype": "Normal"
+    },
+    {
+        "name": "Sky Attack",
+        "damage": 50,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Fire Spin",
+        "damage": 35,
+        "m_ptype": "Fire"
+    },
+    {
+        "name": "Aeroblast",
+        "damage": 100,
+        "m_ptype": "Flying"
+    },
+    {
+        "name": "Sacred Fire",
+        "damage": 100,
+        "m_ptype": "Fire"
+    },
+    {
+        "name": "Outrage",
+        "damage": 120,
+        "m_ptype": "Dragon"
+    },
+    {
+        "name": "Water Spout",
+        "damage": 150,
+        "m_ptype": "Water"
+    },
+    {
+        "name": "Ancient Power",
+        "damage": 60,
+        "m_ptype": "Rock"
+    },
+    {
+        "name": "Eruption",
+        "damage": 150,
+        "m_ptype": "Fire"
+    }
+]
