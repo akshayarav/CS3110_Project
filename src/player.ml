@@ -10,6 +10,8 @@ type player = {
 (* Returns players team *)
 let get_team (p:player) = p.team
 
+let get_current_pokemon (p:player) = p.current_pokemon
+
 (** A player has a team, a first pokemon to send out, and the current pokemon in battle *)
 
 (** Creates a new player with an empty team*)

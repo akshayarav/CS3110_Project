@@ -237,7 +237,7 @@ let battle_tests =
     
       let orig_hp_player2 = poke2_player2.hp in
 
-      Pokemon.attack water_gun poke1_player1 poke2_player2;
+      Pokemon.attack water_gun poke1_player1 poke2_player2 |> ignore;
       
       (* supposed to be 0 will fix later *)
       assert_equal (orig_hp_player2 - poke2_player2.hp = 0) true;
@@ -247,22 +247,25 @@ let battle_tests =
     )
   ]
 
-let player1 = Player.new_player
 let empty_player = Player.new_player
 let player_with_one_pokemon = 
   { empty_player with team = [copy_squirtle1]; current_pokemon = Some copy_squirtle1 }
 let player_with_two_pokemon = 
   { empty_player with team = [copy_squirtle1; sandshrew1]; current_pokemon = Some copy_squirtle1 }
-(* let full_team_player = { empty_player with team = [copy_squirtle1; new_pokemon2; new_pokemon3; new_pokemon4; new_pokemon5; new_pokemon6]; current_pokemon = Some new_pokemon1 } *)
+let full_team_player = { empty_player with 
+team = [copy_squirtle1; copy_squirtle1; copy_squirtle1; copy_squirtle1;
+copy_squirtle1; copy_squirtle1]; current_pokemon = Some copy_squirtle1 }
+
+let player_coin = { empty_player with coins = 10 }
   let player_tests = "suite" >::: [
   "new player team" >:: (fun _ -> 
-    assert_equal player1.team []);
+    assert_equal empty_player.team []);
   "new player curr_poke" >:: (fun _ -> 
-    assert_equal player1.current_pokemon None);
+    assert_equal empty_player.current_pokemon None);
   "new player coins" >:: (fun _ -> 
-    assert_equal player1.coins 10);
+    assert_equal empty_player.coins 10);
   "get_team new player" >:: (fun _ -> 
-    assert_equal (Player.get_team player1) []);
+    assert_equal (Player.get_team empty_player) []);
       "Empty + Addition" >:: (fun _ ->
     let result, success = Player.add_team copy_squirtle1 empty_player in
     assert_equal ~msg:"Empty + Addition" { empty_player with team = [copy_squirtle1]; current_pokemon = Some copy_squirtle1 } result;
@@ -275,12 +278,58 @@ let player_with_two_pokemon =
     assert_equal ~msg:"Success flag for Non-Empty + Addition" true success
   );
 
-  "Team Full + Swap" >:: (fun _ ->
+  "Team of 2 + Swap" >:: (fun _ ->
     let result, success = Player.add_team charmander player_with_two_pokemon in
     assert_equal ~msg:"Team Full + Swap" { player_with_two_pokemon with team = [copy_squirtle1; sandshrew1; charmander] } result;
     assert_equal ~msg:"Success flag for Team Full + Swap" true success
   );
 
+  "Team Full + Swap" >:: (fun _ ->
+    try
+      let _ = Player.add_team charmander full_team_player in
+      assert_failure "Expected Team Full exception, but the operation succeeded";
+    with
+    | Failure msg ->
+      assert_equal ~msg:"Failure message for Team Full + Swap" "Team full" msg
+  );
+
+  "Player Coin" >:: (fun _ ->
+    let more_coins = Player.adjust_coins 10 player_coin in
+    assert_equal more_coins.coins 20;
+  );
+
+  "Player Add 0 with No Coins" >:: (fun _ ->
+    let more_coins = Player.adjust_coins (-10) empty_player in
+    assert_equal more_coins.coins 0;
+  );
+
+  "Player String Empty" >:: (fun _ ->
+    let playerstr = Player.player_to_string empty_player in
+    assert_equal playerstr 
+    "Player's Stats:\nNo Pokémon in team.\nNo current Pokémon in battle.\nCoins: 10"
+  );
+
+  "Player String NonEmpty" >:: (fun _ ->
+    let playerstr = Player.player_to_string player_with_one_pokemon in
+    assert_equal ~msg:playerstr playerstr 
+    "Player's Stats:\nTeam:\n  1. Squirtle: Water Type, Level: 10, XP: 0/100\n\nCurrent Pokémon in battle:\nSquirtle: Water Type, Level: 10, XP: 0/100\nCoins: 10"
+  );
+
+  "Player Update " >:: (fun _ ->
+    let better_squirtle = {squirtle1 with level = 30} in
+    let new_player = Player.update_pokemon better_squirtle player_with_one_pokemon in
+    match Player.get_current_pokemon new_player with
+    | Some pokemon -> assert_equal pokemon.level 30
+    | None -> assert_failure "update_pokemon failed"
+  );
+  
+  "Player Update Non_Matching" >:: (fun _ ->
+    let nonexistent_charmander = {charmander with level = 30} in
+    let new_player = Player.update_pokemon nonexistent_charmander player_with_one_pokemon in
+    match Player.get_current_pokemon new_player with
+    | Some pokemon -> assert_equal base_charmander pokemon.base
+    | None -> assert_failure "update_pokemon failed"
+  )
 ]
   let all_tests = "All Tests" >::: [
     pokemon_tests;
