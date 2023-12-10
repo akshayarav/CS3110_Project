@@ -275,10 +275,14 @@ and choose_pokemon parent poke_list = (
   )
 and add_team new_pokemon par : unit =
   let team_size = List.length (Player.get_team !player) in
+  print_endline "REACHED";
+  print_endline (string_of_int team_size) ;
   if team_size < 6 then player :=
-    {!player with team = !player.team @ [new_pokemon]};
+    {!player with team = new_pokemon :: !player.team};
+    par# destroy ();
   if team_size >= 6 then
     begin
+      print_endline "REACHED TEAM SIZE";
       let dialog = GWindow.dialog
         ~title:"Choose a Pokemon to Swap"
         ~parent: par
@@ -293,10 +297,9 @@ and add_team new_pokemon par : unit =
         let button = GButton.button
           ~label:(sprintf "%s" (Pokemon.name p))
           ~packing:vbox#add () in
-  
-        ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); swap_pokemon p new_pokemon;));
+        ignore(button#connect#clicked ~callback:(fun _ -> dialog#destroy (); swap_pokemon p new_pokemon;par# destroy ();));
       ) (Player.get_team !player); 
-    dialog#show ();
+      dialog#show ();
     end
   
 and swap_pokemon old new_pokemon = 
@@ -515,7 +518,7 @@ and on_wild_result dialog player_pokemon opponent won =
     update_ui_string dialog (sprintf "Add %s to team?" (Pokemon.name opponent));
 
     let button = GButton.button ~label:"Yes" ~packing:dialog#vbox#add () in
-    ignore (button#connect#clicked ~callback:(fun () -> ignore(add_team (Pokemon.copy_pokemon opponent) dialog); dialog#destroy ()));
+    ignore (button#connect#clicked ~callback:(fun () -> ignore(add_team (Pokemon.copy_pokemon opponent) dialog);));
     let button = GButton.button ~label:"No" ~packing:dialog#vbox#add () in
     ignore (button#connect#clicked ~callback:(fun () -> ignore(dialog#destroy ();));
     )
