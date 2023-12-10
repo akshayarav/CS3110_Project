@@ -1,6 +1,7 @@
 open Pokemon
 
-(** This module contains definitions and functionalities related to Pokémon, their evolutions, and interactions with the game world in the Pokémon game. *)
+(** This module contains definitions and functionalities related to Pokémon,
+    their evolutions, and interactions with the game world in the Pokémon game. *)
 
 val json_to_base_pokemon : Yojson.Basic.t -> base_pokemon
 (** [json_to_base_pokemon json] converts a JSON object [json] to a base_pokemon.
