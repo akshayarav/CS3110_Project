@@ -103,14 +103,15 @@ let rec display_menu () =
 
     GMain.Main.main ())
 else if List.length !player.team != 0 then(
-    ignore (create_button "BATTLE Wild Pokemon" vbox (fun () ->  wild_battle()));
+    ignore (create_button "BATTLE: Wild Pokemon" vbox (fun () ->  wild_battle()));
+    ignore (create_button "BATTLE: Trainer" vbox (fun () ->  trainer_battle()));
+    ignore (create_button "BATTLE: Elite Four" vbox (fun () ->  elite_four_battle()));
     ignore (create_button "Pokemon Center" vbox (fun () ->  pokemon_center()));
-    ignore (create_button "BATTLE Trainer" vbox (fun () ->  trainer_battle()));
     window#show ();
     main_menu := Some window; 
 
     GMain.Main.main () )
-
+  
 
 and pokemon_center () =
   if List.length !player.team = 0 then (
@@ -162,26 +163,25 @@ and on_buy_legend dialog =
     raise_error_ui dialog "Not enough coins.\n";
     pokemon_center ()
   ) else (
-    let rec take_n n lst acc =
-      if n = 0 then
-        acc
-      else
-        match lst with
-        | [] -> acc
-        | hd :: tl -> take_n (n - 1) tl (hd :: acc)
-    in
-    let pokemon_list = Pokedex.legendary_pokemon_base in
-    (* Shuffle the list to randomize the order *)
-    let shuffled_pokemon_list = List.sort (fun _ _ -> if Random.bool () then 1 else -1) pokemon_list in
-  
-    (* Select the first three Pokémon from the shuffled list *)
-    let chosen_pokemon_list = take_n 3 shuffled_pokemon_list [] in
-    choose_pokemon dialog chosen_pokemon_list
+    choose_pokemon dialog Pokedex.legendary_pokemon_base
     )
 
 and choose_pokemon parent poke_list = (
+  let rec take_n n lst acc =
+    if n = 0 then
+      acc
+    else
+      match lst with
+      | [] -> acc
+      | hd :: tl -> take_n (n - 1) tl (hd :: acc)
+  in
+  (* Shuffle the list to randomize the order *)
+  let shuffled_pokemon_list = List.sort (fun _ _ -> if Random.bool () then 1 else -1) poke_list in
+
+  (* Select the first three Pokémon from the shuffled list *)
+  let chosen_pokemon_list = take_n 3 shuffled_pokemon_list [] in
   let dialog = GWindow.dialog
-    ~title:"Choose Legendary"
+    ~title:"Choose Pokemon"
     ~parent:parent
     ~width:500
     ~height:300
@@ -207,7 +207,7 @@ and choose_pokemon parent poke_list = (
       ) poke_list; 
       )
     in
-  options poke_list;
+  options chosen_pokemon_list;
   create_ok_button dialog;
   dialog#show ();
   )
@@ -260,6 +260,37 @@ and player_stats () =
 
   dialog#show ();
 
+and elite_four_battle () =
+  let elite_four_members : Trainer.trainer list = Array.to_list (Trainer.create_elite_four ()) in
+  match elite_four_members with
+  | [] -> ()
+  | member :: rest ->
+      trainer_battle_e4 member rest;
+
+and trainer_battle_e4 (trainer: Trainer.trainer) rest= 
+  let dialog = GWindow.dialog
+  ~title: (sprintf "Battle with %s!!" trainer.name)
+  ~parent:(get_main_menu()) 
+  ~width:700
+  ~height:600
+  ~destroy_with_parent:true
+  ~modal:true
+  () in
+  let opponent = trainer.current_pokemon in
+
+  let player_pokemon =
+    match !player.current_pokemon with
+    | Some p -> p
+    | None -> failwith "No current Pokémon to battle with"
+  in
+
+  let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
+  if List.length available_pokemon = 0 then raise_error_ui dialog "All Your Pokemon are Feinted" else
+
+  dialog# show ();
+
+  update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_trainer_result dialog player_pokemon trainer (Some rest));
+
 and trainer_battle () = 
   let regular_trainers = Trainer.create_regular_trainers () in
 
@@ -287,9 +318,9 @@ and trainer_battle () =
 
   dialog# show ();
 
-  update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_trainer_result dialog player_pokemon trainer) 
+  update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_trainer_result dialog player_pokemon trainer None) 
 
-and on_trainer_result dialog player_pokemon trainer won = 
+and on_trainer_result dialog player_pokemon trainer rest won = 
   if won then (
     update_ui_string dialog (sprintf "You defeated trainer %s's %s!\n"(trainer.name) (Pokemon.name trainer.current_pokemon));
     let remaining_opponents = List.filter (fun (p:Pokemon.pokemon) -> not p.feint) trainer.team in
@@ -307,13 +338,30 @@ and on_trainer_result dialog player_pokemon trainer won =
           team = List.map (fun pkmn -> Pokemon.add_xp pkmn xp_gained) !player.team
         };
         update_ui_string dialog (sprintf "All your team Pokémon gained %d XP.\n" xp_gained);
-    
-        choose_pokemon dialog Pokedex.reward_pokemon_base
+        begin
+        match rest with 
+        | Some (h :: t) -> trainer_battle_e4 h t
+        | Some [] -> dialog# destroy() ; beat_elite_four ()
+        | None -> choose_pokemon dialog Pokedex.reward_pokemon_base
+        end
     | new_opponent :: rest ->
         let updated_trainer = Battle.update_trainer_team trainer rest in
         update_ui_string dialog (sprintf "Trainer %s sends out %s!\n" trainer.name new_opponent.base.name);
-        update_ui_moves dialog player_pokemon.base.moves player_pokemon new_opponent (on_trainer_result dialog player_pokemon updated_trainer); end )
+        update_ui_moves dialog player_pokemon.base.moves player_pokemon new_opponent (on_trainer_result dialog player_pokemon updated_trainer None); end )
     else handle_feint_trainer dialog trainer
+and beat_elite_four () = 
+  let dialog = GWindow.dialog
+  ~title: (sprintf "CONGRATS! You beat the elite four")
+  ~parent:(get_main_menu()) 
+  ~width:700
+  ~height:600
+  ~destroy_with_parent:true
+  ~modal:true
+  () in
+  let label = GMisc.label ~text:("CONGRATS! You beat the elite four") () in
+  ignore (dialog#vbox#add (label :> GObj.widget));
+  dialog#show ();
+
 
 and handle_feint_trainer dialog trainer = 
   let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
@@ -349,7 +397,7 @@ and on_choose_new_trainer pokemon dialog trainer: unit=
     | Some p -> p
     | None -> failwith "No current Pokémon to battle with"
   in
-  update_ui_moves dialog player_pokemon.base.moves player_pokemon trainer.current_pokemon (on_trainer_result dialog player_pokemon trainer); 
+  update_ui_moves dialog player_pokemon.base.moves player_pokemon trainer.current_pokemon (on_trainer_result dialog player_pokemon trainer None); 
     
 and wild_battle () = 
 
