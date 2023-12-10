@@ -21,41 +21,41 @@ let choose_player_move player_pokemon =
   in
   highest_damage_move
 
-  let rec simulate_battle player_pokemon opponent_pokemon player =
-    let rec battle_loop player_pokemon opponent_pokemon player =
-      if player_pokemon.hp <= 0 then (
-        player_pokemon.feint <- true;
-        let available_pokemon = List.filter (fun p -> not p.feint) (Player.get_team player) in
-        if List.length available_pokemon = 0 then
-          false
-        else
-          let new_pokemon, updated_player = Battle.choose_new_pokemon player in
-          simulate_battle new_pokemon opponent_pokemon updated_player
-      ) else if opponent_pokemon.hp <= 0 then
+let rec simulate_battle player_pokemon opponent_pokemon player =
+  let rec battle_loop player_pokemon opponent_pokemon player =
+    if player_pokemon.hp <= 0 then (
+      player_pokemon.feint <- true;
+      let available_pokemon = List.filter (fun p -> not p.feint) (Player.get_team player) in
+      if List.length available_pokemon = 0 then
+        false
+      else
+        let new_pokemon = List.hd available_pokemon in
+        simulate_battle new_pokemon opponent_pokemon player
+    ) else if opponent_pokemon.hp <= 0 then
+      true
+    else (
+      let player_move = choose_player_move player_pokemon in
+      Pokemon.attack player_move opponent_pokemon player_pokemon;
+
+      if opponent_pokemon.hp <= 0 then
         true
       else (
-        let player_move = choose_player_move player_pokemon in
-        Pokemon.attack player_move opponent_pokemon player_pokemon;
-  
-        if opponent_pokemon.hp <= 0 then
-          true
-        else (
-          let ai_move = Ai.choose_move opponent_pokemon in
-          Pokemon.attack ai_move player_pokemon opponent_pokemon;
-  
-          if player_pokemon.hp <= 0 then
-            let available_pokemon = List.filter (fun p -> not p.feint) player.team in
-            if List.length available_pokemon = 0 then
-              false
-            else
-              let new_pokemon, updated_player = Battle.choose_new_pokemon player in
-              simulate_battle new_pokemon opponent_pokemon updated_player
+        let ai_move = Ai.choose_move opponent_pokemon in
+        Pokemon.attack ai_move player_pokemon opponent_pokemon;
+
+        if player_pokemon.hp <= 0 then
+          let available_pokemon = List.filter (fun p -> not p.feint) player.team in
+          if List.length available_pokemon = 0 then
+            false
           else
-            battle_loop player_pokemon opponent_pokemon player
-        )
+            let new_pokemon = List.hd available_pokemon in
+            simulate_battle new_pokemon opponent_pokemon player
+        else
+          battle_loop player_pokemon opponent_pokemon player
       )
-    in
-    battle_loop player_pokemon opponent_pokemon player  
+    )
+  in
+  battle_loop player_pokemon opponent_pokemon player
 let pokemon_tests = "Test Suite for Pokemon" >::: [
   "squirtle to string" >:: (fun _ ->
     assert_equal ~msg:"squirtle to string" ~printer:(fun x -> x) "Squirtle: Water Type, Level: 10, XP: 0/100" (Pokemon.to_string squirtle1)
@@ -198,7 +198,7 @@ let ptype_tests =
     ~printer:(fun x -> x) "Fairy Type" (Pokemon.ptype_to_string Fairy));
 ]
 
-let battle_tests =
+let live_battle_tests =
   "suite" >::: [
     "wild battle" >:: (fun _ ->
       let player_pokemon = squirtle1 in
@@ -331,11 +331,16 @@ let player_coin = { empty_player with coins = 10 }
     | None -> assert_failure "update_pokemon failed"
   )
 ]
+
+  let battle_tests = "suite" >::: [
+    
+]
   let all_tests = "All Tests" >::: [
     pokemon_tests;
-    battle_tests;
+    live_battle_tests;
     ptype_tests;
-    player_tests
+    player_tests;
+    battle_tests
   ]
   
   let () =
