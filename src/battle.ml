@@ -39,75 +39,21 @@ let choose_new_pokemon player =
   | Some chosen_pokemon -> (chosen_pokemon, { player with current_pokemon = Some chosen_pokemon })
   | None -> failwith "No Pokemon was chosen"
 
-(** Initiate a battle between two pokemon player_pokemon and opponent.
-  The battle_loop ends when either pokemon feints.
-  If player_pokemon wins battle_loop returns true else false *)
-let rec wild_battle_loop player_pokemon opponent player callback callback_choice = (
-  if player_pokemon.hp <= 0 then (
-    callback (sprintf "Your %s fainted.\n" (player_pokemon.base.name));
-    player_pokemon.feint <- true;
-    false)
-  else (
-    callback (sprintf"\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp);
-    callback (sprintf"Wild %s's HP: %d\n" (Pokemon.name opponent) opponent.hp);
-
-  let get_player_choice (move:move option) : bool =
-    match move with 
-    | Some chosen_move ->
-        callback (sprintf "You chose %s!\n" chosen_move.name);
-        Pokemon.attack chosen_move opponent player_pokemon;  (* Apply player's chosen move *)
-        false  (* Do not end the battle yet, proceed to AI's turn *)
-    | None -> failwith "Switching pokemon unimplemented"
-    in
-
-    callback (sprintf"Choose an action for %s:\n" player_pokemon.base.name);
-    let continue_after_ui_moves_result ui_moves_result =
-      if ui_moves_result then
-        true
-      else if opponent.hp <= 0 then (
-        print_endline "Opponent's HP is 0!";
-        true
-      )
-      else (
-        let ai_move = Ai.choose_move opponent in
-        callback (sprintf "Wild %s chose %s!\n" (Pokemon.name opponent) ai_move.name);
-        Pokemon.attack ai_move player_pokemon opponent;
-
-        if player_pokemon.hp <= 0 then (
-          callback "Player's Pokémon fainted!";
-          let available_pokemon = List.filter (fun p -> not p.feint) player.team in
-          if List.length available_pokemon = 0 then (
-            callback "All your Pokemon have fainted. You lost the battle!\n";
-            false (* Player lost *)
-          )
-          else (
-            failwith "Switching pokemon unimplemented"
-          )
-        )
-        else
-          wild_battle_loop player_pokemon opponent player callback callback_choice
-      )
-    in
-
-    callback_choice player_pokemon.base.moves (get_player_choice) continue_after_ui_moves_result
-  ) 
-)
-
 let on_move_chosen (move: move option) player_pokemon opponent update_ui next_turn_ui (result) =
   (* Here you would add the logic to apply the move, like reducing HP, etc. *)
   let process_move (move: move option) = 
     match move with 
     | Some chosen_move ->
-        update_ui (sprintf "You chose %s!\n" chosen_move.name);
+        update_ui (sprintf "%s used %s!\n" (Pokemon.name player_pokemon) chosen_move.name);
         Pokemon.attack chosen_move opponent player_pokemon;  (* Apply player's chosen move *)
         let ai_move = Ai.choose_move opponent in
-        update_ui (sprintf "Wild %s chose %s!\n" (Pokemon.name opponent) ai_move.name);
+        update_ui (sprintf "%s used %s!\n" (Pokemon.name opponent) ai_move.name);
         Pokemon.attack ai_move player_pokemon opponent;
     | None -> failwith "Switching pokemon unimplemented"; 
     in
   process_move move;
   update_ui (sprintf "\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp);
-  update_ui (sprintf "Wild %s's HP: %d\n" (Pokemon.name opponent) opponent.hp);
+  update_ui (sprintf "%s's HP: %d\n" (Pokemon.name opponent) opponent.hp);
   (* Check if the battle is over and handle accordingly *)
   let continue = ref true in
   if player_pokemon.hp <= 0 then (
@@ -116,7 +62,7 @@ let on_move_chosen (move: move option) player_pokemon opponent update_ui next_tu
     continue := false;
   )
   else if opponent.hp <= 0 then (
-    update_ui "You won the battle!";
+    update_ui (sprintf"%s defeated %s!" (Pokemon.name player_pokemon) (Pokemon.name opponent));
     result true;
     continue := false;
   );
