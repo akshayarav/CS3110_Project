@@ -368,11 +368,11 @@ and trainer_battle () =
   () in
   
   let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
-  if List.length available_pokemon = 0 then raise_error_ui dialog "All Your Pokemon are Feinted" else
+  if List.length available_pokemon = 0 then raise_error_ui dialog "All Your Pokemon are Feinted" else (
 
   dialog# show ();
 
-  update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_trainer_result dialog player_pokemon trainer None) 
+  update_ui_moves dialog player_pokemon.base.moves player_pokemon opponent (on_trainer_result dialog player_pokemon trainer None) )
 
 and on_trainer_result dialog player_pokemon trainer (rest) won = 
   if won then (
@@ -381,8 +381,8 @@ and on_trainer_result dialog player_pokemon trainer (rest) won =
     begin
     match remaining_opponents with
     | [] ->
+        clear_container dialog#vbox;
         update_ui_string dialog (sprintf "You have defeated all of Trainer %s's Pokemon!\n" trainer.name);
-        create_ok_button dialog;
         player := Player.adjust_coins 50 !player;
         update_ui_string dialog (sprintf"You earned 50 coins. Total coins: %d\n" !player.coins);
     
@@ -392,11 +392,12 @@ and on_trainer_result dialog player_pokemon trainer (rest) won =
           team = List.map (fun pkmn -> Pokemon.add_xp pkmn xp_gained) !player.team
         };
         update_ui_string dialog (sprintf "All your team Pokémon gained %d XP.\n" xp_gained);
+        create_ok_button dialog;
         begin
         match rest with 
-        | Some (h :: t) -> print_endline "NEXT TRAINER"; trainer_battle_e4 h t
+        | Some (h :: t) -> trainer_battle_e4 h t
         | Some [] -> dialog# destroy() ; beat_elite_four ()
-        | None -> failwith "Unimplemented"
+        | None -> ()
         end
     | new_opponent :: next_mon ->
         let updated_trainer = Battle.update_trainer_team trainer next_mon in
@@ -422,6 +423,7 @@ and beat_elite_four () =
 
 
 and handle_feint_trainer dialog trainer = 
+  clear_container dialog#vbox;
   let available_pokemon = List.filter (fun (p: Pokemon.pokemon) -> not p.feint) (Player.get_team !player) in
   if List.length available_pokemon = 0 then (
     update_ui_string dialog "All Pokemon have feinted. You lost the battle";
