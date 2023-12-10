@@ -22,3 +22,6 @@ bisect-clean:
 
 clean: bisect-clean
 	@dune clean
+
+doc:
+	@dune build @doc
