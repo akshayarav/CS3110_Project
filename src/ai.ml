@@ -9,8 +9,3 @@ let choose_move pokemon =
   | _ ->
       let move = random_choice available_moves in
       move
-
-let take_turn ai_pokemon player_pokemon =
-  let move = choose_move ai_pokemon in
-  let updated_player_pokemon = attack move player_pokemon in
-  updated_player_pokemon

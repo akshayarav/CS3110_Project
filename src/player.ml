@@ -10,6 +10,8 @@ type player = {
 (* Returns players team *)
 let get_team (p:player) = p.team
 
+let get_current_pokemon (p:player) = p.current_pokemon
+
 (** A player has a team, a first pokemon to send out, and the current pokemon in battle *)
 
 (** Creates a new player with an empty team*)
@@ -25,25 +27,7 @@ let add_team new_pokemon player : (player * bool) =
                         | None -> Some new_pokemon
                         | Some _ -> player.current_pokemon)
                         }, true)
-  else
-    begin
-      printf "Team is full. Do you want to swap a Pokemon? (yes/no): ";
-      match String.lowercase_ascii (read_line ()) with
-      | "yes" ->
-          printf "Choose a Pokemon to swap out:\n";
-          List.iteri (fun i pokemon -> printf "%d: %s\n" (i + 1) (to_string pokemon)) player.team;
-          printf "Enter a number (1-%d) or 0 to cancel: " team_size;
-          let index = read_int () in
-          if index = 0 then
-            (player, false)  (* No change to the team *)
-          else if index > 0 && index <= team_size then
-            let replaced_team = List.mapi (fun i pokemon -> if i = index - 1 then new_pokemon else pokemon) player.team in
-            ({ player with team = replaced_team }, true)
-          else
-            (player, false)  (* Invalid choice, no change to the team *)
-      | _ ->
-          (player, false)  (* No swap, no change to the team *)
-    end
+  else failwith "Team full"
 
 (** Adjusts the player's coins *)
 let adjust_coins amt player =
