@@ -535,7 +535,7 @@ and handle_evolution dialog pokemon =
   match Pokemon.check_evolution pokemon with
   | Some evolved_form ->
       update_ui_string dialog (sprintf"%s IS EVOLVING INTO %s!\n" pokemon.base.name evolved_form.name);
-      Pokemon.evolve_pokemon pokemon evolved_form
+      Pokemon.evolve_pokemon pokemon evolved_form 
   | None -> pokemon
 
 and handle_feint_wild dialog opponent= 
@@ -594,7 +594,7 @@ and choose_starter () =
   dialog#show ();
 
 and on_starter_selected base_pokemon =
-  let starter_pokemon = Pokemon.create base_pokemon 15 in
+  let starter_pokemon = Pokemon.create base_pokemon 5 in
   let new_player, _ = Player.add_team starter_pokemon !player in
   player := new_player;
   print_endline (Player.player_to_string !player);
