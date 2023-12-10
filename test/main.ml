@@ -2,13 +2,13 @@ open OUnit2
 open Mylib
 open Pokedex
 open Moves
-let squirtle1 = Pokemon.create base_squirtle 10
-let sandshrew1 = Pokemon.create base_sandshrew 10
+let squirtle1 = Pokemon.create (find_pokemon_by_name "Squirtle") 10
+let sandshrew1 = Pokemon.create (find_pokemon_by_name "Sandshrew") 10
 let copy_squirtle1 = Pokemon.copy_pokemon squirtle1
 
 let xp_up_squirtle = Pokemon.add_xp squirtle1 (calculate_xp_gained squirtle1.level)
 let level_up_squirtle = Pokemon.level_up xp_up_squirtle
-let charmander = Pokemon.create base_charmander 20
+let charmander = Pokemon.create (find_pokemon_by_name "Charmander") 20
 
 let player = ref (Player.new_player)
 
@@ -73,7 +73,7 @@ let pokemon_tests = "Test Suite for Pokemon" >::: [
   "d_mult check" >::
   (fun _ -> assert_equal ~msg:"d_mult check" ~printer:string_of_float 1. squirtle1.damage_modifier);
   "base check" >::
-  (fun _ -> assert_equal ~msg:"base check" base_squirtle squirtle1.base);
+  (fun _ -> assert_equal ~msg:"base check" (find_pokemon_by_name "Squirtle") squirtle1.base);
 
   "new_player team check" >::
   (fun _ -> assert_equal ~msg:"new_player team check" ~printer:string_of_int 0 (List.length Player.new_player.team));
@@ -109,27 +109,31 @@ let pokemon_tests = "Test Suite for Pokemon" >::: [
   "new_moves existing" >:: (fun _ ->
     let test_squirtle = {squirtle1 with level = 13} in
     let new_moves = Pokemon.check_new_moves test_squirtle in
-    let expected_moves = [(13, water_pulse)] in
+    let expected_moves = [(13, (find_move_by_name "Water Pulse" all_moves))] in
 
     assert_equal expected_moves new_moves;
   );
   "check_ev non_existent" >:: (fun _ ->
-    let test_blastoise = Pokemon.create base_blastoise 10 in
+    let test_blastoise = Pokemon.create (find_pokemon_by_name "Blastoise") 10 in
     let option_ev = Pokemon.check_evolution test_blastoise in
 
     assert_equal option_ev None;
   );
   "check_ev existent" >:: (fun _ ->
-    let test_squirtle = Pokemon.create base_squirtle 16 in
+    let test_squirtle = Pokemon.create (find_pokemon_by_name "Squirtle") 16 in
     let option_ev = Pokemon.check_evolution test_squirtle in
+    let expected_evolution_name = (find_pokemon_by_name "Wartortle").name in
 
-    assert_equal option_ev (Some base_wartortle);
+    let actual_evolution_name = match option_ev with
+      | Some pokemon -> pokemon.name
+      | None -> ""
+    in assert_equal actual_evolution_name expected_evolution_name;
   );
   "evolve pokemon" >:: (fun _ ->
-    let test_squirtle = Pokemon.create base_squirtle 16 in
-    let test_wartortle = Pokemon.evolve_pokemon test_squirtle base_wartortle in
+    let test_squirtle = Pokemon.create (find_pokemon_by_name "Squirtle") 16 in
+    let test_wartortle = Pokemon.evolve_pokemon test_squirtle (find_pokemon_by_name "Wartortle") in
 
-    assert_equal base_wartortle test_wartortle.base;
+    assert_equal (find_pokemon_by_name "Wartortle") test_wartortle.base;
   );
 ]
 
@@ -194,7 +198,7 @@ let live_battle_tests =
   "suite" >::: [
     "wild battle" >:: (fun _ ->
       let player_pokemon = squirtle1 in
-      let opponent_pokemon = Pokemon.create_random base_charmander 5 in
+      let opponent_pokemon = Pokemon.create_random (find_pokemon_by_name "Wartortle") 5 in
 
       player := { !player with current_pokemon = Some player_pokemon };
 
@@ -209,7 +213,7 @@ let live_battle_tests =
     );
     "simulated battle" >:: (fun _ ->
       let player_pokemon = squirtle1 in
-      let opponent_pokemon = Pokemon.create base_charmander 5 in
+      let opponent_pokemon = Pokemon.create (find_pokemon_by_name "Charmander") 5 in
 
       player := { !player with current_pokemon = Some player_pokemon };
 
@@ -221,20 +225,20 @@ let live_battle_tests =
       let player1 = Player.new_player in
       let player2 = Player.new_player in
     
-      let poke1_player1 = Pokemon.create base_wartortle 10 in
-      let poke2_player2 = Pokemon.create base_sandshrew 10 in
+      let poke1_player1 = Pokemon.create (find_pokemon_by_name "Wartortle") 10 in
+      let poke2_player2 = Pokemon.create (find_pokemon_by_name "Sandshrew") 10 in
     
       Player.add_team poke1_player1 player1 |> ignore;
       Player.add_team poke2_player2 player2 |> ignore;
     
       let orig_hp_player2 = poke2_player2.hp in
 
-      Pokemon.attack water_gun poke1_player1 poke2_player2 |> ignore;
+      Pokemon.attack (find_move_by_name "Water Gun" all_moves) poke1_player1 poke2_player2 |> ignore;
       
       (* supposed to be 0 will fix later *)
       assert_equal (orig_hp_player2 - poke2_player2.hp = 0) true;
       
-      let test_poke = Pokemon.create base_test 10 in
+      let test_poke = Pokemon.create (find_pokemon_by_name "0 Moves") 10 in
       assert_raises (Failure "No available moves for this Pokemon.") (fun _ -> Ai.choose_move test_poke)
     )
   ]
@@ -319,7 +323,7 @@ let player_coin = { empty_player with coins = 10 }
     let nonexistent_charmander = {charmander with level = 30} in
     let new_player = Player.update_pokemon nonexistent_charmander player_with_one_pokemon in
     match Player.get_current_pokemon new_player with
-    | Some pokemon -> assert_equal base_charmander pokemon.base
+    | Some pokemon -> assert_equal (find_pokemon_by_name "Charmander") pokemon.base
     | None -> assert_failure "update_pokemon failed"
   )
 ]

@@ -2,6 +2,6 @@
  (name mylib)
  (public_name mylib)
  (modules :standard)
- (libraries lablgtk2)
+ (libraries lablgtk2 yojson)
  (instrumentation (backend bisect_ppx))
  )

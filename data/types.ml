@@ -1,1 +1,0 @@
-(* Contains type definitions for pokemon  *)

@@ -126,6 +126,27 @@ let ptype_to_string = function
   | Steel -> "Steel Type"
   | Fairy -> "Fairy Type"
 
+  let string_to_ptype = function
+  | "Normal" -> Normal
+  | "Fire" -> Fire
+  | "Water" -> Water
+  | "Electric" -> Electric
+  | "Grass" -> Grass
+  | "Ice" -> Ice
+  | "Fighting" -> Fighting
+  | "Poison" -> Poison
+  | "Ground" -> Ground
+  | "Flying" -> Flying
+  | "Psychic" -> Psychic
+  | "Bug" -> Bug
+  | "Rock" -> Rock
+  | "Ghost" -> Ghost
+  | "Dragon" -> Dragon
+  | "Dark" -> Dark
+  | "Steel" -> Steel
+  | "Fairy" -> Fairy
+  | _ -> failwith "Unknown ptype"
+
 (** Creates a new pokemon *)
 let create base level =
   {
@@ -185,7 +206,6 @@ let attack move opponent_pokemon player_pokemon =
     opponent_pokemon.feint <- true)
   else opponent_pokemon.hp <- new_hp
 
-  
 (** Prints out pokemon and its stats *)
 let to_string pokemon =
   let feint_status = if pokemon.feint then " - FEINTED" else "" in

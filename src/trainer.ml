@@ -25,49 +25,57 @@ let create_trainer base_trainer level =
 (* Base trainer for Elite Four Member 1 - Allen *)
 let base_member1 = {
   base_name = "Allen";
-  base_team = [base_venusaur; base_ivysaur; base_bulbasaur; base_tangela; base_victreebel; base_exeggutor];
+  base_team = List.map find_pokemon_by_name
+    ["Venusaur"; "Ivysaur"; "Bulbasaur"; "Tangela"; "Victreebel"; "Exeggutor"];
 }
 
 (* Base trainer for Elite Four Member 2 - Jonny *)
 let base_member2 = {
   base_name = "Jonny";
-  base_team = [base_charizard; base_arcanine; base_ninetales; base_rapidash; base_magmar; base_flareon];
+  base_team = List.map find_pokemon_by_name
+    ["Charizard"; "Arcanine"; "Ninetales"; "Rapidash"; "Magmar"; "Flareon"];
 }
 
 (* Base trainer for Elite Four Member 3 - Ryan *)
 let base_member3 = {
   base_name = "Ryan";
-  base_team = [base_blastoise; base_gyarados; base_vaporeon; base_lapras; base_tentacruel; base_golduck];
+  base_team = List.map find_pokemon_by_name
+    ["Blastoise"; "Gyarados"; "Vaporeon"; "Lapras"; "Tentacruel"; "Golduck"];
 }
 
 (* Base trainer for Elite Four Member 4 - Blake *)
 let base_member4 = {
   base_name = "Blake";
-  base_team = [base_pidgeot; base_fearow; base_aerodactyl; base_charizard; base_dragonite; base_gyarados];
+  base_team = List.map find_pokemon_by_name
+    ["Pidgeot"; "Fearow"; "Aerodactyl"; "Charizard"; "Dragonite"; "Gyarados"];
 }
 
 (* Base trainer for Regular Trainer 1 - Lucy *)
 let base_trainer1 = {
   base_name = "Lucy";
-  base_team = [base_pidgey; base_rattata; base_jigglypuff; base_meowth; base_eevee];
+  base_team = List.map find_pokemon_by_name
+    ["Pidgey"; "Rattata"; "Jigglypuff"; "Meowth"; "Eevee"];
 }
 
 (* Base trainer for Regular Trainer 2 - Max *)
 let base_trainer2 = {
   base_name = "Max";
-  base_team = [base_pikachu; base_magnemite; base_voltorb; base_electabuzz];
+  base_team = List.map find_pokemon_by_name
+    ["Pikachu"; "Magnemite"; "Voltorb"; "Electabuzz"];
 }
 
 (* Base trainer for Regular Trainer 3 - Sandra *)
 let base_trainer3 = {
   base_name = "Sandra";
-  base_team = [base_sandshrew; base_diglett; base_cubone; base_ryhorn];
+  base_team = List.map find_pokemon_by_name
+    ["Sandshrew"; "Diglett"; "Cubone"; "Ryhorn"];
 }
 
 (* Base trainer for Regular Trainer 4 - Ethan *)
 let base_trainer4 = {
   base_name = "Ethan";
-  base_team = [base_caterpie; base_weedle; base_paras; base_venonat; base_butterfree];
+  base_team = List.map find_pokemon_by_name
+    ["Caterpie"; "Weedle"; "Paras"; "Venonat"; "Butterfree"];
 }
 
 (* Function to create an array of trainers from base trainers *)
