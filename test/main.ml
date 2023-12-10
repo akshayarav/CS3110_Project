@@ -332,15 +332,26 @@ let player_coin = { empty_player with coins = 10 }
   )
 ]
 
-  let battle_tests = "suite" >::: [
-    
+let trainer = Trainer.create_trainer Trainer.base_member1 10
+let battle_trainer_tests = "suite" >::: [
+  "Update_Trainer" >:: (fun _ ->
+    let new_team = [ charmander ] in
+    let trainer1 = Battle.update_trainer_team trainer new_team in
+    assert_equal trainer1.team new_team;
+  );
+  "Create_Elite_Four_and_Regular_Trainers" >:: (fun _ ->
+    let elite_four = Trainer.create_elite_four () in
+    let regular_trainers = Trainer.create_regular_trainers () in
+    assert_equal (Array.length elite_four) 4;
+    assert_equal (Array.length regular_trainers) 4
+  );
 ]
   let all_tests = "All Tests" >::: [
     pokemon_tests;
     live_battle_tests;
     ptype_tests;
     player_tests;
-    battle_tests
+    battle_trainer_tests
   ]
   
   let () =
