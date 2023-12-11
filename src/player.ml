@@ -20,7 +20,6 @@ let new_player = { team = []; current_pokemon = None; coins = 10 }
 let add_team new_pokemon player : player * bool =
   let team_size = List.length player.team in
   if team_size < 6 then
-    (* Append new_pokemon at the end of the team list *)
     ( {
         player with
         team = player.team @ [ new_pokemon ];

@@ -298,9 +298,10 @@ let live_battle_tests =
            assert_equal ~msg:"Updated HP" ~printer:string_of_bool true
              (player_pokemon.hp <= player_pokemon.current_max_hp) );
          ( "simulated battle" >:: fun _ ->
-           let player_pokemon = squirtle1 in
+           let player_pokemon = Pokemon.create (find_pokemon_by_name "Squirtle")
+          100 in
            let opponent_pokemon =
-             Pokemon.create (find_pokemon_by_name "Charmander") 5
+             Pokemon.create (find_pokemon_by_name "Charmander") 1
            in
 
            player := { !player with current_pokemon = Some player_pokemon };
@@ -331,7 +332,6 @@ let live_battle_tests =
              poke1_player1 poke2_player2
            |> ignore;
 
-           (* supposed to be 0 will fix later *)
            assert_equal (orig_hp_player2 - poke2_player2.hp = 0) true;
 
            let test_poke = Pokemon.create (find_pokemon_by_name "0 Moves") 10 in

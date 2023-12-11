@@ -47,19 +47,18 @@ let rec wild_battle_loop player_pokemon opponent player =
     let available_pokemon = List.filter (fun p -> not p.feint) player.team in
     if List.length available_pokemon = 0 then (
       printf "All your Pokemon have fainted. You lost the battle!\n";
-      false (* Player lost *))
+      false)
     else (
       let new_pokemon, updated_player = choose_new_pokemon player in
       printf "Go %s!\n" new_pokemon.base.name;
       wild_battle_loop new_pokemon opponent updated_player))
   else if opponent.hp <= 0 then (
     printf "You defeated the wild %s! You won the battle! \n" (Pokemon.name opponent);
-    true (* Player won *))
+    true)
   else (
     printf "\nYour %s's HP: %d\n" player_pokemon.base.name player_pokemon.hp;
     printf "Wild %s's HP: %d\n" (Pokemon.name opponent) opponent.hp;
 
-    (* Player's turn *)
     printf "Choose an action for %s:\n" player_pokemon.base.name;
     List.iteri
       (fun i (move : move) ->
@@ -75,13 +74,13 @@ let rec wild_battle_loop player_pokemon opponent player =
         if choice >= 1 && choice <= List.length player_pokemon.base.moves then (
           let chosen_move = List.nth player_pokemon.base.moves (choice - 1) in
           printf "You chose %s!\n" chosen_move.name;
-          Pokemon.attack chosen_move opponent player_pokemon;  (* Apply player's chosen move *)
-          false  (* Do not end the battle yet, proceed to AI's turn *)
+          Pokemon.attack chosen_move opponent player_pokemon;
+          false
         )
         else if choice = List.length player_pokemon.base.moves + 1 then (
           let new_pokemon, updated_player = choose_new_pokemon player in
           printf "Go %s!\n" new_pokemon.base.name;
-          wild_battle_loop new_pokemon opponent updated_player  (* New Pokémon, start a new battle loop iteration *)
+          wild_battle_loop new_pokemon opponent updated_player
         )
         else (
           printf "Invalid choice. Please enter a valid number: ";
@@ -97,21 +96,19 @@ let rec wild_battle_loop player_pokemon opponent player =
     in
 
     if get_player_choice () then
-      true  (* Battle ended, player won *)
+      true
     else if opponent.hp <= 0 then
-      true  (* Opponent's Pokémon fainted, player won *)
+      true
     else (
-      (* AI's turn *)
       let ai_move = Ai.choose_move opponent in
       printf "Wild %s chose %s!\n" (Pokemon.name opponent) ai_move.name;
       Pokemon.attack ai_move player_pokemon opponent;
 
       if player_pokemon.hp <= 0 then (
-        (* Handle player's Pokémon fainting after AI's turn *)
         let available_pokemon = List.filter (fun p -> not p.feint) player.team in
         if List.length available_pokemon = 0 then (
           printf "All your Pokemon have fainted. You lost the battle!\n";
-          false (* Player lost *)
+          false
         )
         else (
           let new_pokemon, updated_player = choose_new_pokemon player in
@@ -120,7 +117,6 @@ let rec wild_battle_loop player_pokemon opponent player =
         )
       )
       else
-        (* Continue the battle if the player's Pokémon didn't faint *)
         wild_battle_loop player_pokemon opponent player
     )
   )
@@ -147,7 +143,7 @@ let rec trainer_battle_loop player_pokemon opponent player trainer =
     match remaining_opponents with
     | [] ->
         printf "You have defeated all of Trainer %s's Pokemon!\n" trainer.name;
-        true (* End the loop, indicating the player has won *)
+        true
     | new_opponent :: rest ->
         let updated_trainer = update_trainer_team trainer rest in
         printf "Trainer %s sends out %s!\n" trainer.name new_opponent.base.name;
